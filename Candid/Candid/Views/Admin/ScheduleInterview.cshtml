@@ -1,0 +1,65 @@
+@model InterviewStudentViewModel;
+
+@{
+    ViewData["Title"] = "Schedule Interview";
+    var Application = ViewBag.Application;
+    String FormattedDescription = Application.Position.PositionDescription != null ? Application.Position.PositionDescription : "[This position has no description]";
+}
+
+<div class="container">
+    <h1>Schedule Interview</h1>
+    <h2>Upcoming Interviews</h2>
+    @{
+        if (ViewBag.UpcomingInterviews.Count >= 1)
+        {
+            foreach (var item in ViewBag.UpcomingInterviews)
+            {   
+                String FormattedInfo = $"{item.InterviewDate.ToString("dddd, dd MMMM yyyy hh:mm tt")} for {item.AppUserPosition.Position.PositionName}";
+                {
+                    <p>@FormattedInfo</p>
+                }   
+            }   
+        }
+        else
+        {
+            <div class="alert alert-primary">Student has no upcoming interviews</div>
+        }
+    }
+    <h3>Position Details</h3>
+    <h5>Company Name: @Application.Position.Company.CompanyName</h5>
+    <h5>Position Name: @Application.Position.PositionName</h5>
+    <h5>Position Description: @FormattedDescription</h5>
+    <h3>Available Timeslots: </h3>
+
+    @{
+        if (ViewBag.SelectList.Count >= 1)
+        {
+            <form asp-action="ScheduleInterview" asp-controller="Admin" method="POST">
+                <div class="alert alert-danger" asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div class="form-group">
+                    @Html.DropDownList("InterviewId", ViewBag.SelectList, "Select a Timeslot" , new { @class = "form-control" })
+                    <span asp-validation-for="InterviewId" class="text-danger"></span>
+                </div>
+                <input type="hidden" name="AppUserPositionId" value="@Application.AppUserPositionId">
+                <br>
+                @{
+                    if (ViewBag.IsRescheduling)
+                    {
+                        <button class="btn btn-primary" type="submit">Reschedule Interview</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary" type="submit">Schedule Interview</button>
+                    }
+                }
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-danger">There are currently no available timeslots</div>
+        }
+    }
+</div>
+
+
+

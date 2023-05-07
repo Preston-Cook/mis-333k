@@ -1,0 +1,30 @@
+@model RecruiterViewModel;
+
+@{
+    ViewData["Title"] = "Edit Recruiter";
+}
+
+<div class="container">
+    <h1>Edit Recruiter</h1>
+    <form asp-action="EditRecruiter" asp-controller="Admin" method="POST">
+        <div class="alert alert-danger" asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CompanyName" class="control-label"></label>
+            @Html.DropDownListFor(m => m.CompanyName, new SelectList(ViewBag.CompanyList), "Select Company", new { @class = "form-control" })
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+        <input type="hidden" name="RecruiterId" value="@Model.RecruiterId">
+        <br>
+        <button class="btn btn-primary" type="submit">Edit Recruiter</button> 
+    </form>
+</div>

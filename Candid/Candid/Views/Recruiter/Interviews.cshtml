@@ -1,0 +1,99 @@
+@model InterviewRecruiterViewModel;
+
+@{
+    ViewData["Title"] = "Candid | Interviews";
+}
+
+<div class="container">
+    <h1>Interview Slots</h1>
+    <table class="table">
+        <thead>
+            <tr>    
+                <th>Company</th>
+                <th>Position</th>
+                <th>Recruiter</th>
+                <th>Student</th>
+                <th>Room</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+    @{
+        
+        foreach(var item in ViewBag.Interviews)
+        {
+            String FormattedRecruiterName = $"{item.Recruiter.FirstName} {item.Recruiter.LastName}";
+            if (item.AppUserPosition != null && ViewBag.CompanyId == item.Recruiter.CompanyId) 
+            {   
+                String FormattedStudentName = $"{item.AppUserPosition.Student.FirstName} {item.AppUserPosition.Student.LastName}";   
+                {
+                    <tr>
+                        <td>@item.Recruiter.Company.CompanyName</td>
+                        <td>@item.AppUserPosition.Position.PositionName</td>
+                        <td>@FormattedRecruiterName</td>
+                        <td>@FormattedStudentName</td>
+                        <td>@item.Room</td>
+                        <td>@item.InterviewDate</td>
+                    </tr>
+                }
+            }
+            else if (ViewBag.CompanyId == item.Recruiter.CompanyId)
+            {
+                <tr>
+                    <td>@item.Recruiter.Company.CompanyName</td>
+                    <td>TBD</td>
+                    <td>@FormattedRecruiterName</td>
+                    <td>Open</td>
+                    <td>@item.Room</td>
+                    <td>@item.InterviewDate</td>
+                </tr> 
+            }
+            else if (item.Recruiter.Company.CompanyName == "Candid" && ViewBag.AdminIds.Contains(item.RecruiterId))
+            {
+                <tr>
+                    <td>@item.Recruiter.Company.CompanyName</td>
+                    <td>Maintenance</td>
+                    <td>@FormattedRecruiterName</td>
+                    <td>N/A</td>
+                    <td>@item.Room</td>
+                    <td>@item.InterviewDate</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@item.Recruiter.Company.CompanyName</td>
+                    <td>Reserved</td>
+                    <td>Reserved</td>
+                    <td>Reserved</td>
+                    <td>@item.Room</td>
+                    <td>@item.InterviewDate</td>
+                </tr>
+            }
+        }
+    }
+    </tbody>
+    </table>
+    <br>
+    <h2>Reserve a Timeslot</h2>
+    <form asp-action="CreateInterview" asp-controller="Recruiter" method="POST">
+        <div class="alert alert-danger" asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <div class="form-group">
+            <label asp-for="RecruiterId" class="control-label"></label>
+            @Html.DropDownList("RecruiterId", ViewBag.CompanyRecruiters, "Select an Interviewer" , new { @class = "form-control" })
+            <span asp-validation-for="RecruiterId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="RoomType" class="control-label"></label>
+            @Html.DropDownList("RoomType", Html.GetEnumSelectList<RoomType>(), "Select a Room", new { @class = "form-control" })
+            <span asp-validation-for="RoomType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="InterviewDate" class="control-label"></label>
+            <input asp-for="InterviewDate" class="form-control">
+            <span asp-validation-for="InterviewDate" class="text-danger"></span>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Reserve Timeslot</button>
+    </form>
+</div>

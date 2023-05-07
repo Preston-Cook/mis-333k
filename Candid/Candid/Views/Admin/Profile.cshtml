@@ -1,0 +1,17 @@
+@model Candid.Models.AppUser
+
+@{
+    ViewData["Title"] = "Candid | Profile";
+}
+
+<div class="container">
+    <h1>CSO Profile</h1>
+    <h5>First Name: @Model.FirstName</h5>
+    <h5>Last Name: @Model.LastName</h5>
+    <h5>Email: @Model.Email</h5>
+    <h5>Date Created: @Model.DateCreated</h5>
+    <h5>Last Login: @Model.LastLoginDate</h5>
+    <a asp-action="EditProfile" asp-controller="Admin">
+        <button class="btn btn-primary">Edit Profile</button>
+    </a>
+</div>

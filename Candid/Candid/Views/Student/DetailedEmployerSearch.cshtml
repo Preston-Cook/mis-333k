@@ -1,0 +1,33 @@
+@model CompanySearchViewModel;
+
+@{
+    ViewData["Title"] = "Candid | Detailed Company Search";
+}
+
+<div class="container">
+    <h1>Detailed Employer Search</h1>
+    <form asp-action="DetailedEmployerSearch" asp-controller="Student" method="POST">
+         <div class="form-group">
+            <label asp-for="CompanyName" class="control-label"></label>
+            <input asp-for="CompanyName" class="form-control" />
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+         <div class="form-group">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PositionType" class="control-label"></label>
+            @Html.DropDownList("PositionType", Html.GetEnumSelectList<PositionType>(), "Select Position Type", new { @class = "form-control" })
+            <span asp-validation-for="PositionType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IndustryTypes" class="control-label"></label>
+            @Html.ListBox("IndustryTypes", Html.GetEnumSelectList<IndustryTypes>(), new { @class = "form-control" })
+            <span asp-validation-for="IndustryTypes" class="text-danger"></span>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>

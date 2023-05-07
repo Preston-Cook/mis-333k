@@ -1,0 +1,48 @@
+@model IEnumerable<Candid.Models.AppUser>
+
+@{
+    ViewData["Title"] = "Candid | Admins";
+}
+
+<div class="container">
+    <h1>Admins</h1>
+    <a class="btn btn-primary" asp-action="CreateAdmin" asp-controller="Admin">Create Admin</a>
+<table class="table">
+    <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Date Joined</th>
+        <th>Last Login</th>
+        <th>User Status</th>
+        <th>Details</th>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                String FirstName = item.FirstName;
+                String LastName = item.LastName;
+                String Email = item.Email;
+                String FormattedDateCreated = item.DateCreated.ToString("MMMM dd, yyyy");
+                String FormattedLastLoginDate = item.LastLoginDate.HasValue ? item.LastLoginDate.Value.ToString("MMMM dd, yyyy"): "";
+                String IsActive = item.IsActive ? "Active" : "Deactivated";
+                String AdminId = item.Id;
+                {
+                    <tr>
+                    <td>@FirstName</td>
+                    <td>@LastName</td>
+                    <td>@Email</td>
+                    <td>@FormattedDateCreated</td>
+                    <td>@FormattedLastLoginDate</td>
+                    <td>@IsActive</td>
+                    <td>
+                        <a asp-action="AdminDetails" asp-controller="Admin" asp-route-id="@AdminId">Details</a>
+                    </td>
+                </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+</div>

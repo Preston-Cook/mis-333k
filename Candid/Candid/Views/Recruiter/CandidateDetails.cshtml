@@ -1,0 +1,53 @@
+@model AppUserPosition;
+
+@{
+    ViewData["Title"] = "Candid | Candidate Details";
+    String FullName = $"{Model.Student.FirstName} {Model.Student.LastName}";
+    String FormattedGender = Utilities.EnumExtensions.GetDisplayName(Model.Student.Gender);
+    String FormattedEthnicity = Utilities.EnumExtensions.GetDisplayName(Model.Student.Ethnicity);
+    String FormattedGraduationDate = Model.Student.GraduationDate.HasValue ? Model.Student.GraduationDate.Value.ToString("MMMM dd, yyyy"): "";
+    String FormattedStudentMajors = ViewBag.StudentMajors;
+    String FormattedPositionMajors = ViewBag.PositionMajors;
+    Decimal GPA = Model.Student.GPA;
+    String StudentId = Model.StudentId;
+    String PositionTitle = Model.Position.PositionName;
+    String FormattedDeadline = Model.Position.Deadline.ToString("MMMM dd, yyyy");
+}
+
+<div class="container">
+    <h1>Candidate Details</h1>
+    <h3>Student Profile</h3>
+    <p>Name: @FullName</p>
+    <p>Major(s): @FormattedStudentMajors</p>
+    <p>GPA: @GPA</p>
+    <p>Ethnicity: @FormattedEthnicity</p>
+    <p>Gender: @FormattedGender</p>
+    <p>Graduation Date: @FormattedGraduationDate</p>
+    <h3>Position Details</h3>
+    <p>Position Name: @PositionTitle</p>
+    <p>Postiion Majors: @FormattedPositionMajors</p>
+    <p>Position Deadline: @FormattedDeadline</p>
+
+    @{
+        if (Model.StatusType == StatusType.Pending)
+        {
+            <form asp-action="AcceptApplication" asp-controller="Recruiter" method="POST">
+                <input type="hidden" name="Id" value="@Model.AppUserPositionId"> 
+                <button class="btn btn-primary" type="submit">Accept Application</button>
+            </form>
+            <br>
+            <form asp-action="DenyApplication" asp-controller="Recruiter" method="POST">
+                <input type="hidden" name="Id" value="@Model.AppUserPositionId"> 
+                <button class="btn btn-primary">Deny Application</button>
+            </form>
+        }
+        else if (Model.StatusType == StatusType.Accepted)
+        {
+            <div class="alert alert-success">Interview Offered</div>
+        }
+        else
+        {
+           <div class="alert alert-danger">Interview Denied</div> 
+        }
+    }
+</div>

@@ -1,0 +1,28 @@
+@model StudentViewModel;
+
+@{
+    ViewData["Title"] = "Candid | Student Details";
+    String FirstName = Model.FirstName; 
+    String LastName = Model.LastName;
+    String FormattedMajors = String.Join(", ", Model.Majors);
+    String FormattedGraduationDate = Model.GraduationDate.ToString("MMMM dd, yyyy");
+    Decimal GPA = Model.GPA;
+    String FormattedEthnicity = Utilities.EnumExtensions.GetDisplayName(Model.Ethnicity);
+    String FormattedGender = Utilities.EnumExtensions.GetDisplayName(Model.Gender);
+    String FormattedAddress = $"{Model.Street} {Model.City}, {Model.State} {Model.PostalCode}";
+    String StudentId = Model.StudentId;
+}
+
+<div class="container">
+    <h1>Student Details</h1>
+    <h5>FirstName: @FirstName</h5>
+    <h5>Last Name: @LastName</h5>
+    <h5>Major(s): @FormattedMajors</h5>
+    <h5>Graduation Date: @FormattedGraduationDate</h5>
+    <h5>GPA: @GPA</h5>
+    <h5>Ethnicity: @FormattedEthnicity</h5>
+    <h5>Gender: @FormattedGender</h5>
+    <h5>Primary Address: @FormattedAddress</h5>
+    <a class="btn btn-primary" asp-action="CreateApplication" asp-controller="Recruiter" asp-route-id="@StudentId">Offer Interview</a>
+</div>
+

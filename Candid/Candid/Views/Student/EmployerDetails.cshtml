@@ -1,0 +1,49 @@
+@model Candid.Models.Company
+
+@{
+    ViewData["Title"] = $"Candid | Employer Details";
+    String CompanyName = Model.CompanyName;
+    String FormattedAddress = $"{Model.Address.Street} {Model.Address.City}, {Model.Address.State} {Model.Address.PostalCode}";
+}
+
+<div class="container">
+    <h3>Company Name</h3>
+    <h1>@CompanyName</h1>
+    <h3>Main US Office Location</h3>
+    <p>@FormattedAddress</p>
+    <h3>Positions</h3>
+    <ul>
+    @{
+        if (Model.Positions.Where(p => p.isActive && p.Deadline > ViewBag.SystemDate).Count() == 0)
+        {
+            <li>There are currently no active positions for this company</li>
+        }
+        else
+        {
+            foreach (var item in Model.Positions.Where(p => p.isActive && p.Deadline > ViewBag.SystemDate))
+            {
+                if (item.isActive)
+                {
+                    <a asp-action="JobDetails" asp-controller="Student" asp-route-id="@item.PositionId">
+                        <li>@item.PositionName</li>
+                    </a>
+                }
+            }
+        }
+    }
+    </ul>
+    <div>
+        <div id="map" data-lat="@Model.Address.Lat" data-lng="@Model.Address.Lng" data-company-name="@Model.CompanyName"></div>
+    </div>
+</div>
+
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css" integrity="sha512-mD70nAW2ThLsWH0zif8JPbfraZ8hbCtjQ+5RU1m4+ztZq6/MymyZeB55pWsi4YAX+73yvcaJyk61mzfYMvtm9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+
+@section Scripts
+{
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="/js/map.js" type="application/javascript"></script>
+}

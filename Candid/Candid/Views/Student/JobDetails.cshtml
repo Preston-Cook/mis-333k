@@ -1,0 +1,77 @@
+@model Candid.Models.Position
+
+@{
+    ViewData["Title"] = $"Candid | Job Details";
+    Boolean DeadlinePassed = ViewBag.DeadlinePassed;
+    Boolean HasDifferentType = ViewBag.HasDifferentType;
+    Boolean NotHasMajor = ViewBag.NotHasMajor;
+    Boolean HasApplied = ViewBag.HasApplied;
+    String FormattedPositionType = Utilities.EnumExtensions.GetDisplayName(Model.PositionType);
+    String PositionName = Model.PositionName;
+    String CompanyName = Model.Company.CompanyName;
+    String CompanyIndustries = ViewBag.CompanyIndustries;
+    String FormattedDeadline = Model.Deadline.ToString("MMMM dd, yyyy");
+    String FormattedMajors = String.Join(", ", Model.PositionMajors.Where(pm => pm.isActive).Select(pm => pm.Major.MajorCode));
+    String PositionDescription = Model.PositionDescription;
+    Int32 CompanyId = Model.Company.CompanyId;
+    Int32 PositionId = Model.PositionId;
+    String FormattedAddress = $"{Model.Address.Street} {Model.Address.City}, {Model.Address.State} {Model.Address.PostalCode}";
+}
+
+<div class="container">
+    <h4>@FormattedPositionType</h4>
+    <h1>@PositionName</h1>
+    <img src="https://i.etsystatic.com/24925057/r/il/ff25a8/2635267618/il_680x540.2635267618_gp1q.jpg" alt="">
+    <h3>@CompanyName</h3>
+    <h3>Company Industries: @CompanyIndustries</h3>
+    <h3>Location: @FormattedAddress</h3>
+    <h5>More Jobs From this Company</h5>
+    <a asp-action="EmployerDetails" asp-controller="Student" asp-route-id="@CompanyId">Here</a>
+    <h2>Position Details:</h2>
+    <h5>Application Deadline</h5>
+    <p>@FormattedDeadline</p>
+    <h5>Applicable Majors</h5>
+    <p>@FormattedMajors</p>
+    <h4>Job Description</h4>
+    @{
+        if (!string.IsNullOrEmpty(PositionDescription))
+        {
+            <p>@PositionDescription</p>
+        }
+        else
+        {
+            <p>[There is no description for this role]</p>
+        }
+    }
+    <ul>
+        @{
+            if (DeadlinePassed)
+            {
+                <li>The deadline has passed</li>
+            }
+            if (HasDifferentType)
+            {
+                <li>You are not eligible for this job category</li>
+            }
+            if (NotHasMajor)
+            {
+                <li>You do not have a shared major</li>
+            }
+            if (HasApplied)
+            {
+                <li>You have already applied to this position</li>
+            }
+        }   
+    </ul>
+    <form asp-action="CreateApplication" asp-controller="Student" method="POST">
+        <input type="hidden" name="PositionId" value="@PositionId">
+        @if (DeadlinePassed || HasDifferentType || NotHasMajor || HasApplied)
+        {
+            <button disabled class="btn btn-primary" type="submit">Unavailable</button>
+        }
+        else
+        {
+            <button class="btn btn-primary" type="submit">Apply</button>
+        }
+    </form>
+</div>

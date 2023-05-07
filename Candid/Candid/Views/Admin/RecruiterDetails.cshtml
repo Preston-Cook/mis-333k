@@ -1,0 +1,44 @@
+@model Candid.Models.AppUser
+
+@{
+    ViewData["Title"] = "Candid | Recruiter Details";
+    String FirstName = Model.FirstName;
+    String LastName = Model.LastName;
+    String CompanyName = Model.Company.CompanyName;
+    String FormattedStatus = Model.IsActive ? "Active" : "Deactivated";
+    String RecruiterId = Model.Id;
+}
+
+<div class="container">
+    <h1>Recruiter Details</h1>
+    <h5>First Name: @FirstName</h5>
+    <h5>Last Name: @LastName</h5>
+    <h5>Company: @CompanyName</h5>
+    <h5>User Status: @FormattedStatus</h5>
+    <a class="btn btn-primary" asp-action="EditRecruiter" asp-controller="Admin" asp-route-id="@RecruiterId">Edit</a>
+    <br>
+    <br>
+    <form asp-action="DeactivateRecruiter" asp-controller="Admin" method="POST">
+        <input type="hidden" name="Id" value="@RecruiterId">
+        @{
+            if (Model.IsActive)
+            {
+                <button class="btn btn-primary" type="submit">Deactivate Recruiter</button>
+                <br>
+                <br>
+                <a class="btn btn-primary" asp-action="CreateInterview" asp-controller="Admin" asp-route-id="@RecruiterId">
+                    Reserve Timeslot
+                </a>
+            }
+            else
+            {
+                <button class="btn btn-primary" type="submit">Activate Recruiter</button>
+                <br>
+                <br>
+                <a class="disabled btn btn-primary" asp-action="CreateInterview" asp-controller="Admin" asp-route-id="@RecruiterId">
+                    Reserve Timeslot
+                </a>
+            }
+        }
+    </form>    
+</div>

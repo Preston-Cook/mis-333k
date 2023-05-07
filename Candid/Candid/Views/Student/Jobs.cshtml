@@ -1,0 +1,78 @@
+@model IEnumerable<Candid.Models.Position>
+
+@{
+    ViewData["Title"] = "Candid | Jobs";
+}
+
+<div class="container">
+    <form asp-action="Jobs" asp-controller="Student" method="GET"> 
+        <p class="form-group"> 
+            Search: <input name="q" class="form-control"/><br/> 
+            <button type="submit" class="btn btn-primary">Search</button> 
+            <a asp-action="DetailedJobSearch" asp-controller="Student" class="btn btn-success">Detailed Search</a> 
+        </p> 
+    </form> 
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Company Industries
+            </th>
+            <th>
+                Position Name
+            </th>
+            <th>
+                Position Description
+            </th>
+            <th>
+                Position Majors
+            </th>
+            <th>
+               Deadline
+            </th>
+            <th>
+               Position Type
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Details
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            { 
+                String CompanyName = item.Company.CompanyName;
+                String PositionName = item.PositionName;
+                String PositionDescription = item.PositionDescription == "" ? "[There is no description for this role]" : item.PositionDescription;
+                String FormattedMajors = String.Join(", ", item.PositionMajors.Where(pm => pm.isActive).Select(pm => pm.Major.MajorCode));
+                String FormattedPositionType = Utilities.EnumExtensions.GetDisplayName(item.PositionType);
+                String FormattedDeadline = item.Deadline.ToString("MMMM dd, yyyy");
+                String FormattedAddress = $"{item.Address.Street} {item.Address.City}, {item.Address.State} {item.Address.PostalCode}";
+                Int32 PositionId = item.PositionId;
+                {
+                    <tr>
+                        <td>@CompanyName</td>
+                        <td>@ViewBag.CompanyIndustries[CompanyName]</td>
+                        <td>@PositionName</td>
+                        <td>@PositionDescription</td>
+                        <td>@FormattedMajors</td>
+                        <td>@FormattedDeadline</td>
+                        <td>@FormattedPositionType</td>
+                        <td>@FormattedAddress</td>
+                        <td>
+                            <a asp-action="JobDetails" asp-controller="Student" asp-route-id="@PositionId">Details</a>
+                        </td>
+                    </tr>   
+                }
+            }
+        }
+    </tbody>
+</table>
+</div>

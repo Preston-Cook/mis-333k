@@ -1,0 +1,103 @@
+@model IEnumerable<Candid.Models.AppUserPosition>
+
+@{
+    ViewData["Title"] = "Candid | Applications";
+}
+
+<div class="container">
+    <h1>Applications</h1>
+    @{
+        if (TempData["ErrorMsg"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMsg"]</div>
+        }
+        if (TempData["AddedMsg"] != null)
+        {
+            <div class="alert alert-success">@TempData["AddedMsg"]</div>
+        }
+        if (TempData["DeletedMsg"] != null)
+        {
+            <div class="alert alert-danger">@TempData["DeletedMsg"]</div>
+        }
+        if (Model.Count() == 0)
+        {
+            <div class="alert alert-primary">You currently have no applications</div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Job Name</th>
+                        <th>Company Name</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                        <th>Interview</th>
+                        <th>Withdraw</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        String PositionName = item.Position.PositionName;
+                        String CompanyName = item.Position.Company.CompanyName;
+                        StatusType FormattedStatusType = item.StatusType;
+                        String Deadline = item.Position.Deadline.ToString("MMMM dd, yyyy");
+                        var Interview = item.Interview;
+                        Int32 AppUserPositionId = item.AppUserPositionId;
+                        {
+                            <tr>
+                                <td>@PositionName</td>
+                                <td>@CompanyName</td>
+                                <td>@FormattedStatusType</td>
+                                <td>@Deadline</td>
+                                <td>
+                                    @{
+                                        if (Interview == null && item.StatusType == StatusType.Accepted)
+                                        {
+                                            <a asp-action="ScheduleInterview" asp-controller="Student" asp-route-id="@item.AppUserPositionId">
+                                                <button class="btn btn-success">Schedule Interview</button>
+                                            </a>
+                                        }
+                                        else if (Interview != null && item.StatusType == StatusType.Accepted)
+                                        {
+                                            <a asp-action="ScheduleInterview" asp-controller="Student" asp-route-id="@item.AppUserPositionId">
+                                                <button class="btn btn-success">Reschedule Interview</button>
+                                            </a>
+                                        }
+                                        else if (item.StatusType == StatusType.Pending)
+                                        {
+                                            <button disabled class="btn btn-warning" disabled>Results Pending</button>
+                                        }
+                                        else
+                                        {
+                                            <button disabled class="btn btn-danger">Interview Denied</button>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.Position.Deadline < ViewBag.SystemDate)
+                                        {
+                                            <form asp-action="WithdrawApplication" asp-controller="Student" method="POST">
+                                                <input type="hidden" name="ApplicationId" value="@AppUserPositionId">
+                                                <button type="submit" class="btn btn-danger" disabled>Deadline Passed</button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="WithdrawApplication" asp-controller="Student" method="POST">
+                                                <input type="hidden" name="ApplicationId" value="@AppUserPositionId">
+                                                <button type="submit" class="btn btn-danger">Withdraw</button>
+                                            </form>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>

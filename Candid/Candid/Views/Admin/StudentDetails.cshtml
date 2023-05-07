@@ -1,0 +1,89 @@
+@model AdminStudentViewModel;
+
+@{
+    ViewData["Title"] = "Candid | Student Details";
+    String FormattedStatus = Model.IsActive ? "Active" : "Deactivated"; 
+}
+
+<div class="container">
+    @{
+        if (TempData["PositionNames"] != null)
+        {
+            <div class="alert alert-success">Interview(s) Offered for @TempData["PositionNames"]</div>
+        }
+        if (TempData["InterviewRescheduledMsg"] != null)
+        {
+            <div class="alert alert-success">@TempData["InterviewRescheduledMsg"]</div>
+        }
+        else if (TempData["InterviewScheduledMsg"] != null)
+        {
+            <div class="alert alert-success">@TempData["InterviewScheduledMsg"]</div>
+        }
+    }
+    <h1>Student Details</h1>
+    <h5>First Name: @Model.FirstName</h5>
+    <h5>Last Name: @Model.LastName</h5>
+    <h5>User Status: @FormattedStatus</h5>
+    <h5>Majors: @Model.FormattedMajors</h5>
+    <h5>Graduation Date: @Model.FormattedGraduationDate</h5>
+    <h5>GPA: @Model.GPA</h5>
+    <h5>Ethnicity: @Model.FormattedEthnicity</h5>
+    <h5>Gender: @Model.FormattedGender</h5>
+    <h5>Address: @Model.FormattedAddress</h5>
+    <a class="btn btn-primary" asp-action="EditStudent" asp-controller="Admin" asp-route-id="@Model.StudentId">Edit</a>
+    <br>
+    <br>
+    @{
+        if (Model.IsActive)
+        {
+            <form asp-action="DeactivateStudent" asp-controller="Admin" method="POST">
+                <input type="hidden" value="@Model.StudentId" name="Id">
+                <button class="btn btn-primary" type="submit">Deactivate Student</button>
+            </form>
+            <br>
+            <a asp-action="CreateApplication" asp-controller="Admin" asp-route-id="@Model.StudentId">
+                <button class="btn btn-primary">Offer Interview</button>
+            </a>
+            <br>
+            <br>
+            <hr>
+            <form asp-action="ScheduleInterview" asp-controller="Admin" method="GET">
+                <input type="hidden" asp-for="StudentId">
+                @{
+                    if (ViewBag.SelectList.Count >= 1)
+                    {
+                        <div class="form-group">
+                            <label asp-for="ApplicationId" class="control-label"></label>
+                            @Html.DropDownList("ApplicationId", ViewBag.SelectList, "Select an Position" , new { @class = "form-control" })
+                            <span asp-validation-for="ApplicationId" class="text-danger"></span>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Schedule Interview</button>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger">Student has no interview offers</div>
+                        <button disabled class="btn btn-primary">Schedule Interview</button>
+                    }
+                }
+            </form>
+        }
+        else
+        {
+            <form asp-action="DeactivateStudent" asp-controller="Admin" method="POST">
+                <input type="hidden" value="@Model.StudentId" name="Id">
+                <button class="btn btn-primary" type="submit">Activate Student</button>
+             </form>
+             <br>
+             <a class="disabled" asp-action="CreateApplication" asp-controller="Admin" asp-route-id="@Model.StudentId">
+                <button disabled class="btn btn-primary">Offer Interview</button>
+            </a>
+            <br>
+            <br>
+            <hr>
+            <a class="disabled" asp-action="ScheduleInterview" asp-controller="Admin" asp-route-id="@Model.StudentId">
+                <button disabled class="btn btn-primary">Schedule Interview</button>
+            </a>
+        }
+    }
+</div>

@@ -1,0 +1,49 @@
+@model IEnumerable<Candid.Models.AppUserPosition>
+
+@{
+    ViewData["Title"] = "Candid | Candidate Details";
+}
+
+<div class="container">
+    <h1>Candidates</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Position Name</th>
+                <th>Position Description</th>
+                <th>Position Type</th>
+                <th>Application Status</th>
+                <th>Date Submitted</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                String FormattedName = $"{item.Student.FirstName} {item.Student.LastName}";
+                String PositionName = item.Position.PositionName;
+                String PositionDescription = item.Position.PositionDescription;
+                String FormattedPositionType = Utilities.EnumExtensions.GetDisplayName(item.Position.PositionType);
+                String FormattedDateSubmitted = item.DateSubmitted.ToString("MMMM dd, yyyy");
+                String FormattedStatus = Utilities.EnumExtensions.GetDisplayName(item.StatusType);
+                Int32 ApplicationId = item.AppUserPositionId;
+                {
+                    <tr>
+                        <td>@FormattedName</td>
+                        <td>@PositionName</td>
+                        <td>@PositionDescription</td>
+                        <td>@FormattedPositionType</td>
+                        <td>@FormattedStatus</td>
+                        <td>@item.DateSubmitted</td>
+                        <td>
+                            <a asp-action="CandidateDetails" asp-controller="Recruiter" asp-route-id="@ApplicationId">Application Details</a>
+                        </td>
+                    </tr>
+                }
+                }
+            }
+        </tbody>
+    </table>
+</div>

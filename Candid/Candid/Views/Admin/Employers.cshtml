@@ -1,0 +1,46 @@
+@model IEnumerable<Candid.Models.Company>
+
+@{
+    ViewData["Title"] = "Candid | Employers";
+}
+
+<div class="container">
+    <form asp-action="Employers" asp-controller="Admin" method="GET"> 
+        <p class="form-group"> 
+            Search: <input name="q" class="form-control"/><br/> 
+            <button type="submit" class="btn btn-primary">Search</button> 
+            <a asp-action="DetailedEmployerSearch" asp-controller="Admin" class="btn btn-success">Detailed Search</a> 
+        </p> 
+    </form> 
+    <a class="btn btn-primary" asp-action="CreateEmployer" asp-controller="Admin">Create Employer</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Company Email</th>
+            <th>Company Industries</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                String CompanyName = item.CompanyName;
+                String CompanyEmail = item.CompanyEmail;
+                String CompanyIndustries = String.Join(", " , item.CompanyIndustries.Where(ci => ci.isActive).Select(ci => Candid.Utilities.EnumExtensions.GetDisplayName(ci.Industry.IndustryType)));
+                {
+                <tr>
+                    <td>@item.CompanyName</td>
+                    <td>@item.CompanyEmail</td>
+                    <td>@CompanyIndustries</td>
+                    <td>
+                        <a asp-action="EmployerDetails" asp-controller="Admin" asp-route-id="@item.CompanyId">Details</a>
+                    </td>
+                </tr>
+            }
+            }
+        }
+    </tbody>
+</table>
+</div>

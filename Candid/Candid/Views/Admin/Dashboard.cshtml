@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Candid | Dashboard";
+}
+
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <h3>System Date</h3>
+    <div class="date-container">
+        <form asp-action="EditSystemDate" asp-controller="Admin">
+            <input type="date" name="SystemDate">
+            <button type="submit" id="edit-btn" type="submit" class="btn btn-primary">Edit System Date&nbsp;<i class="fa-solid fa-pen-to-square"></i></button>
+        </form>
+        <p id="system-date">@ViewBag.SystemDate.ToString("MMMM dd, yyyy")</p>
+    </div>
+</div>
+
+<div class="welcome-modal hidden">
+      <button class="close-modal">&times;</button>
+      <h1 class="modal-header">Welcome, @TempData["FirstName"]!<img class="modal-logo" src="/images/logo.png"></h1>
+      <p id="modal-content">@TempData["CreationMsg"]</p>
+</div>
+<div class="overlay hidden"></div>
+
+@section Scripts
+{
+    <script src="/js/modal.js" type="application/javascript"></script>
+}

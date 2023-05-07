@@ -1,0 +1,33 @@
+@model Candid.Models.AppUser
+
+@{
+    ViewData["Title"] = "Candid | Profile";
+    String Name = Model.FirstName + " " + Model.LastName;
+    String FormattedDateCreated = Model.DateCreated.ToString("MMMM dd, yyyy");
+    String FormattedMajors = String.Join(", ", Model.AppUserMajors.Where(aum => aum.isActive).Select(aum => aum.Major.MajorName));
+    String FormattedGraduationDate = Model.GraduationDate.HasValue ? Model.GraduationDate.Value.ToString("MMMM dd, yyyy"): "";
+    Decimal GPA = Model.GPA;
+    String FormattedEthnicity = Utilities.EnumExtensions.GetDisplayName(Model.Ethnicity);
+    String FormattedGender = Utilities.EnumExtensions.GetDisplayName(Model.Gender);
+    String FormattedPositionType = Utilities.EnumExtensions.GetDisplayName(Model.PositionType);
+    String FormattedAddress = $"{Model.Address.Street} {Model.Address.City}, {Model.Address.State} {Model.Address.PostalCode}";
+}
+<div class="container">
+    <h1>My Profile</h1>
+    <h5>Name: @Name</h5>
+    <h5>Date Joined: @FormattedDateCreated</h5>
+    <h5>Major(s): @FormattedMajors</h5>
+    <h5>Graduation Date: @FormattedGraduationDate</h5>
+    <h5>GPA: @GPA</h5>
+    <h5>Ethnicity: @FormattedEthnicity</h5>
+    <h5>Gender: @FormattedGender</h5>
+    <h5>Position Type: @FormattedPositionType</h5>
+    <h5>Primary Address: @FormattedAddress</h5>
+    <a asp-action="EditProfile" asp-controller="Student">
+        <button class="btn btn-primary">Edit Profile</button>
+    </a>
+</div>
+
+
+
+

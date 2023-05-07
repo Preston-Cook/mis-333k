@@ -1,0 +1,32 @@
+@model Candid.Models.Company
+
+@{
+    ViewData["Title"] = "Candid | Employer Details";
+    String CompanyName = Model.CompanyName;
+    String FormattedIndustries = String.Join(", ", Model.CompanyIndustries.Where(ci => ci.isActive).Select(ci => Utilities.EnumExtensions.GetDisplayName(ci.Industry.IndustryType)));
+    String FormattedAddress = $"{Model.Address.Street} {Model.Address.City}, {Model.Address.State} {Model.Address.PostalCode}";
+    Int32 CompanyId = Model.CompanyId;
+}
+
+<div class="container">
+    <h1>Employer Details</h1>
+    <h5>Employer Name: @CompanyName</h5>
+    <h5>Industries: @FormattedIndustries</h5>
+    <h5>Address: @FormattedAddress</h5>
+    <a class="btn btn-primary" asp-action="EditEmployer" asp-controller="Admin" asp-route-id="@CompanyId">Edit Employer</a>
+</div>
+
+<div>
+    <div id="map" data-lat="@Model.Address.Lat" data-lng="@Model.Address.Lng" data-company-name="@Model.CompanyName"></div>
+</div>
+
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css" integrity="sha512-mD70nAW2ThLsWH0zif8JPbfraZ8hbCtjQ+5RU1m4+ztZq6/MymyZeB55pWsi4YAX+73yvcaJyk61mzfYMvtm9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+
+@section Scripts
+{
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="/js/map.js" type="application/javascript"></script>
+}

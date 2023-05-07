@@ -1,0 +1,37 @@
+@model Candid.Models.Position
+
+@{
+    ViewData["Title"] = $"Candid | Job Details";
+    String FormattedPositionType = Utilities.EnumExtensions.GetDisplayName(Model.PositionType);
+    String PositionName = Model.PositionName;
+    String CompanyName = Model.Company.CompanyName;
+    String FormattedDeadline = Model.Deadline.ToString("MMMM dd, yyyy");
+    String FormattedMajors = String.Join(", ", Model.PositionMajors.Where(pm => pm.isActive).Select(pm => pm.Major.MajorCode));
+    String PositionDescription = Model.PositionDescription;
+    Int32 CompanyId = Model.Company.CompanyId;
+    Int32 PositionId = Model.PositionId;
+}
+
+<div class="container">
+    <h4>@FormattedPositionType</h4>
+    <h1>@PositionName</h1>
+    <img src="https://i.etsystatic.com/24925057/r/il/ff25a8/2635267618/il_680x540.2635267618_gp1q.jpg" alt="">
+    <h3>@CompanyName</h3>
+    <h2>About the Role</h2>
+    <h5>Application Deadline</h5>
+    <p>@FormattedDeadline</p>
+    <h5>Applicable Majors</h5>
+    <p>@FormattedMajors</p>
+    <h4>Job Description</h4>
+    @{
+        if (!string.IsNullOrEmpty(PositionDescription))
+        {
+            <p>@PositionDescription</p>
+        }
+        else
+        {
+            <p>[There is no description for this role]</p>
+        }
+    }
+    <a class="btn btn-primary" asp-action="EditJob" asp-controller="Recruiter" asp-route-id="@PositionId">Edit Job</a>
+</div>

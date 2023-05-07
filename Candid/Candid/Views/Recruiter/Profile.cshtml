@@ -1,0 +1,25 @@
+@model RecruiterProfileViewModel
+
+@{
+    ViewData["Title"] = "Candid | Profile";
+    String FirstName = Model.FirstName;
+    String LastName = Model.LastName;
+    String DateCreated = Model.DateCreated.ToString("MMMM dd, yyyy");
+    String CompanyName = Model.CompanyName;
+    String CompanyDescription = Model.CompanyDescription;
+    String WebsiteUrl = Model.WebsiteUrl;
+    String FormattedIndustries = String.Join(", ", Model.IndustryTypes.Select(i => Utilities.EnumExtensions.GetDisplayName(i)));
+    String FormattedAddress = $"{Model.Street} {Model.City}, {Model.State} {Model.PostalCode}";
+}
+
+<div class="container">
+    <h1>Recruiter Profile</h1>
+    <h5>First: @FirstName</h5>
+    <h5>Last: @LastName</h5>
+    <h5>Date Joined: @DateCreated</h5>
+    <h1>Company Profile</h1>
+    <h5>Company Name: @CompanyName</h5>
+    <h5>Industries: @FormattedIndustries</h5>
+    <h5>Address: @FormattedAddress</h5>
+    <a class="btn btn-primary" asp-action="EditProfile" asp-controller="Recruiter">Edit Profile</a>
+</div>

@@ -1,0 +1,61 @@
+@model IEnumerable<Candid.Models.Company>
+
+@{
+    ViewData["Title"] = "Candid | Employers";
+}
+
+<div class="container">
+    <form asp-action="Employers" asp-controller="Student" method="GET"> 
+        <p class="form-group"> 
+            Search: <input name="q" class="form-control"/><br/> 
+            <button type="submit" class="btn btn-primary">Search</button> 
+            <a asp-action="DetailedEmployerSearch" asp-controller="Student" class="btn btn-success">Detailed Search</a> 
+        </p> 
+    </form> 
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Company Email</th>
+            <th>Company Industries</th>
+            <th>Number of Active Positions</th>
+            <th>Company Description</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            Int32 PosCount = 0;
+            foreach (var item in Model)
+            { 
+                PosCount = item.Positions.Where(p => p.Deadline >= ViewBag.SystemDate).Count();
+                String CompanyName = item.CompanyName;
+                String CompanyEmail = item.CompanyEmail;
+                Int32 CompanyId = item.CompanyId;
+                {
+                    <tr>
+                    <td>@CompanyName</td>
+                    <td>@CompanyEmail</td>
+                    <td>@String.Join(", " , item.CompanyIndustries.Where(ci => ci.isActive).Select(ci => Candid.Utilities.EnumExtensions.GetDisplayName(ci.Industry.IndustryType)))</td>
+                    @{
+                        if (PosCount == 0)
+                        {
+                            <td>No Active Positions</td>
+                        }
+                        else
+                        {
+                            <td>@PosCount</td>
+                        }
+                    <td>@item.CompanyDescription</td>
+                    <td>
+                        <a asp-action="EmployerDetails" asp-controller="Student" asp-route-id="@CompanyId" asp>Details</a>
+                    </td>
+                    }
+                </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+</div>

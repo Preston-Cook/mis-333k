@@ -1,0 +1,49 @@
+@model PositionSearchViewModel;
+
+@{
+    ViewData["Title"] = "Candid | Detailed Job Search";
+}
+
+<div class="container">
+    <h1>Detailed Position Search</h1>
+    <form asp-action="DetailedJobSearch" asp-controller="Student" method="POST">
+        <div class="form-group">
+            <label asp-for="PositionName" class="control-label"></label>
+            <input asp-for="PositionName" class="form-control" />
+            <span asp-validation-for="PositionName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CompanyId" class="control-label"></label>
+            @Html.DropDownList("CompanyId", ViewBag.SelectList, "Select a Company Name" , new { @class = "form-control" })
+            <span asp-validation-for="CompanyId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PositionDescription" class="control-label"></label>
+            <input asp-for="PositionDescription" class="form-control" />
+            <span asp-validation-for="PositionDescription" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PositionType" class="control-label"></label>
+            @Html.DropDownList("PositionType", Html.GetEnumSelectList<PositionType>(), "Select Position Type", new { @class = "form-control" })
+            <span asp-validation-for="PositionType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Majors" class="control-label"></label>
+            @Html.ListBox("Majors", Html.GetEnumSelectList<MajorCodes>(), new { @class = "form-control" })
+            <span asp-validation-for="Majors" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IndustryTypes" class="control-label"></label>
+            @Html.ListBox("IndustryTypes", Html.GetEnumSelectList<IndustryTypes>(), new { @class = "form-control" })
+            <span asp-validation-for="IndustryTypes" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Deadline" class="control-label"></label>
+            <input asp-for="Deadline" class="form-control" type="date"/>
+            <span asp-validation-for="Deadline" class="text-danger"></span>
+            <input type="hidden" asp-for="isBeforeDeadline" value="true" />
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>

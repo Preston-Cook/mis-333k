@@ -1,0 +1,49 @@
+@model StudentSearchViewModel;
+
+@{
+    ViewData["Title"] = "Candid | Detailed Student Search";
+}
+
+<div class="container">
+    <h1>Detailed Student Search</h1>
+    <form asp-action="DetailedStudentSearch" asp-controller="Recruiter" method="POST">
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Majors" class="control-label"></label>
+            @Html.ListBox("Majors", Html.GetEnumSelectList<MajorCodes>(), new { @class = "form-control" })
+            <span asp-validation-for="Majors" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PositionType" class="control-label"></label>
+            @Html.DropDownList("PositionType", Html.GetEnumSelectList<PositionType>(), "Select Position Type", new { @class = "form-control" })
+            <span asp-validation-for="PositionType" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="GraduationDate" class="control-label"></label>
+            <input asp-for="GraduationDate" class="form-control" type="date" />
+            <span asp-validation-for="GraduationDate" class="text-danger"></span>
+            <input type="radio" asp-for="isAboveGraduationDate" value="true" checked="true" /> Before Date<br />
+            <input type="radio" asp-for="isAboveGraduationDate" value="false" /> After Date<br />
+            <span asp-validation-for="isAboveGraduationDate" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="GPA" class="control-label"></label>
+            <input asp-for="GPA" class="form-control" type="number" step=".01" placeholder="0.00" />
+            <span asp-validation-for="GPA" class="text-danger"></span>
+            <input type="radio" asp-for="isAboveGPA" value="true" checked="true" /> Above GPA<br />
+            <input type="radio" asp-for="isAboveGPA" value="false" /> Below GPA<br />
+            <span asp-validation-for="isAboveGPA" class="text-danger"></span>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>

@@ -1,0 +1,94 @@
+@model StudentRegisterModel
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<h1>Create a new Student</h1>
+<div class="container">
+    <form asp-action="CreateStudent" asp-controller="Admin" method="POST">
+        <div class="alert alert-danger" asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" class="control-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Majors" class="control-label"></label>
+            @Html.ListBox("Majors", Html.GetEnumSelectList<MajorCodes>(), new { @class = "form-control" })
+            <span asp-validation-for="Majors" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateOfBirth" class="control-label"></label>
+            <input asp-for="DateOfBirth" class="form-control" type="date"/>
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GraduationDate" class="control-label"></label>
+            <input asp-for="GraduationDate" class="form-control" type="date"/>
+            <span asp-validation-for="GraduationDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GPA" class="control-label"></label>
+            <input asp-for="GPA" class="form-control" type="number" step=".01" value="0.00"/>
+            <span asp-validation-for="GPA" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ethnicity" class="control-label"></label>
+            @Html.DropDownList("Ethnicity", Html.GetEnumSelectList<Ethnicity>(), "Select Ethnicity", new { @class = "form-control" })
+            <span asp-validation-for="Ethnicity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender" class="control-label"></label>
+            @Html.DropDownList("Gender", Html.GetEnumSelectList<Gender>(), "Select Gender", new { @class = "form-control" })
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div> 
+        <div class="form-group">
+            <label asp-for="PositionType" class="control-label"></label>
+            @Html.DropDownList("PositionType", Html.GetEnumSelectList<PositionType>(), "Select Position Type", new { @class = "form-control" })
+            <span asp-validation-for="PositionType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Street" class="control-label"></label>
+            <input asp-for="Street" class="form-control" />
+            <span asp-validation-for="Street" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PostalCode" class="control-label"></label>
+            <input asp-for="PostalCode" class="form-control" />
+            <span asp-validation-for="PostalCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="State" class="control-label"></label>
+            @Html.DropDownList("State", Html.GetEnumSelectList<StateType>(), "Select State", new { @class = "form-control" })
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Submit</button> 
+    </form>
+</div>
