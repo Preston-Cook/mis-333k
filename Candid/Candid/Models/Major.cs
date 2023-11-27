@@ -7,14 +7,14 @@ namespace Candid.Models
     public class Major
     {
         [Key]
-        public Int32 MajorId { get; set; }
+        public int MajorId { get; set; }
 
         [Required]
         [Display(Name = "Major Name")]
-        public String MajorName { get; set; }
+        public string MajorName { get; set; }
 
         [Required]
-        public Boolean isActive { get; set; } = true;
+        public bool isActive { get; set; } = true;
 
         [Required]
         [Display(Name = "Major Code")]

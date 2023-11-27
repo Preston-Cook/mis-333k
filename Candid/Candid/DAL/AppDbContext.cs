@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Candid.Models;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -13,8 +12,6 @@ namespace Candid.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //this code makes sure the database is re-created on the $5/month Azure tier
-            builder.HasPerformanceLevel("Basic");
-            builder.HasServiceTier("Basic");
             base.OnModelCreating(builder);
 
             // Set Precision on GPA storage
@@ -67,26 +64,26 @@ namespace Candid.DAL
             // Many-to-many for Industry to Company
             builder.Entity<CompanyIndustry>()
                 .HasKey(ci => new { ci.CompanyId, ci.IndustryId });
-            
+
             builder.Entity<CompanyIndustry>()
                 .HasOne(ci => ci.Company)
                 .WithMany(ci => ci.CompanyIndustries)
                 .HasForeignKey(ci => ci.CompanyId);
-            
+
             builder.Entity<CompanyIndustry>()
                 .HasOne(ci => ci.Industry)
                 .WithMany(ci => ci.CompanyIndustries)
                 .HasForeignKey(ci => ci.IndustryId);
-            
+
             // Many-to-many for Student to Majors
             builder.Entity<AppUserMajor>()
                 .HasKey(aum => new { aum.AppUserId, aum.MajorId });
-            
+
             builder.Entity<AppUserMajor>()
                 .HasOne(aum => aum.AppUser)
                 .WithMany(aum => aum.AppUserMajors)
                 .HasForeignKey(aum => aum.AppUserId);
-            
+
             builder.Entity<AppUserMajor>()
                 .HasOne(aum => aum.Major)
                 .WithMany(aum => aum.AppUserMajors)
@@ -95,7 +92,7 @@ namespace Candid.DAL
             // Many-to-many Position to Majors
             builder.Entity<PositionMajor>()
                 .HasKey(pm => new { pm.PositionId, pm.MajorId });
-            
+
             builder.Entity<PositionMajor>()
                 .HasOne(pm => pm.Position)
                 .WithMany(pm => pm.PositionMajors)
@@ -117,13 +114,13 @@ namespace Candid.DAL
                 .WithMany(sp => sp.AppUserPositions)
                 .HasForeignKey(sp => sp.PositionId)
                 .OnDelete(DeleteBehavior.NoAction);
-            
+
             // Store room enum as string in interview table
             builder.Entity<Interview>()
                 .HasOne(i => i.Recruiter)
                 .WithMany(r => r.RecruiterInterviews)
                 .OnDelete(DeleteBehavior.NoAction);
-            
+
 
             builder.Entity<Interview>()
             .Property(d => d.Room)

@@ -6,11 +6,11 @@ namespace Candid.Models
 {
     public class CompanyIndustry
     {
-        public Boolean isActive { get; set; } = true;
-        public Int32 CompanyId { get; set; }
+        public bool isActive { get; set; } = true;
+        public int CompanyId { get; set; }
         public Company Company { get; set; }
 
-        public Int32 IndustryId { get; set; }
+        public int IndustryId { get; set; }
         public Industry Industry { get; set; }
     }
 }

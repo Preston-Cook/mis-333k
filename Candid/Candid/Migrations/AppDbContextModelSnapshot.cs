@@ -3,7 +3,6 @@ using System;
 using Candid.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -16,25 +15,17 @@ namespace Candid.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-            SqlServerModelBuilderExtensions.HasServiceTierSql(modelBuilder, "'Basic'");
-            SqlServerModelBuilderExtensions.HasPerformanceLevelSql(modelBuilder, "'Basic'");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
 
             modelBuilder.Entity("Candid.Models.Address", b =>
                 {
                     b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("Lat")
                         .HasColumnType("decimal(10,7)");
@@ -43,15 +34,15 @@ namespace Candid.Migrations
                         .HasColumnType("decimal(10,7)");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Street")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("AddressId");
 
@@ -873,101 +864,101 @@ namespace Candid.Migrations
             modelBuilder.Entity("Candid.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("AddressId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Ethnicity")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("GPA")
                         .HasColumnType("decimal(3,2)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("GraduationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("LastLoginDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PositionType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SystemDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -980,18 +971,17 @@ namespace Candid.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "13f522a5-c59c-4c75-b767-6077ca503450",
+                            Id = "be7b04c7-a79a-4efe-9f40-9550dea53d0f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "80d6f0bd-bab6-467a-b476-77e6444056a2",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 21, 989, DateTimeKind.Local).AddTicks(1200),
+                            ConcurrencyStamp = "1b905cfe-9066-4f69-9e62-5fb70f301201",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 590, DateTimeKind.Local).AddTicks(2290),
                             Email = "ra@aoo.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1003,20 +993,20 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "RA@AOO.COM",
                             NormalizedUserName = "RA@AOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBaQ2IoyNqqiFHslVUpoMGXvkHk/SdgljjbvncwOgzsfJf35y3Th49A5ZvFLAi9lAg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEqAIm6b24BjJ3tqMnvYLxwU+UzHMRXKMLyQRVZFwfK1V9VHJ7jvgVcBtOolBVAZXw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "ceb09d6a-f20f-47e7-8d77-4ba0d56ad87c",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 21, 989, DateTimeKind.Local).AddTicks(1220),
+                            SecurityStamp = "aebf28f2-97dc-4221-93cf-47c81bc71bc1",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 590, DateTimeKind.Local).AddTicks(2320),
                             TwoFactorEnabled = false,
                             UserName = "ra@aoo.com"
                         },
                         new
                         {
-                            Id = "677b36c2-c5de-497a-8465-b56fe96af334",
+                            Id = "d2057556-d00d-4dc1-be24-ace1e9c34c3f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63e14db8-f6c9-404c-a922-2458203d875b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 26, DateTimeKind.Local).AddTicks(6200),
+                            ConcurrencyStamp = "daefabd7-5368-4898-8e0f-5f3ba286b80c",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 627, DateTimeKind.Local).AddTicks(4920),
                             Email = "captain@enterprise.net",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1028,20 +1018,20 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CAPTAIN@ENTERPRISE.NET",
                             NormalizedUserName = "CAPTAIN@ENTERPRISE.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOyIYuaqvE4P/3EjTc8UYJ9JEmYD4nJjKV/WbsJYlqQy0r7EedRnj9iWa6IDrWrqcA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECYcV5F/8bqXhcuxygXp1RbFMKpKugizvnAdt3kIeixRDKnOcW8F2MYWGnm1SPd1HA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "26902f45-3e4f-4533-911e-02241655ba18",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 26, DateTimeKind.Local).AddTicks(6220),
+                            SecurityStamp = "504ab9c2-a71f-464a-a0d5-0caf74f5847e",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 627, DateTimeKind.Local).AddTicks(4920),
                             TwoFactorEnabled = false,
                             UserName = "captain@enterprise.net"
                         },
                         new
                         {
-                            Id = "3b6e8ffc-8aa1-4e52-8c14-d01a3daeb582",
+                            Id = "88fe0b5e-207d-4439-bf6b-beacc9a5f23d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "29441270-58d1-4c4e-837f-4cbddacc4452",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 63, DateTimeKind.Local).AddTicks(8030),
+                            ConcurrencyStamp = "16f7a915-3641-46d1-ad6f-522619275cc4",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 664, DateTimeKind.Local).AddTicks(4800),
                             Email = "slayer@onegirl.net",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1053,20 +1043,20 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SLAYER@ONEGIRL.NET",
                             NormalizedUserName = "SLAYER@ONEGIRL.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOJjFLumzEwFznUV88cWWDTFvaz9KmYTMFDAnhj5Kt3QU/AdrqfLgeZ2aa5mzJPmeg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIiATVb4vv1WeyKvyuwJoPtsKHhNPuGdAFjGrAw3pXSGM0RqaV17q3xHlqgXHeMWtw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "528603df-f7f2-420e-bb0e-2ed4b7268758",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 63, DateTimeKind.Local).AddTicks(8040),
+                            SecurityStamp = "4ae7915b-f144-473f-ad2e-b450708787fc",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 664, DateTimeKind.Local).AddTicks(4800),
                             TwoFactorEnabled = false,
                             UserName = "slayer@onegirl.net"
                         },
                         new
                         {
-                            Id = "cd2971ad-feae-4428-9e1a-d564b8cb8610",
+                            Id = "016667f6-e9b0-4d7c-91cb-7699380abf79",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b64a70a-f844-48d2-891e-ab251ddd58da",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 101, DateTimeKind.Local).AddTicks(130),
+                            ConcurrencyStamp = "3dc1af8b-d43d-420e-bf20-25fb57deea4a",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 701, DateTimeKind.Local).AddTicks(5970),
                             Email = "liz@ggmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1078,20 +1068,20 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "LIZ@GGMAIL.COM",
                             NormalizedUserName = "LIZ@GGMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKmOVsZI24HB3oDWYoE+vfv03rAkDXfjX+QJPqAuDBsVLG33ReVbnRvCITUmZx0fLA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOfhfvwOwDzu1tcvBOq0fBE81yUHsXDnTjzRS8CpegALqEMozuqhFotnu2mMN0y5Vw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "63e7c5f0-8347-4c94-b34a-187f349e962e",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 101, DateTimeKind.Local).AddTicks(130),
+                            SecurityStamp = "9ec7f806-7469-4b8f-bc2e-eaae9708dc40",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 701, DateTimeKind.Local).AddTicks(5970),
                             TwoFactorEnabled = false,
                             UserName = "liz@ggmail.com"
                         },
                         new
                         {
-                            Id = "f9424b1d-fb39-47d4-b3ce-0d2e48bb5e78",
+                            Id = "5d5687f6-16cf-4839-9d7a-c8c47ab3e815",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1e3f0b3-303b-487b-8802-2817121114cc",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 138, DateTimeKind.Local).AddTicks(7490),
+                            ConcurrencyStamp = "46c990d9-b365-49da-8a13-55e1acf78299",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 738, DateTimeKind.Local).AddTicks(9320),
                             Email = "twin@deservedbetter.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1103,21 +1093,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TWIN@DESERVEDBETTER.COM",
                             NormalizedUserName = "TWIN@DESERVEDBETTER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI6AsEJfBwumea9u8yNaoJZDP2U3C9lhZOITIZyCd4ug/e0APP+jPlj1LTVukerLWA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOc5xLYc2TUfvNsX50K7WoylL3jXBhO2a778n0mWL9Z1/hEXOM9ixQeR/FK5yYSE+A==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "850fa74c-8a28-4127-9d29-25ea8d0b4e09",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 138, DateTimeKind.Local).AddTicks(7490),
+                            SecurityStamp = "4c93804c-c85e-4c76-917c-c213d06873be",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 738, DateTimeKind.Local).AddTicks(9320),
                             TwoFactorEnabled = false,
                             UserName = "twin@deservedbetter.com"
                         },
                         new
                         {
-                            Id = "7adb64f0-0d74-4449-b469-daa8799f20b4",
+                            Id = "715c1593-9f91-4855-a7c0-de88682cdb79",
                             AccessFailedCount = 0,
                             CompanyId = 1,
-                            ConcurrencyStamp = "f7d2cb69-3b17-411a-8bb4-0e9757d2af2f",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 177, DateTimeKind.Local).AddTicks(4020),
+                            ConcurrencyStamp = "5d506f80-9c96-48fd-85a9-cbb8d32d787a",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 777, DateTimeKind.Local).AddTicks(530),
                             Email = "michelle@example.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1129,21 +1119,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MICHELLE@EXAMPLE.COM",
                             NormalizedUserName = "MICHELLE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDpvcFF5ZD52C9isFHn4s9J36CXgoKw4+/o7orARjWgURo4+fZFFSy425HuumrXUtA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEABpwJrsfBKjvdCdMFRq+a8y9ptTMond13jLdMQkxB+CD0f3jsSZTmac0drk9sys8A==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "498d36e1-a241-40bb-b94f-4978df103362",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 177, DateTimeKind.Local).AddTicks(4040),
+                            SecurityStamp = "29de605d-facb-4daf-9535-fe1896f55c87",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 777, DateTimeKind.Local).AddTicks(540),
                             TwoFactorEnabled = false,
                             UserName = "michelle@example.com"
                         },
                         new
                         {
-                            Id = "df8f08ba-e7e0-467a-a048-dbf9f75b19ce",
+                            Id = "d55bb438-be06-4961-8d85-6fd03192dbcf",
                             AccessFailedCount = 0,
                             CompanyId = 1,
-                            ConcurrencyStamp = "557ddc07-9d01-44c1-9cef-ce83fe98a053",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 215, DateTimeKind.Local).AddTicks(6010),
+                            ConcurrencyStamp = "88817f23-b7e2-40ab-b39a-392cdafd2639",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 815, DateTimeKind.Local).AddTicks(1830),
                             Email = "toddy@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1155,21 +1145,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TODDY@AOOL.COM",
                             NormalizedUserName = "TODDY@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHjyiG+CEahug8VdSn5Q48eskHwM/6vongTOU8NdS0apZkY9sVvHfdA/e7nZxoU5VA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOMa+ux+DcbajTEtkkPAz/kzaXW6vMdybqP3588yw42U2UJpjUo9E5gXvKfFZZJtoA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "00881773-9db9-437c-a1cf-2c356c108815",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 215, DateTimeKind.Local).AddTicks(6020),
+                            SecurityStamp = "cfa66a0f-0f79-4382-9ca7-f261f6eeb1b5",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 815, DateTimeKind.Local).AddTicks(1830),
                             TwoFactorEnabled = false,
                             UserName = "toddy@aool.com"
                         },
                         new
                         {
-                            Id = "4955ae5a-39a7-4e7f-857e-102d10c26c77",
+                            Id = "f0fdd3b1-f79a-4b58-9fe1-d97e099113e2",
                             AccessFailedCount = 0,
                             CompanyId = 2,
-                            ConcurrencyStamp = "7828a65c-38ff-42de-8c11-e90232d579cf",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 253, DateTimeKind.Local).AddTicks(8560),
+                            ConcurrencyStamp = "ee11f1cd-c86b-4b42-9eb5-d07b14174a0d",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 853, DateTimeKind.Local).AddTicks(8110),
                             Email = "elowe@netscrape.net",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1181,21 +1171,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ELOWE@NETSCRAPE.NET",
                             NormalizedUserName = "ELOWE@NETSCRAPE.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOxiwFs9+NBiOq+5r2Bx46BNJYrJHSID1VYaEvbUrvbehk/MyWK+JOHbMxGLTUkE7Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDGmhfCm+UwuqR7bzYdwsPxx6y0bhaqrVCwRNilGvfRqqniIgMmrI+TTxmkBcPyXFQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "1a8514e7-9786-4945-aec7-a555dbf59054",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 253, DateTimeKind.Local).AddTicks(8560),
+                            SecurityStamp = "2746c98c-225c-41cf-87e7-251dc4a078cf",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 853, DateTimeKind.Local).AddTicks(8120),
                             TwoFactorEnabled = false,
                             UserName = "elowe@netscrape.net"
                         },
                         new
                         {
-                            Id = "34f24e25-36a7-4293-b497-ad8329741278",
+                            Id = "ce4243a4-9dad-4acc-8bff-38a6c3357e49",
                             AccessFailedCount = 0,
                             CompanyId = 3,
-                            ConcurrencyStamp = "6e3403b3-b972-4bf9-8405-7082538a9a58",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 292, DateTimeKind.Local).AddTicks(1140),
+                            ConcurrencyStamp = "287294b9-5abb-4396-a8b9-1b03c77d0131",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 891, DateTimeKind.Local).AddTicks(8440),
                             Email = "mclarence@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1207,21 +1197,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MCLARENCE@AOOL.COM",
                             NormalizedUserName = "MCLARENCE@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG8q7k1+kLYpXn9wJgjxVr1ELNmdnX3jz6AIfHKxXxn2OuLrv9wRJoASw5PHdl++ag==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDdVR6BhMi18h924wV5OFIwD3MeZeq9BfnV1SR08QwRjSAiv7YTxVDCb8CUS+DvfEA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "35e2cece-9997-4ce3-9d36-11d13d457455",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 292, DateTimeKind.Local).AddTicks(1140),
+                            SecurityStamp = "df599ee0-f16c-4709-af1e-b36991871e75",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 891, DateTimeKind.Local).AddTicks(8440),
                             TwoFactorEnabled = false,
                             UserName = "mclarence@aool.com"
                         },
                         new
                         {
-                            Id = "dbbf9288-ae29-4d22-a1cd-8a4fe86ebf50",
+                            Id = "6ae4f0ac-d516-428d-8378-72fffc8e37c6",
                             AccessFailedCount = 0,
                             CompanyId = 3,
-                            ConcurrencyStamp = "d0f333e4-3682-4849-a633-f96715da73f1",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 330, DateTimeKind.Local).AddTicks(2910),
+                            ConcurrencyStamp = "5a05e1e0-e5ec-4d89-9063-f1ab9f5a42b0",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 929, DateTimeKind.Local).AddTicks(9270),
                             Email = "nelson.Kelly@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1233,21 +1223,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "NELSON.KELLY@AOOL.COM",
                             NormalizedUserName = "NELSON.KELLY@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENd0RczSJEaCySORsjjXkRMLQPoSk/t3VnJclkS1Ln6qvTwPlv5CyWn6xOMmCwDPsw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKJGO8izr4rz8Uuxc1TY3Fsp7ei503bGtjXJI73W3+C1jpC3QlYoGytM7IXNYskUgg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "dfed3961-ae25-480a-a70a-efd790da50a3",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 330, DateTimeKind.Local).AddTicks(2910),
+                            SecurityStamp = "6b28dc9f-2cc7-4d73-8d36-a4b7059dc82e",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 929, DateTimeKind.Local).AddTicks(9270),
                             TwoFactorEnabled = false,
                             UserName = "nelson.Kelly@aool.com"
                         },
                         new
                         {
-                            Id = "5f4072f1-4938-499f-9287-503a5f536b76",
+                            Id = "3cd735fe-8129-4aed-8929-7bf029cb16a3",
                             AccessFailedCount = 0,
                             CompanyId = 3,
-                            ConcurrencyStamp = "b5eb7277-d49f-4a53-ae3b-60efea7e0ba2",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 368, DateTimeKind.Local).AddTicks(4710),
+                            ConcurrencyStamp = "c5ce1488-7f5d-4b18-b64c-0d30a9524de2",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 31, 968, DateTimeKind.Local).AddTicks(2910),
                             Email = "megrhodes@freezing.co.uk",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1259,21 +1249,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MEGRHODES@FREEZING.CO.UK",
                             NormalizedUserName = "MEGRHODES@FREEZING.CO.UK",
-                            PasswordHash = "AQAAAAIAAYagAAAAELrnOiixzDC0DvgnZ/9cBC0aTYt7BywYAYilqWOx3IplvaroRbV2H97w6Ok3WyMmeg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJSSCeuvqI9Cnrnlb+VpVAku74f2TzXEyKhGlaJnos1gzdLwLGzVB3xjtmeYTfUaDQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "97077a04-d0ec-4a29-b621-95de04b0bfd0",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 368, DateTimeKind.Local).AddTicks(4730),
+                            SecurityStamp = "becd76f0-5832-4288-a44a-d7d0622f3e06",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 31, 968, DateTimeKind.Local).AddTicks(2920),
                             TwoFactorEnabled = false,
                             UserName = "megrhodes@freezing.co.uk"
                         },
                         new
                         {
-                            Id = "fc557e69-6813-435f-b1f2-233dddfca80e",
+                            Id = "8c40c1a0-eddc-409c-af8c-869101b609a1",
                             AccessFailedCount = 0,
                             CompanyId = 5,
-                            ConcurrencyStamp = "cc0b5c0c-3e8c-4557-957b-46b977057772",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 406, DateTimeKind.Local).AddTicks(7770),
+                            ConcurrencyStamp = "a4587f71-f810-4780-9ba3-878538cefde7",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 6, DateTimeKind.Local).AddTicks(5350),
                             Email = "sheff44@ggmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1285,21 +1275,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SHEFF44@GGMAIL.COM",
                             NormalizedUserName = "SHEFF44@GGMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH+0yfb/r+w0S7Y5WSy0OJojYX8bT7VJkGiS6RTTMARo3ErbNSAgTOjcVQvY+A2Nng==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPoI9976iATcWysHpw3jOBlK19Bpge9qJScYFc+QR8n5OxqRDuXEjnIELLgLpwFWoA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "df322145-1629-47ff-ba86-375c6596e417",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 406, DateTimeKind.Local).AddTicks(7770),
+                            SecurityStamp = "f934484d-88ed-4610-9248-f5635255d581",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 6, DateTimeKind.Local).AddTicks(5350),
                             TwoFactorEnabled = false,
                             UserName = "sheff44@ggmail.com"
                         },
                         new
                         {
-                            Id = "ac036877-901d-464a-b02e-494acf94ad4d",
+                            Id = "48bb5539-0993-4ca2-9e65-0d644dab8e9d",
                             AccessFailedCount = 0,
                             CompanyId = 5,
-                            ConcurrencyStamp = "c04fbe75-249c-4aa0-9fbe-0a7f51cb24d4",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 445, DateTimeKind.Local).AddTicks(2370),
+                            ConcurrencyStamp = "08762ec9-4a13-40ae-8859-7dc4afe5339b",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 44, DateTimeKind.Local).AddTicks(6220),
                             Email = "peterstump@hootmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1311,21 +1301,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PETERSTUMP@HOOTMAIL.COM",
                             NormalizedUserName = "PETERSTUMP@HOOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGVKjtTJbMuutrw1pOw3EIEewWNOWTN2/0kylu6gsatVuUrJzflMsJ95wsrC6Wt78w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEz1TUQA+QkxSGwpebGZnbn7ufKhWw9pGP9YjbtO1zkzTl+Wegc1y1Px2BeQuPUkbw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "c914e492-7bb2-4eb8-8136-79633b8ba528",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 445, DateTimeKind.Local).AddTicks(2370),
+                            SecurityStamp = "9aeb6246-95b0-4064-a322-ded9f680bff4",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 44, DateTimeKind.Local).AddTicks(6220),
                             TwoFactorEnabled = false,
                             UserName = "peterstump@hootmail.com"
                         },
                         new
                         {
-                            Id = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
+                            Id = "ae3389ff-c40f-4f70-bf67-bdd132402931",
                             AccessFailedCount = 0,
                             CompanyId = 6,
-                            ConcurrencyStamp = "92915a56-8d7b-42d1-833f-ea3c89be2a55",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 483, DateTimeKind.Local).AddTicks(7140),
+                            ConcurrencyStamp = "3037b729-d1c1-46c7-b259-d33fc24bbe56",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 82, DateTimeKind.Local).AddTicks(6470),
                             Email = "yhuik9.Taylor@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1337,21 +1327,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "YHUIK9.TAYLOR@AOOL.COM",
                             NormalizedUserName = "YHUIK9.TAYLOR@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEu74/MQ0Vx8H47Q66mVSgo8gipxGbYJW2clSIJjQoFuOgaEyT0xZUqbQCRuqSIYbQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEmItiIe7PfZlo12XI54YNgCfKayHNMHgxj85bkZ85RcWa2eAmLjHDEj7i427mjxSQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "4552aecb-788b-483d-8921-1b3279685e37",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 483, DateTimeKind.Local).AddTicks(7150),
+                            SecurityStamp = "c6264f71-4156-47ff-b166-3cd403cad61a",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 82, DateTimeKind.Local).AddTicks(6470),
                             TwoFactorEnabled = false,
                             UserName = "yhuik9.Taylor@aool.com"
                         },
                         new
                         {
-                            Id = "92a565c6-4096-4b59-99c6-aee76311b68a",
+                            Id = "0edbb0c1-3779-4090-a9d6-55b1a2397119",
                             AccessFailedCount = 0,
                             CompanyId = 7,
-                            ConcurrencyStamp = "87e3f422-777b-4195-948e-5b6da1f25ee5",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 521, DateTimeKind.Local).AddTicks(650),
+                            ConcurrencyStamp = "5903e6fb-dc7e-4f8d-8653-8e09761120be",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 119, DateTimeKind.Local).AddTicks(7490),
                             Email = "tuck33@ggmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1363,21 +1353,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TUCK33@GGMAIL.COM",
                             NormalizedUserName = "TUCK33@GGMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL0leAoc6NMtt3mmPOpwJAsiEBwOIfEMdiakOHDBAMtf89Qux0vMXzRrNOWVi9p3/A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEhRtyjgZInRhlDFgaDggG4Q1vX+IQeTYG7oH2OLTb+CbuqS6RXRJ7ecQ/maxkXs7g==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "67fd9f41-1280-48a6-8d5a-04cb323a4f75",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 521, DateTimeKind.Local).AddTicks(650),
+                            SecurityStamp = "91e3eb32-41ca-47ef-8fd1-6265f968c54e",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 119, DateTimeKind.Local).AddTicks(7490),
                             TwoFactorEnabled = false,
                             UserName = "tuck33@ggmail.com"
                         },
                         new
                         {
-                            Id = "7dbe4c9e-a015-47cb-8098-57a60cfccc4b",
+                            Id = "76236e18-0495-45e3-ac79-20b15bb5b68d",
                             AccessFailedCount = 0,
                             CompanyId = 8,
-                            ConcurrencyStamp = "12366a5a-0d6b-486d-94ca-025dc8151444",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 558, DateTimeKind.Local).AddTicks(2390),
+                            ConcurrencyStamp = "5355d5be-b3d7-4fbf-a600-f0df48863de3",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 157, DateTimeKind.Local).AddTicks(3860),
                             Email = "taylordjay@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1389,21 +1379,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TAYLORDJAY@AOOL.COM",
                             NormalizedUserName = "TAYLORDJAY@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMkIpWIVv83S25oT6VhMXu6jFiqULrHigA+54JxHsT0qvyb5tMiNs7sew13pwlDWrA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECn5oMNf+XtwWyKS9slJtXI/oXhbBR5R+LJTl4tcuEyswqHOgF4HjYK6AQWiDtCyBg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "643f235e-2bc5-40b6-9af6-5d8e3f95710c",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 558, DateTimeKind.Local).AddTicks(2400),
+                            SecurityStamp = "206ca2f9-7228-441d-8d20-798e7451dde2",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 157, DateTimeKind.Local).AddTicks(3880),
                             TwoFactorEnabled = false,
                             UserName = "taylordjay@aool.com"
                         },
                         new
                         {
-                            Id = "ab89fdf5-cbd2-49c3-b01f-025ae7f9e046",
+                            Id = "da86f76c-7cfa-4a47-8c41-c0927018b888",
                             AccessFailedCount = 0,
                             CompanyId = 9,
-                            ConcurrencyStamp = "53f1eb5b-2f9d-4b0c-be45-5f26dbc35812",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 595, DateTimeKind.Local).AddTicks(3850),
+                            ConcurrencyStamp = "499edf33-ef35-4f2b-9c5a-321e531f3294",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 194, DateTimeKind.Local).AddTicks(3760),
                             Email = "jojoe@ggmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1415,21 +1405,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOJOE@GGMAIL.COM",
                             NormalizedUserName = "JOJOE@GGMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPt2Txst8fx7FZfNJMSuRWz6VPfWb+sLcrzI0qOCl+FKEF6sXHr0XvYuutZsj/VYIQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJtI8q7TXJs8jIgEvj8tWjKfSaqXpkAtUR+yTrKkd8TXQSgod8UPToyP9Ruz/lWiDA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "918ba746-8b3a-4de7-aabb-e2310ab16078",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 595, DateTimeKind.Local).AddTicks(3850),
+                            SecurityStamp = "5cf9a9a2-cc01-42af-87f2-a90c0473d0e9",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 194, DateTimeKind.Local).AddTicks(3770),
                             TwoFactorEnabled = false,
                             UserName = "jojoe@ggmail.com"
                         },
                         new
                         {
-                            Id = "30caf059-b889-45c0-bcc8-062f0f57a06d",
+                            Id = "fb803e5c-db3e-4931-9cbb-01af2889c447",
                             AccessFailedCount = 0,
                             CompanyId = 10,
-                            ConcurrencyStamp = "bfef7b33-0a91-4a9a-aab7-bf68f6c3e54b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 632, DateTimeKind.Local).AddTicks(6200),
+                            ConcurrencyStamp = "a4c7b59e-486c-4aaa-a9ab-a4044d6571ae",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 231, DateTimeKind.Local).AddTicks(5200),
                             Email = "hicks43@ggmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1441,21 +1431,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HICKS43@GGMAIL.COM",
                             NormalizedUserName = "HICKS43@GGMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMyCc5+AzZiKnjlBvznzFEdDsGJ6sljKmxJ+5odMiwrZ5LFdJWqOicfDuCY+kh+4dw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGgEh2ONu9Z8fb8qzhfNSHZQPwtclMstUrNG99wFQENvMXQtqmB1sJE5VS6PnJX73Q==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "a2fb2d69-6f95-432d-bda9-a11823427c96",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 632, DateTimeKind.Local).AddTicks(6210),
+                            SecurityStamp = "95cfabb8-b980-4c0b-85c1-3e976aff25b1",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 231, DateTimeKind.Local).AddTicks(5200),
                             TwoFactorEnabled = false,
                             UserName = "hicks43@ggmail.com"
                         },
                         new
                         {
-                            Id = "39df0958-b951-47ab-8c70-30708af91bf3",
+                            Id = "808ce1ec-8885-454a-93f0-065feeddabb3",
                             AccessFailedCount = 0,
                             CompanyId = 10,
-                            ConcurrencyStamp = "ebd34f2d-d58b-47b2-852d-4b657e08ab03",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 670, DateTimeKind.Local).AddTicks(910),
+                            ConcurrencyStamp = "afc242a1-b214-4dcc-8878-e74fb7b6272d",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 268, DateTimeKind.Local).AddTicks(7280),
                             Email = "orielly@foxnets.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1467,21 +1457,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ORIELLY@FOXNETS.COM",
                             NormalizedUserName = "ORIELLY@FOXNETS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEILL8V1BU8Y1BfUqI5Ifzh0IKGdB0beQpr+XKXXwUQDa4GrEbSSgQgvIkVgioHhGyg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH/+5yQ3/1sMW2R73QD2FtfHvrRPrlsG2zsDD5yllaFFI77mJwdhnJchEeX8Os5zig==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "32c8c81d-8545-4502-8118-22d19f857ce0",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 670, DateTimeKind.Local).AddTicks(910),
+                            SecurityStamp = "124eee1c-b579-4b7c-a440-d4985a7f6356",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 268, DateTimeKind.Local).AddTicks(7280),
                             TwoFactorEnabled = false,
                             UserName = "orielly@foxnets.com"
                         },
                         new
                         {
-                            Id = "a0cec485-38d5-4365-8081-5b285943df45",
+                            Id = "721d7a8f-cb48-4bf2-80a4-ad217491080f",
                             AccessFailedCount = 0,
                             CompanyId = 10,
-                            ConcurrencyStamp = "383916d4-3ee5-4140-9dd8-fd7d65537a7b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 707, DateTimeKind.Local).AddTicks(3020),
+                            ConcurrencyStamp = "42d20c7d-5286-428c-b597-015adb23a82c",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 306, DateTimeKind.Local).AddTicks(790),
                             Email = "louielouie@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1493,21 +1483,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "LOUIELOUIE@AOOL.COM",
                             NormalizedUserName = "LOUIELOUIE@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMJEMDuguWfmzwiEtitxPUsu1H4sJYt04p0MouD3LfBZw4+fhLgOo/+dzyxt4DtMfw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBf/Xs8Qhu0ycd/2UgPT7nphMqI4+27NNlEcllHB52kV3GUtpgk03L/A+IkEWScnCg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "3a9a57a2-94a5-450f-a7b9-ba94726c976b",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 707, DateTimeKind.Local).AddTicks(3030),
+                            SecurityStamp = "30112940-0efc-4a57-9d3a-016c27e54ae9",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 306, DateTimeKind.Local).AddTicks(790),
                             TwoFactorEnabled = false,
                             UserName = "louielouie@aool.com"
                         },
                         new
                         {
-                            Id = "c5506eb1-7594-4e74-bac7-04ecf82cca5f",
+                            Id = "cad02551-a322-4ba3-b64d-df09534bcba9",
                             AccessFailedCount = 0,
                             CompanyId = 4,
-                            ConcurrencyStamp = "98e7f1db-5bfa-4af1-8fd9-8b7703478350",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 744, DateTimeKind.Local).AddTicks(3940),
+                            ConcurrencyStamp = "8486bb33-1bed-4ddb-83c3-b92cf800f5ed",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 343, DateTimeKind.Local).AddTicks(510),
                             Email = "smartinmartin.Martin@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1519,21 +1509,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SMARTINMARTIN.MARTIN@AOOL.COM",
                             NormalizedUserName = "SMARTINMARTIN.MARTIN@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDb9NljHpYkGPXbsZpnVYtV1qJVGk0B+AajAEBSXru3aIE2ba+qmYw/F71tqV1e4w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELXKcUocE/E4KqQa/TyqDsj8ooAlYhoLJCorl2znlmArBU0btorzhtUoshou7eNVjQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "9eb61932-51a3-45be-81d9-4d2674b7f321",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 744, DateTimeKind.Local).AddTicks(3940),
+                            SecurityStamp = "978fd48f-225f-4d93-9523-5763488fc887",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 343, DateTimeKind.Local).AddTicks(510),
                             TwoFactorEnabled = false,
                             UserName = "smartinmartin.Martin@aool.com"
                         },
                         new
                         {
-                            Id = "3358b2db-cdd0-4b15-bd97-c97ae08d172f",
+                            Id = "f3957123-4d3f-4583-af95-b0f137b8f5cc",
                             AccessFailedCount = 0,
                             CompanyId = 4,
-                            ConcurrencyStamp = "76506b60-4ce8-45e2-902a-0e639fde5ccb",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 781, DateTimeKind.Local).AddTicks(5660),
+                            ConcurrencyStamp = "7adb5458-b72d-4b0c-9b9a-cbcf5f7e625a",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 379, DateTimeKind.Local).AddTicks(9190),
                             Email = "or@aool.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1545,21 +1535,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "OR@AOOL.COM",
                             NormalizedUserName = "OR@AOOL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENEqjiJJaCJ6c/RwN5Zz68E+tg4vJyxAJd2FigQSGDLa3s9SWskASBGwM55yDPyu3w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECntxYbbBHvH4M3XcS1sL5QdYYdycor+rV+iaKUM3IHVyg/KgQPdjl6OeOw2T5dplg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "17f10d51-7c1d-4b58-ac2a-15426a6e4235",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 781, DateTimeKind.Local).AddTicks(5670),
+                            SecurityStamp = "0ec09bc0-2b24-40ad-bcc7-296f859012fc",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 379, DateTimeKind.Local).AddTicks(9190),
                             TwoFactorEnabled = false,
                             UserName = "or@aool.com"
                         },
                         new
                         {
-                            Id = "5cb15e84-86ac-4b42-b60f-8989c5a063e3",
+                            Id = "779c2fc8-b231-41e6-b9c4-4357f6a74bd4",
                             AccessFailedCount = 0,
                             CompanyId = 12,
-                            ConcurrencyStamp = "69731011-682d-43d7-8f62-69583ebfe815",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 818, DateTimeKind.Local).AddTicks(6330),
+                            ConcurrencyStamp = "01038b8f-c3e8-4f95-9ae3-5b7801e50bd5",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 417, DateTimeKind.Local).AddTicks(2270),
                             Email = "tanner@ggmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1571,21 +1561,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TANNER@GGMAIL.COM",
                             NormalizedUserName = "TANNER@GGMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPtWXcmmTwPY102FOyANWLzpJD/FGs9mBP4K68dI+1GHog8Zwbe5j1z9Z7JecUG/VA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDkHBPSEvZ3JlMZQIk6N4KyUdDrv15oWObUB5WeeODTvz9AP8VOpD4zVnQbvOjgcPw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "56ce4571-b663-4a49-ad4a-f21431006efc",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 818, DateTimeKind.Local).AddTicks(6340),
+                            SecurityStamp = "a972b8d3-9528-4a9e-a6ec-ffa98981294f",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 417, DateTimeKind.Local).AddTicks(2270),
                             TwoFactorEnabled = false,
                             UserName = "tanner@ggmail.com"
                         },
                         new
                         {
-                            Id = "7781ee93-7275-42a4-8240-0a76a05fd402",
+                            Id = "9b70c4f1-85d0-452b-a8d2-62c45dfde3b8",
                             AccessFailedCount = 0,
                             CompanyId = 11,
-                            ConcurrencyStamp = "2a1121d7-e72d-4b75-ba87-b3c48583b458",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 855, DateTimeKind.Local).AddTicks(7550),
+                            ConcurrencyStamp = "ddc442fa-4fbd-4800-b9cf-74da372ee8eb",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 454, DateTimeKind.Local).AddTicks(6790),
                             Email = "tee_frank@hootmail.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1597,21 +1587,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEE_FRANK@HOOTMAIL.COM",
                             NormalizedUserName = "TEE_FRANK@HOOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA3UDvEFxWFPY97obwbu3h+NdMCMQAaLM4xBN8KEbPI1MdhlWW5N/BhAUlzRz2dEXQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJjOP3+eJwhJotKPbcHC9iqw48ePq5TJxFty/P68WbtyF3uPTDTJewauTX4ku9H32A==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "872d76d3-8cb8-42ce-b829-9c9d8604b8a4",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 855, DateTimeKind.Local).AddTicks(7550),
+                            SecurityStamp = "5f220e38-fa0a-4745-b582-ce8b49691326",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 454, DateTimeKind.Local).AddTicks(6810),
                             TwoFactorEnabled = false,
                             UserName = "tee_frank@hootmail.com"
                         },
                         new
                         {
-                            Id = "7499a7ad-44e0-40f5-b044-163cc86e8e5f",
+                            Id = "0b2fcac6-6568-42f0-893b-36b3d2437db6",
                             AccessFailedCount = 0,
                             CompanyId = 13,
-                            ConcurrencyStamp = "e64aa49b-1cf9-4093-9b0b-57745799f71f",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 892, DateTimeKind.Local).AddTicks(9520),
+                            ConcurrencyStamp = "a8ec42fb-6d3a-47d7-a867-2593f640f5bc",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 491, DateTimeKind.Local).AddTicks(6610),
                             Email = "target_spot@example.com",
                             EmailConfirmed = false,
                             Ethnicity = "Asian",
@@ -1623,21 +1613,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TARGET_SPOT@EXAMPLE.COM",
                             NormalizedUserName = "TARGET_SPOT@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB5lj3BcUGqseZEez/7LjsQI0egQjg/UkhcoMP46yfof7f6zQPNV8sIsUqKFQR3/+g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGunNUMM/l0mq5Onvlp+s0+a2PWBZju7D8yCjGHUJJcA9Yf3C31t7Y2MIxguei8q0Q==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "f4999092-4c36-479e-b19c-59f26c99967a",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 892, DateTimeKind.Local).AddTicks(9520),
+                            SecurityStamp = "c4857c99-cc3d-4104-b88f-39b20af9ccf6",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 491, DateTimeKind.Local).AddTicks(6610),
                             TwoFactorEnabled = false,
                             UserName = "target_spot@example.com"
                         },
                         new
                         {
-                            Id = "eac2f179-0bc8-406c-acba-49812724b40d",
+                            Id = "cf6c5917-5161-49af-b79b-5aad9ef0ff0d",
                             AccessFailedCount = 0,
                             AddressId = 14,
-                            ConcurrencyStamp = "f5b3f0a5-804b-4338-a759-801ec64d910d",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 930, DateTimeKind.Local).AddTicks(1150),
+                            ConcurrencyStamp = "1c107960-27a9-4a3b-9701-6cf204b7ab39",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 528, DateTimeKind.Local).AddTicks(7790),
                             DateOfBirth = new DateTime(2001, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "cbaker@example.com",
                             EmailConfirmed = false,
@@ -1651,21 +1641,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CBAKER@EXAMPLE.COM",
                             NormalizedUserName = "CBAKER@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPZjCYjW2emF4LpqFjPH6PW27vWoFFJc5HNHWnqSkEPHWczDOPop3agocdeAxVgC0A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFeHIy6BGw130ucZgxroJ0VvEubB6uZ4LhCvaVPyb9MJ+L7Me15os9X5R9mJ3ZDE2A==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "19154bed-7ba5-4421-82b9-795fb86f406c",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 930, DateTimeKind.Local).AddTicks(1160),
+                            SecurityStamp = "1994fcb1-9864-49a8-b8d1-07264041ce32",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 528, DateTimeKind.Local).AddTicks(7790),
                             TwoFactorEnabled = false,
                             UserName = "cbaker@example.com"
                         },
                         new
                         {
-                            Id = "5449f2bb-06a1-4291-b108-404103418fd6",
+                            Id = "e36685df-681f-422c-a4e7-5c3c32041ea0",
                             AccessFailedCount = 0,
                             AddressId = 15,
-                            ConcurrencyStamp = "79e078cf-12e0-412f-b28c-82b17e4c2526",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 22, 967, DateTimeKind.Local).AddTicks(3550),
+                            ConcurrencyStamp = "be7ccc91-1a2f-43ff-80f4-7137f33a9516",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 565, DateTimeKind.Local).AddTicks(9160),
                             DateOfBirth = new DateTime(2000, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "banker@longhorn.net",
                             EmailConfirmed = false,
@@ -1679,21 +1669,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BANKER@LONGHORN.NET",
                             NormalizedUserName = "BANKER@LONGHORN.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOAsw640spqlTpXrJlp/etbLe/OZRxnP/7sRzZSMBw6b+qyE6wgHKXMoHEcPnkxy3A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEb0iEHrosXYjO0BpZjxo6Dvuun7HqBo+bNfh2H8E5mRu+Y9ZQX0QDCDXmE6/0oGCQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "a1436ce6-a894-4d87-a56b-d3e3095026f0",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 22, 967, DateTimeKind.Local).AddTicks(3550),
+                            SecurityStamp = "97a5e805-5e8c-439d-bc85-19ebc2b723ba",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 565, DateTimeKind.Local).AddTicks(9160),
                             TwoFactorEnabled = false,
                             UserName = "banker@longhorn.net"
                         },
                         new
                         {
-                            Id = "2377e694-030a-4ef6-8590-99f0ccb8c583",
+                            Id = "71771f28-a611-456c-863e-805ef104acf1",
                             AccessFailedCount = 0,
                             AddressId = 16,
-                            ConcurrencyStamp = "8f1505ea-0df4-4980-8c95-cdd87272bb19",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 4, DateTimeKind.Local).AddTicks(5520),
+                            ConcurrencyStamp = "6bb1ef3a-1789-4e7f-80b6-91a47b1660ee",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 603, DateTimeKind.Local).AddTicks(660),
                             DateOfBirth = new DateTime(2002, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "franco@example.com",
                             EmailConfirmed = false,
@@ -1707,21 +1697,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FRANCO@EXAMPLE.COM",
                             NormalizedUserName = "FRANCO@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF/lSHjsyWzoCFMZv2OnLHSihyNSeVbEBrd8N1K7lAWMli/L4P6w7e5E4aGC9ZcQSw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDnSxnl3I34yXAhDInzBnJJ5mx8tqXGQjmHbL858T5WGHRJUGtOPX86SbEs1dUOHeA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "6891237c-e89f-44ff-961f-e28fd2e3d23e",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 4, DateTimeKind.Local).AddTicks(5530),
+                            SecurityStamp = "4617c676-963e-443f-8584-8dc99e3d7478",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 603, DateTimeKind.Local).AddTicks(660),
                             TwoFactorEnabled = false,
                             UserName = "franco@example.com"
                         },
                         new
                         {
-                            Id = "bc30683e-b23d-4dfa-ac61-a6eb24670952",
+                            Id = "6a26dbe3-59ae-4faa-a446-2497c3553bd7",
                             AccessFailedCount = 0,
                             AddressId = 17,
-                            ConcurrencyStamp = "af60a685-7d78-4678-87b9-d772f1534526",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 41, DateTimeKind.Local).AddTicks(6700),
+                            ConcurrencyStamp = "fdf91f48-990f-420c-840c-149e6d4cd0f7",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 640, DateTimeKind.Local).AddTicks(1020),
                             DateOfBirth = new DateTime(2001, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "wchang@example.com",
                             EmailConfirmed = false,
@@ -1735,21 +1725,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "WCHANG@EXAMPLE.COM",
                             NormalizedUserName = "WCHANG@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP5Wlsrx5ipggruY1JM2UIjTf5zaZEphAzMfxkRcKPc3WQ8AQdkRw+i+avmCbMcrLA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8ea0kYdae9VbPRPUgMlOEprRaGxQachqMP6vaQPtvJQB/7QkFM3kJM4mM3rgo35Q==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "9be39345-9e80-4fba-bab6-ec9e5fa4f558",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 41, DateTimeKind.Local).AddTicks(6700),
+                            SecurityStamp = "2287e365-2c53-4699-8141-830dfad3b482",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 640, DateTimeKind.Local).AddTicks(1020),
                             TwoFactorEnabled = false,
                             UserName = "wchang@example.com"
                         },
                         new
                         {
-                            Id = "a7fa66b0-4aed-4409-afff-272b8aaa2907",
+                            Id = "27f23b88-addc-4733-b304-16a97cc5817a",
                             AccessFailedCount = 0,
                             AddressId = 18,
-                            ConcurrencyStamp = "ff27b847-a7af-4d1d-9e65-08dbe06ecec7",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 78, DateTimeKind.Local).AddTicks(8280),
+                            ConcurrencyStamp = "96a54ef3-2b8e-44a1-a94f-46cdccfde542",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 677, DateTimeKind.Local).AddTicks(670),
                             DateOfBirth = new DateTime(2003, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "limchou@gogle.com",
                             EmailConfirmed = false,
@@ -1763,21 +1753,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "LIMCHOU@GOGLE.COM",
                             NormalizedUserName = "LIMCHOU@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH+URlcDIPao4DsvXSuqoygeH5ZLjouCrg6bWgNZUIXWwiPT1i2gDSKxCJx2dZjZdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM4sv+hE1VBJKNF25XAxklylzGiegPOig593azPFF5jVgYlU5QZSsnUcOOD1UNqdJQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "27ac4064-e0bd-4bab-874a-9d5fc928e178",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 78, DateTimeKind.Local).AddTicks(8280),
+                            SecurityStamp = "2fe591aa-232e-4fab-868d-97e9743ad426",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 677, DateTimeKind.Local).AddTicks(670),
                             TwoFactorEnabled = false,
                             UserName = "limchou@gogle.com"
                         },
                         new
                         {
-                            Id = "133a1335-8c77-48d2-a556-09e94fe742cb",
+                            Id = "84fe17d1-f73c-44f9-a2c4-d3146b0765eb",
                             AccessFailedCount = 0,
                             AddressId = 19,
-                            ConcurrencyStamp = "105c62b7-bf19-4c18-ad15-8d26fa7b9bcb",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 115, DateTimeKind.Local).AddTicks(9660),
+                            ConcurrencyStamp = "0f312372-3572-4587-a19d-f4b167820a03",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 714, DateTimeKind.Local).AddTicks(3980),
                             DateOfBirth = new DateTime(2002, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "shdixon@aoll.com",
                             EmailConfirmed = false,
@@ -1791,21 +1781,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SHDIXON@AOLL.COM",
                             NormalizedUserName = "SHDIXON@AOLL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGMn8IIacY/JlR7ZIX6oCDVhxcCNvycrmDGafOMLsTlc4+zX0uXqp+eZdEgGQzs/qg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAaBvRhJjEQtu5GjdCvFyw+d44QeVso6ugbuzxMk6Rt14DujO63o9WMsNZ69VY0BdA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "09b4f610-3e78-49fb-adc2-cb1009b6feb1",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 115, DateTimeKind.Local).AddTicks(9670),
+                            SecurityStamp = "9bbc2db2-9ae4-4196-a1bc-c21b19625760",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 714, DateTimeKind.Local).AddTicks(3980),
                             TwoFactorEnabled = false,
                             UserName = "shdixon@aoll.com"
                         },
                         new
                         {
-                            Id = "cb86ec9e-bc98-4973-aa47-bba78cfab53b",
+                            Id = "b3989942-c2b0-41d0-b905-498bf74b0655",
                             AccessFailedCount = 0,
                             AddressId = 20,
-                            ConcurrencyStamp = "0c3d8d02-5021-454a-b4ed-f528b49fc449",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 153, DateTimeKind.Local).AddTicks(3120),
+                            ConcurrencyStamp = "1f663ea6-bdc3-469b-81bb-183ef2212fc6",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 751, DateTimeKind.Local).AddTicks(2810),
                             DateOfBirth = new DateTime(2001, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "j.b.evans@aheca.org",
                             EmailConfirmed = false,
@@ -1819,21 +1809,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "J.B.EVANS@AHECA.ORG",
                             NormalizedUserName = "J.B.EVANS@AHECA.ORG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGiydQmG0ICwfd0iMgT9UXtuY67iTNDwaVKrVcpb6p34gdaMGJhoYB28RhIMGRSHdg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE5EOClJdWRqWcH6ZxzvzqSoZq+hlxdlCn8+zjPEvfZ0slwbMSEc9POvVVnzFvdFHg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "8f6d0c5b-7f7d-4536-a330-fd8e39e95e05",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 153, DateTimeKind.Local).AddTicks(3130),
+                            SecurityStamp = "4f837d49-5508-4529-8312-50ef93aee71b",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 751, DateTimeKind.Local).AddTicks(2810),
                             TwoFactorEnabled = false,
                             UserName = "j.b.evans@aheca.org"
                         },
                         new
                         {
-                            Id = "112c0553-9717-4894-9590-7246e414e899",
+                            Id = "0dfefb99-0ea1-4b54-9e47-b1f0a95e0302",
                             AccessFailedCount = 0,
                             AddressId = 21,
-                            ConcurrencyStamp = "46ac098e-0830-4598-9838-0dd693080c00",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 190, DateTimeKind.Local).AddTicks(7830),
+                            ConcurrencyStamp = "4d150ddd-5282-4082-8a20-e69538fa1d5c",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 788, DateTimeKind.Local).AddTicks(1940),
                             DateOfBirth = new DateTime(2003, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "feeley@penguin.org",
                             EmailConfirmed = false,
@@ -1847,21 +1837,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FEELEY@PENGUIN.ORG",
                             NormalizedUserName = "FEELEY@PENGUIN.ORG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG1xLFX239Wj9Apxblc0STCeKi8ChVyZMaomtlPi0Ikf/eX0PvQFmFvInfK6YOSZnQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKhOnIYLzcT9DU+CH9BGZ09G5aim5BG46gLVZ3xZtJHIC27KEqGG06qY6/6cqjkpBg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "88f214fe-a4f2-4377-b0c3-491d48bfe0b7",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 190, DateTimeKind.Local).AddTicks(7830),
+                            SecurityStamp = "cacf044d-eb77-4d26-a232-28f107f33fc5",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 788, DateTimeKind.Local).AddTicks(1940),
                             TwoFactorEnabled = false,
                             UserName = "feeley@penguin.org"
                         },
                         new
                         {
-                            Id = "1066cc51-a1ab-4767-a91f-7459610a7092",
+                            Id = "40242fd0-e360-42e8-b407-d0301c5d593f",
                             AccessFailedCount = 0,
                             AddressId = 22,
-                            ConcurrencyStamp = "ef50344c-08c0-445e-b482-5f0c46682e4d",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 228, DateTimeKind.Local).AddTicks(880),
+                            ConcurrencyStamp = "9c0e0c38-1916-4d5a-94b2-d57a838eb9f9",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 825, DateTimeKind.Local).AddTicks(5490),
                             DateOfBirth = new DateTime(1996, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tfreeley@minnetonka.ci.us",
                             EmailConfirmed = false,
@@ -1875,21 +1865,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TFREELEY@MINNETONKA.CI.US",
                             NormalizedUserName = "TFREELEY@MINNETONKA.CI.US",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG1+jNdG29WAW6O+sxp8ZJDaZCNOCzTXuL8wg8bUKnlVfqfAkOV9CPvIOAOOzxkduA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ6pnLrx00sQBn7hfo3YRzXc04u6n/EjN/CHKuHSziiXpw320qSjRe2Y7RHXkAp/vA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "18007fd6-b5bd-4952-8d46-43192d3992b3",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 228, DateTimeKind.Local).AddTicks(900),
+                            SecurityStamp = "066c24d8-b06e-4de4-b04c-887561093d59",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 825, DateTimeKind.Local).AddTicks(5500),
                             TwoFactorEnabled = false,
                             UserName = "tfreeley@minnetonka.ci.us"
                         },
                         new
                         {
-                            Id = "8f391bcb-df75-475a-a481-4aca008508c9",
+                            Id = "d7ff8474-9cb9-4155-926b-dbdc647fbc9a",
                             AccessFailedCount = 0,
                             AddressId = 23,
-                            ConcurrencyStamp = "164938c5-992d-4e78-92f4-f73ef5d7afe9",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 265, DateTimeKind.Local).AddTicks(1560),
+                            ConcurrencyStamp = "f1e5ea24-ec44-4dd6-8e07-6c99e4bc6d2b",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 863, DateTimeKind.Local).AddTicks(2320),
                             DateOfBirth = new DateTime(2002, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mgarcia@gogle.com",
                             EmailConfirmed = false,
@@ -1903,21 +1893,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MGARCIA@GOGLE.COM",
                             NormalizedUserName = "MGARCIA@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOpfhjf7vTqpeB2r5MvUvq8sRwWjWXYdcpP2OW6TG2npdmFVKQb6Ko2rTmLqPfxPng==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPYYFbUeYUDn0XWI+gcXpoaWHmJLdbWIOQHgNTR4pH5Rr+VV7OQk05PYW+6NHmBjKg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "ce06e63a-d8ba-4a0f-abb4-7485f15f9c21",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 265, DateTimeKind.Local).AddTicks(1560),
+                            SecurityStamp = "6245b3b3-0f14-48a7-bfeb-f2acb938d94c",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 863, DateTimeKind.Local).AddTicks(2340),
                             TwoFactorEnabled = false,
                             UserName = "mgarcia@gogle.com"
                         },
                         new
                         {
-                            Id = "ccfe848a-ff30-4948-a9bb-4494f5ef7442",
+                            Id = "682a043f-dc4c-46d3-9816-8dad38a56d04",
                             AccessFailedCount = 0,
                             AddressId = 24,
-                            ConcurrencyStamp = "c5bb42b3-00b3-4e4b-9e28-e61333a3eb46",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 302, DateTimeKind.Local).AddTicks(2730),
+                            ConcurrencyStamp = "5f184a0d-2d18-4f6d-bedb-fdadaee377f3",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 900, DateTimeKind.Local).AddTicks(1140),
                             DateOfBirth = new DateTime(1998, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "chaley@thug.com",
                             EmailConfirmed = false,
@@ -1931,21 +1921,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CHALEY@THUG.COM",
                             NormalizedUserName = "CHALEY@THUG.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENDci5vdy5VsK0hMykt/Yn/47qFyuVBwzF5j6sG0xFi/u8YhfKURMBm1ibmwD2hyvg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMTs0UhyD59DRjIa/oWjZSncgYAzq6kBhgvaVzi1G7804Il918VQe5KDe371vCPGXg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "6cffd348-db4f-48a6-b50b-291d6543bd35",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 302, DateTimeKind.Local).AddTicks(2730),
+                            SecurityStamp = "293207a6-b162-483a-8407-49bafb568fee",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 900, DateTimeKind.Local).AddTicks(1140),
                             TwoFactorEnabled = false,
                             UserName = "chaley@thug.com"
                         },
                         new
                         {
-                            Id = "57a6f1e7-0d26-428f-aebd-ec233a1ba643",
+                            Id = "869d2640-c513-42e8-b921-b7b252ef83b8",
                             AccessFailedCount = 0,
                             AddressId = 25,
-                            ConcurrencyStamp = "12a9421b-e397-41db-8744-8d063602a1a0",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 339, DateTimeKind.Local).AddTicks(4390),
+                            ConcurrencyStamp = "aae4239b-15da-4dde-9cd2-e47e01eb6f87",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 937, DateTimeKind.Local).AddTicks(3440),
                             DateOfBirth = new DateTime(2003, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jeffh@sonic.com",
                             EmailConfirmed = false,
@@ -1959,21 +1949,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JEFFH@SONIC.COM",
                             NormalizedUserName = "JEFFH@SONIC.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELzhpLgkBEoLz8Fl1Sp8WJiEvQq6txbU6PIqo6EDorAbmD9qex9GupV97GXpXD4RkQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEArCH/IF5jqndquZ+59yhxlsDkU5eij1nQLRpHXHWYs8O2TqaRyqKKdhU18U2ISJSg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "a283c464-f77d-4309-830c-ff4541da10ff",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 339, DateTimeKind.Local).AddTicks(4400),
+                            SecurityStamp = "54fe2317-b765-441c-8321-5ca786203313",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 937, DateTimeKind.Local).AddTicks(3440),
                             TwoFactorEnabled = false,
                             UserName = "jeffh@sonic.com"
                         },
                         new
                         {
-                            Id = "e4d90733-3e62-4b97-926a-54561fb63ae3",
+                            Id = "94eb4296-228d-48d1-afe8-6d4e3214d4eb",
                             AccessFailedCount = 0,
                             AddressId = 26,
-                            ConcurrencyStamp = "29f94cf9-3333-4942-9969-ee3b323f0ee6",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 376, DateTimeKind.Local).AddTicks(5770),
+                            ConcurrencyStamp = "8ed06cf5-9a0f-4ee9-bf46-344ab9440c1f",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 32, 974, DateTimeKind.Local).AddTicks(3400),
                             DateOfBirth = new DateTime(2000, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "wjhearniii@umich.org",
                             EmailConfirmed = false,
@@ -1987,21 +1977,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "WJHEARNIII@UMICH.ORG",
                             NormalizedUserName = "WJHEARNIII@UMICH.ORG",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGsy6n0+YboJ6Zo6XYIiBNz2QIC0KNkdV+VFF7R3DwNyXkmVDuBzSRd95YLMdPovCA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELcKrMw8uCC6uDmAL2AQH2sA8p1yowNZNVyzG9TlUfqvld2s1a9/CJ+SzZvnHtVu5g==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "3077c6e0-0bbc-4068-920c-72b0463c5b97",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 376, DateTimeKind.Local).AddTicks(5780),
+                            SecurityStamp = "12cea0f8-67bc-4aeb-9d60-6fe84b9654ad",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 32, 974, DateTimeKind.Local).AddTicks(3400),
                             TwoFactorEnabled = false,
                             UserName = "wjhearniii@umich.org"
                         },
                         new
                         {
-                            Id = "8d64652a-9817-4172-82cd-8d32f42f2db6",
+                            Id = "9ddaa3c1-a3cc-4a21-9091-6f9f236570ef",
                             AccessFailedCount = 0,
                             AddressId = 27,
-                            ConcurrencyStamp = "e25f61b4-ed7a-4eca-8fa2-5c20ceb73036",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 413, DateTimeKind.Local).AddTicks(8350),
+                            ConcurrencyStamp = "e5465cff-7c99-46e8-bff0-62b3a8ecee98",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 11, DateTimeKind.Local).AddTicks(2960),
                             DateOfBirth = new DateTime(2003, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ahick@yaho.com",
                             EmailConfirmed = false,
@@ -2015,21 +2005,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "AHICK@YAHO.COM",
                             NormalizedUserName = "AHICK@YAHO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMGXZ2pdGpuXVwjnEH3+pjbmrQKK++0beThW9k0vOzcTVeNYWI8mUtK2+UqI5Sj8Yw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOckBo2Ctz+bzBmOsTiy8C4Vj8u4LZ1Ecn1Rq5kPIrisFz/6ak6heIOag224iELcCQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "d0e092d5-8289-41bf-ab81-4a4acb2a80c0",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 413, DateTimeKind.Local).AddTicks(8360),
+                            SecurityStamp = "0d214b6d-aea6-4398-a982-6d8d4a489eb2",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 11, DateTimeKind.Local).AddTicks(2970),
                             TwoFactorEnabled = false,
                             UserName = "ahick@yaho.com"
                         },
                         new
                         {
-                            Id = "5993c6c2-b79c-40ac-8e69-d1e26794c0a8",
+                            Id = "42131839-483c-4bf4-82d8-ffaf166b9bb6",
                             AccessFailedCount = 0,
                             AddressId = 28,
-                            ConcurrencyStamp = "ebe4eec6-68c7-46f8-af8f-ec102d51a4c1",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 450, DateTimeKind.Local).AddTicks(9080),
+                            ConcurrencyStamp = "22371f39-005e-44eb-b8d7-2d93f3d2799a",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 48, DateTimeKind.Local).AddTicks(2390),
                             DateOfBirth = new DateTime(2001, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ingram@jack.com",
                             EmailConfirmed = false,
@@ -2043,21 +2033,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "INGRAM@JACK.COM",
                             NormalizedUserName = "INGRAM@JACK.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELAFGw68Ygdxwqdt98xrsgz6hnVEmJKesbroSguo28nhhM2kbu9jsG6JNDBCGJWi6Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFyMzZ9fIhaNCjwVYhb8tdrSRpXXCWngUfp5LqwtbxqmKWtxf/JV7cSvMS5N/EymEg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "37e0d939-9a53-4fde-bc65-c6dc34714516",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 450, DateTimeKind.Local).AddTicks(9080),
+                            SecurityStamp = "d80faacb-51ce-42ca-bf1a-0aeb6e7f0143",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 48, DateTimeKind.Local).AddTicks(2400),
                             TwoFactorEnabled = false,
                             UserName = "ingram@jack.com"
                         },
                         new
                         {
-                            Id = "9457e4ad-c052-4b0d-9a77-f717b44fe246",
+                            Id = "cc38625e-88a9-44ef-8dd3-cd5f23e72d5a",
                             AccessFailedCount = 0,
                             AddressId = 29,
-                            ConcurrencyStamp = "15b7a1a5-3d91-4a64-89b0-abf5a25663ff",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 488, DateTimeKind.Local).AddTicks(1970),
+                            ConcurrencyStamp = "f80db7d7-0cc7-4a41-a653-8a7738caba9f",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 85, DateTimeKind.Local).AddTicks(1350),
                             DateOfBirth = new DateTime(2001, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "toddj@yourmom.com",
                             EmailConfirmed = false,
@@ -2071,21 +2061,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TODDJ@YOURMOM.COM",
                             NormalizedUserName = "TODDJ@YOURMOM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKyDA8R6cocD1KXdL5j+0Hmf7hg7KLF5CMO+QnpPZAxX+DxYbAPuH/wD1A/HTHEsKA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPJwIfrVRvnjansMa57VyNHZDapnRiYfav1YHeS84atpcNzPH8v27SnMFyvf3cl8VQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "f7da3e16-718a-4c5e-b5b4-2218d12eb0d2",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 488, DateTimeKind.Local).AddTicks(1970),
+                            SecurityStamp = "bd88ba54-5d44-4129-9322-d5d87d0b1b32",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 85, DateTimeKind.Local).AddTicks(1350),
                             TwoFactorEnabled = false,
                             UserName = "toddj@yourmom.com"
                         },
                         new
                         {
-                            Id = "ea76119b-5ded-497f-a4fb-7091bd52d82a",
+                            Id = "573ab8fb-5a49-400e-bf05-7cb3092ee3d0",
                             AccessFailedCount = 0,
                             AddressId = 30,
-                            ConcurrencyStamp = "83d22c05-7eaa-4672-8fd9-c43bfaf15f40",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 525, DateTimeKind.Local).AddTicks(5390),
+                            ConcurrencyStamp = "526570bf-4205-4b06-bd3b-44ea1ac501bd",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 122, DateTimeKind.Local).AddTicks(1030),
                             DateOfBirth = new DateTime(2001, 1, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "thequeen@aska.net",
                             EmailConfirmed = false,
@@ -2099,21 +2089,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "THEQUEEN@ASKA.NET",
                             NormalizedUserName = "THEQUEEN@ASKA.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAELrHDedKWC2kFx4UqjhfTFy2H1mc7UPrQZHZA/rhaWiRCW9RNgXhSVmY/ipmyIWd5w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKKXfF93eB3UEsUmQGfXuTO88Te7BHFzokiTGBypkfi68BqVZo88fOwyTwjrSJmx9g==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "ab3326a4-cc57-4a0a-bdc4-587aa981e95f",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 525, DateTimeKind.Local).AddTicks(5400),
+                            SecurityStamp = "3b659c8d-be22-4b4d-a1e0-ee12312a0876",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 122, DateTimeKind.Local).AddTicks(1030),
                             TwoFactorEnabled = false,
                             UserName = "thequeen@aska.net"
                         },
                         new
                         {
-                            Id = "b1f980d2-eeea-400a-8c88-a7793ac59e82",
+                            Id = "ade77a46-4295-46f3-9acd-2171ccf78de4",
                             AccessFailedCount = 0,
                             AddressId = 31,
-                            ConcurrencyStamp = "d14e653f-2613-40dd-8650-2ee439b95b42",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 562, DateTimeKind.Local).AddTicks(8170),
+                            ConcurrencyStamp = "656d9bc6-f50c-4a3e-868b-06dbfc074398",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 159, DateTimeKind.Local).AddTicks(1120),
                             DateOfBirth = new DateTime(2004, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "linebacker@gogle.com",
                             EmailConfirmed = false,
@@ -2127,21 +2117,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "LINEBACKER@GOGLE.COM",
                             NormalizedUserName = "LINEBACKER@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK2z3zad3RWSHRNPVppuIFBmMLtXGoPe3c+lVBwJ8kazV+zYv2UTZmGFGoSD7sejeQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN9NBDRTxYiIEBJyJSjfVTFRX6yJxwqaIpzEcy8H0XrBZO6BIh01XIXEJg0xGb90RQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "1c944f8c-e9d2-40cf-a96f-84dc19448102",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 562, DateTimeKind.Local).AddTicks(8180),
+                            SecurityStamp = "a712be3d-a35b-42e8-9b1f-226ac19643bf",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 159, DateTimeKind.Local).AddTicks(1120),
                             TwoFactorEnabled = false,
                             UserName = "linebacker@gogle.com"
                         },
                         new
                         {
-                            Id = "0cb96c55-c6ba-4e81-bdc2-209d7b957282",
+                            Id = "05fbabcc-e04d-4c21-8f8b-0162acccbffc",
                             AccessFailedCount = 0,
                             AddressId = 32,
-                            ConcurrencyStamp = "5626f7d7-b4a6-427e-af56-4401daec44ea",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 599, DateTimeKind.Local).AddTicks(8960),
+                            ConcurrencyStamp = "00bc3a30-e00b-477d-9719-56efd23dd0cc",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 196, DateTimeKind.Local).AddTicks(3840),
                             DateOfBirth = new DateTime(2001, 12, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "elowe@netscare.net",
                             EmailConfirmed = false,
@@ -2155,21 +2145,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ELOWE@NETSCARE.NET",
                             NormalizedUserName = "ELOWE@NETSCARE.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEII0MwnWj3OK2fLqrbgfI6hjkhM4Nc/nPilNG7CrWRxJ9GcsnJMfpZKP+CZruuIFeg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO0o+L9YCHsnFeXVXgTcNNIyvvhlUJ0WxBCZK7oaqMdjA0MvQQOUst6GzvZhZjqWjg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "fb4291b7-2d4d-48c6-a7b4-a13373aaa34a",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 599, DateTimeKind.Local).AddTicks(8960),
+                            SecurityStamp = "a724c166-5eff-4164-af1a-ae7a27df373c",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 196, DateTimeKind.Local).AddTicks(3840),
                             TwoFactorEnabled = false,
                             UserName = "elowe@netscare.net"
                         },
                         new
                         {
-                            Id = "523f552e-c26f-432c-9bd5-66a4464db93e",
+                            Id = "2fdf167e-7507-4acc-bc65-1652affb6558",
                             AccessFailedCount = 0,
                             AddressId = 33,
-                            ConcurrencyStamp = "9d031fc1-555d-444a-acc2-201f791cbf01",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 637, DateTimeKind.Local).AddTicks(550),
+                            ConcurrencyStamp = "ef861fd5-7825-490b-8730-f71c22fb513a",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 233, DateTimeKind.Local).AddTicks(4070),
                             DateOfBirth = new DateTime(2001, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "cluce@gogle.com",
                             EmailConfirmed = false,
@@ -2183,21 +2173,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLUCE@GOGLE.COM",
                             NormalizedUserName = "CLUCE@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENxHrrMrvYUmb4C9mzxTHoJgq1TEPbU+Sucnuyz3QijSLFt3bkpJfJTM5uixWafm0w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELj+FZp86JM7572Fk9oJwinsmSMe83B98qdB6+tl+/95LFFMGp8uMCCN1PJmbPQIdA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "944e7b33-f875-4cda-ba4b-1d4cef6be995",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 637, DateTimeKind.Local).AddTicks(550),
+                            SecurityStamp = "6c924f7b-8947-493c-a761-91e0f31db925",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 233, DateTimeKind.Local).AddTicks(4080),
                             TwoFactorEnabled = false,
                             UserName = "cluce@gogle.com"
                         },
                         new
                         {
-                            Id = "1bcfd888-c765-449d-a286-bcca98b19c19",
+                            Id = "876bda16-595b-4ccf-ad34-9099c73ce21b",
                             AccessFailedCount = 0,
                             AddressId = 34,
-                            ConcurrencyStamp = "3ce4724d-767a-49ae-ba16-7e7b640aa386",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 674, DateTimeKind.Local).AddTicks(3740),
+                            ConcurrencyStamp = "ae61b1e2-0a1c-46bf-b417-27729f559ebf",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 270, DateTimeKind.Local).AddTicks(6780),
                             DateOfBirth = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mackcloud@george.com",
                             EmailConfirmed = false,
@@ -2211,21 +2201,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MACKCLOUD@GEORGE.COM",
                             NormalizedUserName = "MACKCLOUD@GEORGE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJDExwVXsARZMFSceoWy0w1+uL2LQskYOTw4COroRAPwTJoP8patMkEPuWBwlCIBlg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED00VLMQOtyNUNZBTc38okqs7rS2s9AlNHV1Aoj2WiJPxss+5KZi/1QmhLkRLj0LLw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "af4ad73f-efb4-487d-bd6b-32c660ac055d",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 674, DateTimeKind.Local).AddTicks(3740),
+                            SecurityStamp = "6fa06391-7acb-4910-8be0-cad045ea0d2b",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 270, DateTimeKind.Local).AddTicks(6780),
                             TwoFactorEnabled = false,
                             UserName = "mackcloud@george.com"
                         },
                         new
                         {
-                            Id = "249f0ae9-9fb9-4d7d-864a-aa058cf6d1c9",
+                            Id = "d4d5a7fe-b81f-47c0-b40b-e4c8acc228c2",
                             AccessFailedCount = 0,
                             AddressId = 35,
-                            ConcurrencyStamp = "5395d778-024c-4190-b670-af1bef1a2539",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 711, DateTimeKind.Local).AddTicks(6910),
+                            ConcurrencyStamp = "30b456e9-001a-4766-8611-5289a0ae7b79",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 307, DateTimeKind.Local).AddTicks(7490),
                             DateOfBirth = new DateTime(2000, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "cmartin@beets.com",
                             EmailConfirmed = false,
@@ -2239,21 +2229,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CMARTIN@BEETS.COM",
                             NormalizedUserName = "CMARTIN@BEETS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJA9WHraWy/MYU6V3xueEFnGmOauS14xjWKgKHkJg1TZdo9pAduDJtrlJxG2crQkxQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELZOxuPVIWEKM7Yjc59Z/cVr88SFjBnIQ8VIfArlHtg4pOKvDyOaEC2s9dGER2JJag==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "40e477ea-25ad-4669-8be5-c12b169eb9ac",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 711, DateTimeKind.Local).AddTicks(6910),
+                            SecurityStamp = "533293d2-49d4-40ae-8136-7492cc9ec57b",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 307, DateTimeKind.Local).AddTicks(7490),
                             TwoFactorEnabled = false,
                             UserName = "cmartin@beets.com"
                         },
                         new
                         {
-                            Id = "bb2caa99-1ced-4c4d-b197-178257ce2e5f",
+                            Id = "d3659c1e-dc50-4afd-9a4b-c412af974199",
                             AccessFailedCount = 0,
                             AddressId = 36,
-                            ConcurrencyStamp = "5b1dc70e-ee60-47fe-bc29-eaaf0b85f8f4",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 749, DateTimeKind.Local).AddTicks(350),
+                            ConcurrencyStamp = "27962c84-9d86-4124-9e56-b337cb38886c",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 344, DateTimeKind.Local).AddTicks(8740),
                             DateOfBirth = new DateTime(2002, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "clarence@yoho.com",
                             EmailConfirmed = false,
@@ -2267,21 +2257,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLARENCE@YOHO.COM",
                             NormalizedUserName = "CLARENCE@YOHO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHdNyRzvgksW77/9o1coLdcqSj+d8h2ZFhMTt4LEMrhCxy6L/NVPHcYmo0+WC7FhmA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN8QXpCXKRdsSwE1Ct09KbFaqIPiZ/+4djJvi2nuUGYvlHiucLA5mHuIKznUg5IsNg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "a4d8faca-2feb-4db0-b453-a0388ddc8582",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 749, DateTimeKind.Local).AddTicks(350),
+                            SecurityStamp = "3975498e-6744-414f-bb46-5435ccdcf577",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 344, DateTimeKind.Local).AddTicks(8740),
                             TwoFactorEnabled = false,
                             UserName = "clarence@yoho.com"
                         },
                         new
                         {
-                            Id = "182a6b63-09a3-4744-b03b-7b09dde76618",
+                            Id = "bf84cdd5-949b-4e31-8cd8-7458c30293b5",
                             AccessFailedCount = 0,
                             AddressId = 37,
-                            ConcurrencyStamp = "ea709202-2588-4c23-b744-641c4b096604",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 786, DateTimeKind.Local).AddTicks(1610),
+                            ConcurrencyStamp = "dc6e3480-1d6a-47e5-a02a-b66f265807a2",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 382, DateTimeKind.Local).AddTicks(1000),
                             DateOfBirth = new DateTime(2003, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gregmartinez@drdre.com",
                             EmailConfirmed = false,
@@ -2295,21 +2285,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GREGMARTINEZ@DRDRE.COM",
                             NormalizedUserName = "GREGMARTINEZ@DRDRE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECjQUYMv+1Hu2rY01PtON+agNMfjkJiew15tSuRz4ajNaOajknDYHQ9I/mwHcpAW9w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHgoai5uJ5OpFKnNi+RLVBZhs+5mRVz6WQh0G+JNUuCSZU+qRrIJxDEP6DU46YpYDg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "84861529-6da2-414e-a394-2e150d86ac6d",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 786, DateTimeKind.Local).AddTicks(1610),
+                            SecurityStamp = "7efeb144-46ec-4d0e-82bd-0acbbd11c00d",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 382, DateTimeKind.Local).AddTicks(1000),
                             TwoFactorEnabled = false,
                             UserName = "gregmartinez@drdre.com"
                         },
                         new
                         {
-                            Id = "6631fef5-5287-4ca2-abd7-4621ad392c86",
+                            Id = "8f8e13e2-eb0a-406f-82c6-c7fefe962154",
                             AccessFailedCount = 0,
                             AddressId = 38,
-                            ConcurrencyStamp = "ae3c9378-d04a-4764-931d-4a575377b860",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 823, DateTimeKind.Local).AddTicks(4640),
+                            ConcurrencyStamp = "f72b818d-22d7-42f8-83c4-50dc39dd1555",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 419, DateTimeKind.Local).AddTicks(3650),
                             DateOfBirth = new DateTime(2001, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "cmiller@bob.com",
                             EmailConfirmed = false,
@@ -2323,21 +2313,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CMILLER@BOB.COM",
                             NormalizedUserName = "CMILLER@BOB.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJB5aLBNzxFJ83uwGEn1/SkJoAuhXdce0lOerw9/HX8ueWDVNfi27vdUTyrxs+A2tQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL7Y4dpLz3ft6ZI9Z2WirSii1rhBfo06sj9HI16EuxfP0d2HQaL9vYcKykTEbvad2w==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "d9d3cadf-5663-4812-9d35-3b180200f781",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 823, DateTimeKind.Local).AddTicks(4650),
+                            SecurityStamp = "0408cf97-9d82-4935-bc97-25062a0348f4",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 419, DateTimeKind.Local).AddTicks(3650),
                             TwoFactorEnabled = false,
                             UserName = "cmiller@bob.com"
                         },
                         new
                         {
-                            Id = "cc1fbb3a-6ba8-400a-b00c-88d70619c5ef",
+                            Id = "a3093694-84ad-416e-a98e-98c269c6fa29",
                             AccessFailedCount = 0,
                             AddressId = 39,
-                            ConcurrencyStamp = "5aa1961f-7eb8-4b2f-849c-d318bfde7ffa",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 860, DateTimeKind.Local).AddTicks(8490),
+                            ConcurrencyStamp = "258a4329-0726-4457-917a-95202a85e0bc",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 456, DateTimeKind.Local).AddTicks(3620),
                             DateOfBirth = new DateTime(2003, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "knelson@aoll.com",
                             EmailConfirmed = false,
@@ -2351,21 +2341,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KNELSON@AOLL.COM",
                             NormalizedUserName = "KNELSON@AOLL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJFTOOaih6gdCzQ3jOTpuErlBEyTJqHxjnELBUJ+m5TyfcpD0xnQ+zaicCLPd/4ENQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELoCoqilh9/dPeO4xeCwK5Myi4Tq4Wk0We0QToIV8rW1t6mjsCzmFxFxsNpeUI5NxA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "d3c7b3bc-dbd9-4e4b-947a-08056803a7d2",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 860, DateTimeKind.Local).AddTicks(8490),
+                            SecurityStamp = "a4c9b058-ae26-42c0-915d-37efe63bac63",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 456, DateTimeKind.Local).AddTicks(3620),
                             TwoFactorEnabled = false,
                             UserName = "knelson@aoll.com"
                         },
                         new
                         {
-                            Id = "3415e8da-751f-4450-8327-6e42ab913dae",
+                            Id = "2c8fddbb-00ad-40cb-a258-54b86cc101f4",
                             AccessFailedCount = 0,
                             AddressId = 40,
-                            ConcurrencyStamp = "3605ff44-10f9-4b65-814d-532addb9d55e",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 897, DateTimeKind.Local).AddTicks(9950),
+                            ConcurrencyStamp = "aef58754-6f03-45f0-9da0-d62e3a827328",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 493, DateTimeKind.Local).AddTicks(3800),
                             DateOfBirth = new DateTime(2000, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "joewin@xfactor.com",
                             EmailConfirmed = false,
@@ -2379,21 +2369,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOEWIN@XFACTOR.COM",
                             NormalizedUserName = "JOEWIN@XFACTOR.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ2wnew1onjbIpv2i4eaCFDPK3qkDAp+k6HFywTqhO8xMXO4gNBw84pDfavDOZav5g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIwo2V9c5FuaPxe+068D00p1r5S6GSZCGsrcuuiF6pX54E96Mjtp+4sK9Av5ujiL1g==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "9d2a5e7a-9f8c-4104-8fec-94b0b8ff6cea",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 897, DateTimeKind.Local).AddTicks(9950),
+                            SecurityStamp = "ee2bbc42-9756-42d9-9061-229ac3a12dbb",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 493, DateTimeKind.Local).AddTicks(3810),
                             TwoFactorEnabled = false,
                             UserName = "joewin@xfactor.com"
                         },
                         new
                         {
-                            Id = "aded3147-1b49-44da-a7d0-765912bdaf37",
+                            Id = "a9866409-e08f-4e15-b896-0905775622fa",
                             AccessFailedCount = 0,
                             AddressId = 41,
-                            ConcurrencyStamp = "5820b8d1-fb21-41b3-8416-8ed5e449f174",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 935, DateTimeKind.Local).AddTicks(1120),
+                            ConcurrencyStamp = "3fadd0e6-3806-414a-80ff-8e8abe8afd97",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 530, DateTimeKind.Local).AddTicks(2560),
                             DateOfBirth = new DateTime(2001, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "orielly@foxnews.cnn",
                             EmailConfirmed = false,
@@ -2407,21 +2397,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ORIELLY@FOXNEWS.CNN",
                             NormalizedUserName = "ORIELLY@FOXNEWS.CNN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEiob1E6/NLwkDxbI2M++nn1709Ff6eaMefoGj/EhAxfIaqOSJ2DzWgNZ+NWny0LkA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBer9oOEgLi96g5erDCdCbXmuwh+dOFC1CvF7ubPC/gfVyd/jXTfV6FcVpew1JffXg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "d2f027c6-3cc5-4ce5-958c-96b66a6fe62e",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 935, DateTimeKind.Local).AddTicks(1130),
+                            SecurityStamp = "56b739e0-9e42-48ab-b990-9abb0fcc20d6",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 530, DateTimeKind.Local).AddTicks(2560),
                             TwoFactorEnabled = false,
                             UserName = "orielly@foxnews.cnn"
                         },
                         new
                         {
-                            Id = "e51b4197-c122-49c1-ab25-5a4716a73e33",
+                            Id = "42906696-1971-4676-86e2-942ff0ef5c74",
                             AccessFailedCount = 0,
                             AddressId = 42,
-                            ConcurrencyStamp = "3dfafb7f-77a9-412a-a66e-07cad8aa8e2e",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 23, 972, DateTimeKind.Local).AddTicks(2720),
+                            ConcurrencyStamp = "d819ed64-539b-4530-a3ee-82d1ae357e9d",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 567, DateTimeKind.Local).AddTicks(3090),
                             DateOfBirth = new DateTime(2001, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ankaisrad@gogle.com",
                             EmailConfirmed = false,
@@ -2435,21 +2425,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANKAISRAD@GOGLE.COM",
                             NormalizedUserName = "ANKAISRAD@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJbv4QARk21Z47XNMe62pNRkWlrjdzfBk/C3Z/CUYKz9SwM+EQNW16jKZG8RZx1IXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKTEFFXzXWaVYg/k8ypyf2makjfMAMb5L3Jj7JC66lQn+2nCBAYDi7OadtFf+DcXIA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "f99ed964-309f-4acc-9c75-d1366529b61f",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 23, 972, DateTimeKind.Local).AddTicks(2720),
+                            SecurityStamp = "bd0988b9-8b1c-44fb-9828-b9fece1dbd00",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 567, DateTimeKind.Local).AddTicks(3090),
                             TwoFactorEnabled = false,
                             UserName = "ankaisrad@gogle.com"
                         },
                         new
                         {
-                            Id = "4ecfc6da-b7a5-4b90-9846-4784ce99a2e2",
+                            Id = "474311ae-14a4-4384-9950-6ca66983f25b",
                             AccessFailedCount = 0,
                             AddressId = 43,
-                            ConcurrencyStamp = "507a0641-e3ec-4775-88a1-767b2e58f487",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 9, DateTimeKind.Local).AddTicks(3500),
+                            ConcurrencyStamp = "ed82a9ce-db64-43aa-ad6f-7a3b1eae7bc9",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 604, DateTimeKind.Local).AddTicks(2450),
                             DateOfBirth = new DateTime(2001, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "megrhodes@freserve.co.uk",
                             EmailConfirmed = false,
@@ -2463,21 +2453,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MEGRHODES@FRESERVE.CO.UK",
                             NormalizedUserName = "MEGRHODES@FRESERVE.CO.UK",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMU9NxAJl2KtEvLqh/wYqrl4cXH99vgqv2xPhGXUWE3DJGhh1xXmdXT3Dq9nNRo2xA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK8WwOMriuu9W+kRq4wDEwscV8uiOtFBhcrSCywN7PTsxmovz8pjfcbYTYzHEANUUw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "e2feff0c-226a-47b8-bce6-1af0023260c4",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 9, DateTimeKind.Local).AddTicks(3510),
+                            SecurityStamp = "7f36b372-e39d-456f-9260-3e74f0cf67a1",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 604, DateTimeKind.Local).AddTicks(2450),
                             TwoFactorEnabled = false,
                             UserName = "megrhodes@freserve.co.uk"
                         },
                         new
                         {
-                            Id = "ec3ba1cd-24de-4012-865b-c8cd4e59dac4",
+                            Id = "f5bd6e29-3a80-4d35-b105-a0fb987eba5c",
                             AccessFailedCount = 0,
                             AddressId = 44,
-                            ConcurrencyStamp = "2b92ec75-7ee8-4452-83cc-9ac9d71044ba",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 46, DateTimeKind.Local).AddTicks(4280),
+                            ConcurrencyStamp = "cb7b2183-2149-47a3-99ce-47bb9a97a863",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 641, DateTimeKind.Local).AddTicks(4730),
                             DateOfBirth = new DateTime(2004, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "erynrice@aoll.com",
                             EmailConfirmed = false,
@@ -2491,21 +2481,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ERYNRICE@AOLL.COM",
                             NormalizedUserName = "ERYNRICE@AOLL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIxH2n7OdwRvI7n+x6Qx8/KjEgYKoczBvRii9uuESBv0VcVOY4/mCbJGjxwt9ALyJg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJTmQy4ntkqcUpFsl+UIPiMZ2UZrWsvCuFb4KVtbF0oPHDW04Yb6krghxW1/YRbMfQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "ca9e3672-d705-400f-b5a6-8fc2feee8078",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 46, DateTimeKind.Local).AddTicks(4280),
+                            SecurityStamp = "6c63b616-8b21-454d-8c8c-f493fd5cd4a3",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 641, DateTimeKind.Local).AddTicks(4730),
                             TwoFactorEnabled = false,
                             UserName = "erynrice@aoll.com"
                         },
                         new
                         {
-                            Id = "8fde2dd6-cffe-4dca-b5a1-f3bb2a2d869b",
+                            Id = "44fe3df4-f173-47bf-901d-d4d2c6e88107",
                             AccessFailedCount = 0,
                             AddressId = 45,
-                            ConcurrencyStamp = "9bf58260-917e-4471-8d4b-1e27d1f416ba",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 83, DateTimeKind.Local).AddTicks(5190),
+                            ConcurrencyStamp = "fb4e3cfe-70c6-43c8-a2a8-69de1d5a59bd",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 678, DateTimeKind.Local).AddTicks(5030),
                             DateOfBirth = new DateTime(2002, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jorge@noclue.com",
                             EmailConfirmed = false,
@@ -2519,21 +2509,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JORGE@NOCLUE.COM",
                             NormalizedUserName = "JORGE@NOCLUE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE98msH/MR0xvmqPTrGhyowAxrSp7CuUDKPw/b1rPsratmiWKimVStbYA4nQ7JXfGw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHGZB+E7senx0YqGwjQF5mMrPtRka2eHL+qxa+8TJf5y64OEvAdDQNxPE54nh9xARA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "44b10da3-f4af-4778-8727-ce0047474295",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 83, DateTimeKind.Local).AddTicks(5190),
+                            SecurityStamp = "c1ace2cd-3a64-4fcc-8460-a96d3be0fad5",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 678, DateTimeKind.Local).AddTicks(5030),
                             TwoFactorEnabled = false,
                             UserName = "jorge@noclue.com"
                         },
                         new
                         {
-                            Id = "ef563ec2-99e3-4aa0-b9c9-3bc6deac215f",
+                            Id = "a0bebee6-526a-46a7-9570-1b532538536c",
                             AccessFailedCount = 0,
                             AddressId = 46,
-                            ConcurrencyStamp = "977b8b58-5709-4872-959a-8f9977cab323",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 120, DateTimeKind.Local).AddTicks(6910),
+                            ConcurrencyStamp = "fe035550-9c6e-45cc-bb8b-1a2a72b9e3da",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 715, DateTimeKind.Local).AddTicks(4810),
                             DateOfBirth = new DateTime(2001, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrrogers@lovelyday.com",
                             EmailConfirmed = false,
@@ -2547,21 +2537,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MRROGERS@LOVELYDAY.COM",
                             NormalizedUserName = "MRROGERS@LOVELYDAY.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG7CQIc+5kGCFSX0C2Row+tSAN0//LOCu0+5daxvjvH+bKiEp1vepzNNFJZqWzRnHA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPu9SQcWBZ6eNAnjUuYMyXfucpaiTBboubldQkojKF7TAxtyzV39bz3eaB0rgqFiZw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "4ce8cfa5-a03d-4aa0-b50e-e567f50a7f97",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 120, DateTimeKind.Local).AddTicks(6910),
+                            SecurityStamp = "4d260cb5-fa45-46ab-b56f-fe946b5d2e4e",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 715, DateTimeKind.Local).AddTicks(4820),
                             TwoFactorEnabled = false,
                             UserName = "mrrogers@lovelyday.com"
                         },
                         new
                         {
-                            Id = "c43a68a0-4e1e-4b6b-a60e-7689d2b8ee85",
+                            Id = "a847a4a8-ecdd-4573-ac3f-b8656ca5d0f5",
                             AccessFailedCount = 0,
                             AddressId = 47,
-                            ConcurrencyStamp = "5941470b-4224-4a3e-abae-a897a756a7e7",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 158, DateTimeKind.Local).AddTicks(710),
+                            ConcurrencyStamp = "ca0242a5-71e6-40d6-91e0-804b7c36fe5e",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 752, DateTimeKind.Local).AddTicks(6180),
                             DateOfBirth = new DateTime(2002, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "stjean@athome.com",
                             EmailConfirmed = false,
@@ -2575,21 +2565,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STJEAN@ATHOME.COM",
                             NormalizedUserName = "STJEAN@ATHOME.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAED/g2LYDUnKjrXsBJUQUFWRA8RX7T7kC7iRBVwXemclP+RphFXVLEpe3rY5RKknogQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELD3RBF/7y9E3WPDFm7YKJdwf2zriP/dAEG9ytWuYsQaxPaj5MmPKuv9RofI1LH3HQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "e71e584b-208a-45af-a0a7-89191a59a171",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 158, DateTimeKind.Local).AddTicks(730),
+                            SecurityStamp = "eceafa20-b14c-4c21-b6f0-8361b04852d2",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 752, DateTimeKind.Local).AddTicks(6190),
                             TwoFactorEnabled = false,
                             UserName = "stjean@athome.com"
                         },
                         new
                         {
-                            Id = "9d65d32c-4ed3-4ba9-a72e-4491f5df921b",
+                            Id = "ed56463c-f12b-4e88-85a5-0e0ed0a2a01f",
                             AccessFailedCount = 0,
                             AddressId = 48,
-                            ConcurrencyStamp = "c3defbe1-2e89-46a1-965b-7b5359ccf728",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 195, DateTimeKind.Local).AddTicks(2660),
+                            ConcurrencyStamp = "7a05442d-5919-462d-90b2-1117625f59c5",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 789, DateTimeKind.Local).AddTicks(6410),
                             DateOfBirth = new DateTime(2002, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "saunders@pen.com",
                             EmailConfirmed = false,
@@ -2603,21 +2593,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SAUNDERS@PEN.COM",
                             NormalizedUserName = "SAUNDERS@PEN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBzJQtdcADju0PPIJH/Yk/NUiWRtqsbWGAcB0X9DDfJwQuLUjyrioIAGlWMUZ+/S/g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELxUnne3F8VraUN92Kos/hCt1b60xt8BvPu7pvY9HuQgNWty7R0tauTmc5E+iir94w==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "6b2d44d5-05f0-4ce5-b28d-483e46bc802d",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 195, DateTimeKind.Local).AddTicks(2660),
+                            SecurityStamp = "d99e7599-3dfd-4313-8152-47312def6a8f",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 789, DateTimeKind.Local).AddTicks(6410),
                             TwoFactorEnabled = false,
                             UserName = "saunders@pen.com"
                         },
                         new
                         {
-                            Id = "ce61ea89-8818-44ae-8b16-6366761a6313",
+                            Id = "81cc7536-91c8-4fb8-ae58-9f49e12fa2e9",
                             AccessFailedCount = 0,
                             AddressId = 49,
-                            ConcurrencyStamp = "1f6c3744-c508-4b2b-96f0-c47a5ad4f10f",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 232, DateTimeKind.Local).AddTicks(6190),
+                            ConcurrencyStamp = "8f594e5a-0d9c-493d-a086-c0dc6f9625a1",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 826, DateTimeKind.Local).AddTicks(5830),
                             DateOfBirth = new DateTime(2002, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "willsheff@email.com",
                             EmailConfirmed = false,
@@ -2631,21 +2621,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "WILLSHEFF@EMAIL.COM",
                             NormalizedUserName = "WILLSHEFF@EMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELm3w2Epe71ZKzY9ySQ+1uJF0GwXiB0OvDgtXJrzObjSVKUIMVu/+0sDl0xzLSf9qA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENdq8r7qxJ/SUugtLtTP3AqaxQWiTpwxXS9oOTwEnCb3ro5exFXVcOS4OX+G52RkHg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "aecc6b29-0123-4a7f-ad14-2907e1f75571",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 232, DateTimeKind.Local).AddTicks(6190),
+                            SecurityStamp = "91070889-ac32-411c-bf6d-771a421a9699",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 826, DateTimeKind.Local).AddTicks(5840),
                             TwoFactorEnabled = false,
                             UserName = "willsheff@email.com"
                         },
                         new
                         {
-                            Id = "ddf4e679-1d22-45c7-b332-c3955d8b798a",
+                            Id = "e5b45a2e-53b3-451f-bf87-b7d756bf207a",
                             AccessFailedCount = 0,
                             AddressId = 50,
-                            ConcurrencyStamp = "e090be6d-965e-4c9b-88f5-712a4ad328f1",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 269, DateTimeKind.Local).AddTicks(7910),
+                            ConcurrencyStamp = "294e49f8-4d24-4808-860e-669c2c0b4c29",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 863, DateTimeKind.Local).AddTicks(8060),
                             DateOfBirth = new DateTime(2002, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "sheffiled@gogle.com",
                             EmailConfirmed = false,
@@ -2659,21 +2649,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SHEFFILED@GOGLE.COM",
                             NormalizedUserName = "SHEFFILED@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHKHVaBy7HNExmHnCiaIfFMPYwNnw0oo35XneY4MaYKyi0PxhjAuYkzqIhbJt5AuHQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEld11e+hSJbCoIRtG5AHUQxbIauGc8kgVtx4bhOTqY8iJ/JqpsDmIyvkaD5i/99Cg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "ff9e4fcc-26f9-4156-a824-8a9e7eceeaac",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 269, DateTimeKind.Local).AddTicks(7910),
+                            SecurityStamp = "04300751-ebf6-4adb-beac-7c39a1b91fb7",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 863, DateTimeKind.Local).AddTicks(8060),
                             TwoFactorEnabled = false,
                             UserName = "sheffiled@gogle.com"
                         },
                         new
                         {
-                            Id = "7b4f4718-f143-4d36-b210-6e4924931d87",
+                            Id = "7ea8a7f4-819f-442a-9e51-56bb8c686900",
                             AccessFailedCount = 0,
                             AddressId = 51,
-                            ConcurrencyStamp = "c8caaadb-0c4d-45e2-96ef-f3514ac6517a",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 306, DateTimeKind.Local).AddTicks(9380),
+                            ConcurrencyStamp = "70cb85b5-3c65-4ea8-a49c-a272d289eccf",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 900, DateTimeKind.Local).AddTicks(8710),
                             DateOfBirth = new DateTime(2001, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "johnsmith187@aoll.com",
                             EmailConfirmed = false,
@@ -2687,21 +2677,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNSMITH187@AOLL.COM",
                             NormalizedUserName = "JOHNSMITH187@AOLL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJtrYJjZk0/LT4amprs81uZajLALgZCyXpqN0MfGnZx9118u9sS2tujPkry8TmyySQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMjlaon/icIu8YGRvQ4sFszd8LMVzB4hvefMaXxBOXii61MuLya697q8mnfxm2VRow==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "556f808f-13e5-46a3-9ed3-70c9239ba90b",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 306, DateTimeKind.Local).AddTicks(9380),
+                            SecurityStamp = "c68f0b3d-4bf1-48ff-a7d7-963742fe1510",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 900, DateTimeKind.Local).AddTicks(8710),
                             TwoFactorEnabled = false,
                             UserName = "johnsmith187@aoll.com"
                         },
                         new
                         {
-                            Id = "dd8698f5-ffee-41a8-b5e7-89647e015669",
+                            Id = "2ae79be7-c7ba-4fa8-b73b-a264ef5a957f",
                             AccessFailedCount = 0,
                             AddressId = 52,
-                            ConcurrencyStamp = "629b7523-df24-4911-baab-7499ab751f0b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 344, DateTimeKind.Local).AddTicks(1350),
+                            ConcurrencyStamp = "3c5cb6a6-6629-4459-95ee-069d7c788f93",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 937, DateTimeKind.Local).AddTicks(9420),
                             DateOfBirth = new DateTime(2002, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "dustroud@mail.com",
                             EmailConfirmed = false,
@@ -2715,21 +2705,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "DUSTROUD@MAIL.COM",
                             NormalizedUserName = "DUSTROUD@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHPMdT3P6Mex3dwekYZ4B6I2Yxngf0bOOttFVozFlk8eLSbhvhbvFyPTHJXkdoZ5+A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECDrL5Z71RniY/fRYx6J4WMUIXVTk4meIe6wWHOeo/vKIALGMK5YC1dgRbhH8s1njQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "6e0161a1-8793-45ef-a820-8e2ac12e1054",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 344, DateTimeKind.Local).AddTicks(1350),
+                            SecurityStamp = "d54c85fd-2acb-455c-a684-37469bb36b55",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 937, DateTimeKind.Local).AddTicks(9420),
                             TwoFactorEnabled = false,
                             UserName = "dustroud@mail.com"
                         },
                         new
                         {
-                            Id = "69cb26a9-9508-46c0-bc6e-fa217aa75a13",
+                            Id = "9ff70a7a-be2f-4af0-9bbd-6455cb7d5274",
                             AccessFailedCount = 0,
                             AddressId = 53,
-                            ConcurrencyStamp = "132cb29d-59be-4d6f-a97b-9e0139ebd665",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 381, DateTimeKind.Local).AddTicks(2160),
+                            ConcurrencyStamp = "c1215578-be86-4501-a0ee-cb524a777fea",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 33, 974, DateTimeKind.Local).AddTicks(9980),
                             DateOfBirth = new DateTime(2003, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "estuart@anchor.net",
                             EmailConfirmed = false,
@@ -2743,21 +2733,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ESTUART@ANCHOR.NET",
                             NormalizedUserName = "ESTUART@ANCHOR.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOfIjzxBWuz4MRS7iiPLg+iFTq78SxGrTAtNLFFN6M9uNZJKckgtoDxbafmZXCIKOg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECakD0QEgkA26CHJBnK5amngpBVVtGL9+HgLWcTlaAGwDWI+dln1LRRiZFKWRdrfyQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "a090cf37-4b40-4c3a-ad6f-d90baa8238cb",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 381, DateTimeKind.Local).AddTicks(2170),
+                            SecurityStamp = "a9f73bd0-f32a-4257-adfc-e82a1b5f1f79",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 33, 974, DateTimeKind.Local).AddTicks(9980),
                             TwoFactorEnabled = false,
                             UserName = "estuart@anchor.net"
                         },
                         new
                         {
-                            Id = "b4dc7510-7624-4329-a270-2487e28692e8",
+                            Id = "c437dc50-cbe1-42b2-83e8-0570ed766f69",
                             AccessFailedCount = 0,
                             AddressId = 54,
-                            ConcurrencyStamp = "c5ab467e-f57b-47a8-a70f-678b88ee1333",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 418, DateTimeKind.Local).AddTicks(3790),
+                            ConcurrencyStamp = "33adccd2-748c-4242-ae83-1414a4144f60",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 11, DateTimeKind.Local).AddTicks(9510),
                             DateOfBirth = new DateTime(2002, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "peterstump@noclue.com",
                             EmailConfirmed = false,
@@ -2771,21 +2761,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PETERSTUMP@NOCLUE.COM",
                             NormalizedUserName = "PETERSTUMP@NOCLUE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEj9u1iwioCXjzDSZmllxX54aQFnozN6lcfV6IDNIi1Ri2jU23MTK8eQL5veJlcmhA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPdpEEWhTniXWN+r+dheKSgZ0k0GhsanInsUEsDwYL9DHb82IzhNsA2l3lXVLeZf0Q==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "47182fee-28e5-4032-9056-28a27ca9273a",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 418, DateTimeKind.Local).AddTicks(3790),
+                            SecurityStamp = "69ad65da-b898-4379-afe4-5af46662f394",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 11, DateTimeKind.Local).AddTicks(9510),
                             TwoFactorEnabled = false,
                             UserName = "peterstump@noclue.com"
                         },
                         new
                         {
-                            Id = "fc9db39e-6880-41ba-b723-2daff5dc03f2",
+                            Id = "04e6be85-e718-4c28-bff8-8a61845544df",
                             AccessFailedCount = 0,
                             AddressId = 55,
-                            ConcurrencyStamp = "3fbf80fb-f0e7-4e6f-a3de-0e167d47253a",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 455, DateTimeKind.Local).AddTicks(5680),
+                            ConcurrencyStamp = "9e4e71e5-18d3-407c-9e99-31ce0f46796c",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 49, DateTimeKind.Local).AddTicks(1210),
                             DateOfBirth = new DateTime(2002, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jtanner@mustang.net",
                             EmailConfirmed = false,
@@ -2799,21 +2789,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JTANNER@MUSTANG.NET",
                             NormalizedUserName = "JTANNER@MUSTANG.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGTAU32TfTcjbZbVAQd7XnKft8wwPpH2rj7SLHB7nnZv43t8Xfjg4eIh3c4ySRJz5A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELS4jWhoijeTobIXXhEanzpQLllfJ6tCLQ8MyqDOWO4j/ZWE2Cmgu12qY+heziYmrg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "f04a0964-de4d-40e4-a80e-6989c57e2dc2",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 455, DateTimeKind.Local).AddTicks(5680),
+                            SecurityStamp = "e9929196-1e86-44ad-b9d1-d301c2bd6ef7",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 49, DateTimeKind.Local).AddTicks(1220),
                             TwoFactorEnabled = false,
                             UserName = "jtanner@mustang.net"
                         },
                         new
                         {
-                            Id = "daab1bfe-16da-42f4-b553-5747b916d7e1",
+                            Id = "be77e03a-1e33-41e0-ac73-59af7094aecb",
                             AccessFailedCount = 0,
                             AddressId = 56,
-                            ConcurrencyStamp = "60771193-44d2-45b3-8451-659c76b6b361",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 492, DateTimeKind.Local).AddTicks(7040),
+                            ConcurrencyStamp = "9225ae51-ca41-4be1-b4a3-20f541f3ed50",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 86, DateTimeKind.Local).AddTicks(3210),
                             DateOfBirth = new DateTime(2001, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "taylordjay@aoll.com",
                             EmailConfirmed = false,
@@ -2827,21 +2817,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TAYLORDJAY@AOLL.COM",
                             NormalizedUserName = "TAYLORDJAY@AOLL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELM1yrlsjCDpPJKOuO3mL/+KP+2cxCCULOyZV1pNEGlKkoQQq7bE3YLDRnZrrMOnAA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDH0tDcHBR7i2YKpz1BM/fMfTGWrFiFUnm1u6zN6eZL+0ouBNVWGrEyAFzzEgPEKBA==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "f777aa15-a878-4daa-a483-2e879d03abb4",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 492, DateTimeKind.Local).AddTicks(7040),
+                            SecurityStamp = "6172b164-d6ef-4e26-b859-4bf2caf70957",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 86, DateTimeKind.Local).AddTicks(3210),
                             TwoFactorEnabled = false,
                             UserName = "taylordjay@aoll.com"
                         },
                         new
                         {
-                            Id = "7573173a-8c71-41f6-a352-5a064aee1dac",
+                            Id = "f6bec9b3-3cc4-404a-adb7-3c7de60dc459",
                             AccessFailedCount = 0,
                             AddressId = 57,
-                            ConcurrencyStamp = "958c6574-b5d5-4634-8c03-f88f62074bf4",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 529, DateTimeKind.Local).AddTicks(9860),
+                            ConcurrencyStamp = "4a9d7a5d-3065-4f6b-86d0-caf63527821c",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 123, DateTimeKind.Local).AddTicks(5320),
                             DateOfBirth = new DateTime(2003, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "rtaylor@gogle.com",
                             EmailConfirmed = false,
@@ -2855,21 +2845,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "RTAYLOR@GOGLE.COM",
                             NormalizedUserName = "RTAYLOR@GOGLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF2L2KaSVTmAV/fAITcnLxcfsC6Qi8cY0MQr/zTE5u9RENqasLX3qFyRZg/WE2DGFQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKwf6NNBGDnsajJcwlR90vRSaZsC/j2MmNq+hNc2PqHYtzeRpmL2KlEJsIJaTvq4tg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "999efbdb-5c4e-4d32-9901-133aaa55dc58",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 529, DateTimeKind.Local).AddTicks(9870),
+                            SecurityStamp = "8ec71b55-f9bb-4ce9-9071-fed003b5e1ed",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 123, DateTimeKind.Local).AddTicks(5320),
                             TwoFactorEnabled = false,
                             UserName = "rtaylor@gogle.com"
                         },
                         new
                         {
-                            Id = "8b8c27db-812d-47ba-a927-c84b1aacb645",
+                            Id = "19e5f9b8-fd8e-450a-b918-143f68fcc4d7",
                             AccessFailedCount = 0,
                             AddressId = 58,
-                            ConcurrencyStamp = "ca4822b1-d1cc-454e-adae-a4c7d01e6dbb",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 567, DateTimeKind.Local).AddTicks(800),
+                            ConcurrencyStamp = "2ca81923-efcc-4e03-bb05-bad3397ee139",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 160, DateTimeKind.Local).AddTicks(8520),
                             DateOfBirth = new DateTime(2003, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "teefrank@noclue.com",
                             EmailConfirmed = false,
@@ -2883,21 +2873,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEEFRANK@NOCLUE.COM",
                             NormalizedUserName = "TEEFRANK@NOCLUE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGUCwvsS4P21aVbGOeGOfXOtL35/gbirW5K7r3mdGBCJMbF+/mF+UvYfHivBxFFdLw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEtNIcgcgUYmCoe8FHbzZV8z62saiNe1HHQYdQKcUhnSmTpagqSmnEyf8JTnO4W9wg==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "bdd74fc6-986e-487b-b3fe-e7ea33683e26",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 567, DateTimeKind.Local).AddTicks(800),
+                            SecurityStamp = "80ad312d-89e6-43cb-8c7a-fa752123cd96",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 160, DateTimeKind.Local).AddTicks(8520),
                             TwoFactorEnabled = false,
                             UserName = "teefrank@noclue.com"
                         },
                         new
                         {
-                            Id = "60cae427-0d8f-4873-84dd-5e9212a0664c",
+                            Id = "84789208-f640-4ead-9cac-c99e60cdf585",
                             AccessFailedCount = 0,
                             AddressId = 59,
-                            ConcurrencyStamp = "199d9812-e3f6-4a42-9b0d-08645baac904",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 604, DateTimeKind.Local).AddTicks(4530),
+                            ConcurrencyStamp = "48921928-1795-407b-af9f-3ccbd0822af9",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 197, DateTimeKind.Local).AddTicks(8820),
                             DateOfBirth = new DateTime(2001, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ctucker@alphabet.co.uk",
                             EmailConfirmed = false,
@@ -2911,21 +2901,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CTUCKER@ALPHABET.CO.UK",
                             NormalizedUserName = "CTUCKER@ALPHABET.CO.UK",
-                            PasswordHash = "AQAAAAIAAYagAAAAELNxouCbzZ753UR2J/fRLK5ylwRMyToIlD+zdDr2hzFQsusbspLCQ/XLsXalKSpxUg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN8yo02Rr6ZNVa/jpwABq72eir4uxElfUAs+X7o1r8oz8uZAW8zjPswwOB2mtoz4xQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "995be886-0e63-4831-b607-870c8341c7cd",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 604, DateTimeKind.Local).AddTicks(4530),
+                            SecurityStamp = "91119df1-4a9d-4451-8ac5-62f4c5c2eac1",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 197, DateTimeKind.Local).AddTicks(8820),
                             TwoFactorEnabled = false,
                             UserName = "ctucker@alphabet.co.uk"
                         },
                         new
                         {
-                            Id = "81b8a64f-fa24-4cdf-a94d-ab1acd5597f8",
+                            Id = "3d7fdf32-e278-4985-a569-157491a4b072",
                             AccessFailedCount = 0,
                             AddressId = 60,
-                            ConcurrencyStamp = "a403e8b0-204c-41b7-9370-9157ad9b2e6c",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 641, DateTimeKind.Local).AddTicks(8370),
+                            ConcurrencyStamp = "5e914997-c4a7-44c9-ba4e-c6cf00cd0f2f",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 234, DateTimeKind.Local).AddTicks(9830),
                             DateOfBirth = new DateTime(2003, 6, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "avelasco@yoho.com",
                             EmailConfirmed = false,
@@ -2939,21 +2929,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "AVELASCO@YOHO.COM",
                             NormalizedUserName = "AVELASCO@YOHO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO+rAo2hw8WESVOERuJjcL2Lhq4DagyA0gxIhzA3oIWgfJf6RFBt9XnFdJesNTXWJA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM2g8RaY5WCz69lGHp91erPY+4OjYdjvKPv4GANClyVmKiH6R+T58Cl1I0D2+YaxRw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "84316dd9-765c-49e0-bfda-3464bc3e39a6",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 641, DateTimeKind.Local).AddTicks(8380),
+                            SecurityStamp = "6b8b6dd6-e60b-4150-bb62-2172ed880c46",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 234, DateTimeKind.Local).AddTicks(9830),
                             TwoFactorEnabled = false,
                             UserName = "avelasco@yoho.com"
                         },
                         new
                         {
-                            Id = "b1faccab-3207-418b-9e44-4a78ed008612",
+                            Id = "ceb4daca-8ed2-4f44-bd2c-022b64d648eb",
                             AccessFailedCount = 0,
                             AddressId = 61,
-                            ConcurrencyStamp = "1aa064b8-428a-4dcf-8eea-8c64ba403f8b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 679, DateTimeKind.Local).AddTicks(1560),
+                            ConcurrencyStamp = "cd1924e0-c19d-46f2-be63-5cb96cf00c83",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 271, DateTimeKind.Local).AddTicks(9180),
                             DateOfBirth = new DateTime(1997, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "vinovino@grapes.com",
                             EmailConfirmed = false,
@@ -2967,21 +2957,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "VINOVINO@GRAPES.COM",
                             NormalizedUserName = "VINOVINO@GRAPES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA8LhiGWTFErDh4XMHlCIF1h/THju3HYLHv4t/XDeAYjQqUZUwin7kGb4griXHIKuA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB/cIt/cUur1oK07kAPYpc/uZaH99BnAlqWNwrKaPzZ3dkfrH4fz9SICD9Kqa7V0Uw==",
                             PhoneNumberConfirmed = false,
                             PositionType = "I",
-                            SecurityStamp = "3b1d5abe-d4bb-43bd-b80b-5b7fdb060c7f",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 679, DateTimeKind.Local).AddTicks(1570),
+                            SecurityStamp = "703a430c-41b0-4302-826a-0f4da1121028",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 271, DateTimeKind.Local).AddTicks(9190),
                             TwoFactorEnabled = false,
                             UserName = "vinovino@grapes.com"
                         },
                         new
                         {
-                            Id = "d56aa3bd-b1c7-4edb-9186-ffb1971348aa",
+                            Id = "145b524d-fd3c-438b-873c-b8399afa4e6e",
                             AccessFailedCount = 0,
                             AddressId = 62,
-                            ConcurrencyStamp = "f5d7d7be-0d7d-4d83-9b11-1d1d10958842",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 716, DateTimeKind.Local).AddTicks(3410),
+                            ConcurrencyStamp = "6a39715c-f50f-40e2-90a7-5f6e5997426d",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 309, DateTimeKind.Local).AddTicks(1520),
                             DateOfBirth = new DateTime(2002, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "westj@pioneer.net",
                             EmailConfirmed = false,
@@ -2995,21 +2985,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "WESTJ@PIONEER.NET",
                             NormalizedUserName = "WESTJ@PIONEER.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOFho0fAwAskYuqBeuK6vMgAzlONzvBmQFGQ1yX90VWo/+fKPGQq//e9tYU/Kuziww==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH04UVwUUd6MDI+K32jM1zwVnuV+KxhT9ntu4WThyd9LfluF8R12c4CSddlKGTT58w==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "5611b72f-72a4-4cb5-ad05-27b7b54b7b7f",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 716, DateTimeKind.Local).AddTicks(3420),
+                            SecurityStamp = "7e5c4d6f-df1d-44ed-b474-551cb29970f9",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 309, DateTimeKind.Local).AddTicks(1520),
                             TwoFactorEnabled = false,
                             UserName = "westj@pioneer.net"
                         },
                         new
                         {
-                            Id = "b6f1c0f1-5bca-4677-b4ac-59df9694b308",
+                            Id = "44bf2a68-8707-4903-be9b-fd02fadcdeb0",
                             AccessFailedCount = 0,
                             AddressId = 63,
-                            ConcurrencyStamp = "1008a700-4967-4223-90b8-23f0697cc5ff",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 753, DateTimeKind.Local).AddTicks(5430),
+                            ConcurrencyStamp = "8a9e3ec9-e75e-46aa-a7d6-fb3fe324b1ae",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 346, DateTimeKind.Local).AddTicks(380),
                             DateOfBirth = new DateTime(2001, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "winner@hootmail.com",
                             EmailConfirmed = false,
@@ -3023,21 +3013,21 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "WINNER@HOOTMAIL.COM",
                             NormalizedUserName = "WINNER@HOOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBPJLv0Wq754qo/XhW4Z9GWgQarJvliO6k7oAh8uycUQJ3W/YQhqHHM1ur82Fj1muw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOVlEZ3Zg7v9P+M1ckVD1zTqPAWVpRdHcaW703zMUxsWqoPzZHv8A+h1hW2SS3Dh8A==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "878ce862-e4d1-464b-bab5-b60ec56986a9",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 753, DateTimeKind.Local).AddTicks(5430),
+                            SecurityStamp = "5a1ffcf4-bdbc-47c0-a3ee-0a4c67a8d5ec",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 346, DateTimeKind.Local).AddTicks(380),
                             TwoFactorEnabled = false,
                             UserName = "winner@hootmail.com"
                         },
                         new
                         {
-                            Id = "776ac473-3f9a-4f09-8b4e-0225a72f428c",
+                            Id = "14422cf3-595c-44f6-a477-5f005a671e52",
                             AccessFailedCount = 0,
                             AddressId = 64,
-                            ConcurrencyStamp = "5458d8ac-3ba3-4b06-8f8b-b7a3a8ad8efa",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 790, DateTimeKind.Local).AddTicks(7260),
+                            ConcurrencyStamp = "192673a9-6b8d-4e16-a24a-5e7d6fa5f817",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 383, DateTimeKind.Local).AddTicks(850),
                             DateOfBirth = new DateTime(2001, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "rwood@voyager.net",
                             EmailConfirmed = false,
@@ -3051,11 +3041,11 @@ namespace Candid.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "RWOOD@VOYAGER.NET",
                             NormalizedUserName = "RWOOD@VOYAGER.NET",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKdgxjJkkmslopGWkmHnCfmTumlrghw9pZCIAQvoHfiXZ93huaE67qljT6lHuitJwQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJNmbJGK0jYqnu+JNAfttb+d6obIqDtcHUiqXfIwI70JGgNabGKl5OjCvibcR8PxdQ==",
                             PhoneNumberConfirmed = false,
                             PositionType = "FT",
-                            SecurityStamp = "3a7dc312-9b0c-4baa-a035-f8d6ea03d0a3",
-                            SystemDate = new DateTime(2023, 4, 23, 21, 59, 24, 790, DateTimeKind.Local).AddTicks(7260),
+                            SecurityStamp = "17cc051e-018c-4a8f-ab83-fe0ea74437e7",
+                            SystemDate = new DateTime(2023, 11, 27, 0, 24, 34, 383, DateTimeKind.Local).AddTicks(850),
                             TwoFactorEnabled = false,
                             UserName = "rwood@voyager.net"
                         });
@@ -3064,13 +3054,13 @@ namespace Candid.Migrations
             modelBuilder.Entity("Candid.Models.AppUserMajor", b =>
                 {
                     b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("MajorId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("AppUserId", "MajorId");
 
@@ -3081,307 +3071,307 @@ namespace Candid.Migrations
                     b.HasData(
                         new
                         {
-                            AppUserId = "eac2f179-0bc8-406c-acba-49812724b40d",
+                            AppUserId = "cf6c5917-5161-49af-b79b-5aad9ef0ff0d",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "5449f2bb-06a1-4291-b108-404103418fd6",
+                            AppUserId = "e36685df-681f-422c-a4e7-5c3c32041ea0",
                             MajorId = 4,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "2377e694-030a-4ef6-8590-99f0ccb8c583",
+                            AppUserId = "71771f28-a611-456c-863e-805ef104acf1",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "bc30683e-b23d-4dfa-ac61-a6eb24670952",
+                            AppUserId = "6a26dbe3-59ae-4faa-a446-2497c3553bd7",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "a7fa66b0-4aed-4409-afff-272b8aaa2907",
+                            AppUserId = "27f23b88-addc-4733-b304-16a97cc5817a",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "133a1335-8c77-48d2-a556-09e94fe742cb",
+                            AppUserId = "84fe17d1-f73c-44f9-a2c4-d3146b0765eb",
                             MajorId = 4,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "cb86ec9e-bc98-4973-aa47-bba78cfab53b",
+                            AppUserId = "b3989942-c2b0-41d0-b905-498bf74b0655",
                             MajorId = 1,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "112c0553-9717-4894-9590-7246e414e899",
+                            AppUserId = "0dfefb99-0ea1-4b54-9e47-b1f0a95e0302",
                             MajorId = 6,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "1066cc51-a1ab-4767-a91f-7459610a7092",
+                            AppUserId = "40242fd0-e360-42e8-b407-d0301c5d593f",
                             MajorId = 1,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "8f391bcb-df75-475a-a481-4aca008508c9",
+                            AppUserId = "d7ff8474-9cb9-4155-926b-dbdc647fbc9a",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "ccfe848a-ff30-4948-a9bb-4494f5ef7442",
+                            AppUserId = "682a043f-dc4c-46d3-9816-8dad38a56d04",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "57a6f1e7-0d26-428f-aebd-ec233a1ba643",
+                            AppUserId = "869d2640-c513-42e8-b921-b7b252ef83b8",
                             MajorId = 9,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "e4d90733-3e62-4b97-926a-54561fb63ae3",
+                            AppUserId = "94eb4296-228d-48d1-afe8-6d4e3214d4eb",
                             MajorId = 2,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "8d64652a-9817-4172-82cd-8d32f42f2db6",
+                            AppUserId = "9ddaa3c1-a3cc-4a21-9091-6f9f236570ef",
                             MajorId = 7,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "5993c6c2-b79c-40ac-8e69-d1e26794c0a8",
+                            AppUserId = "42131839-483c-4bf4-82d8-ffaf166b9bb6",
                             MajorId = 7,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "9457e4ad-c052-4b0d-9a77-f717b44fe246",
+                            AppUserId = "cc38625e-88a9-44ef-8dd3-cd5f23e72d5a",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "ea76119b-5ded-497f-a4fb-7091bd52d82a",
+                            AppUserId = "573ab8fb-5a49-400e-bf05-7cb3092ee3d0",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "b1f980d2-eeea-400a-8c88-a7793ac59e82",
+                            AppUserId = "ade77a46-4295-46f3-9acd-2171ccf78de4",
                             MajorId = 1,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "0cb96c55-c6ba-4e81-bdc2-209d7b957282",
+                            AppUserId = "05fbabcc-e04d-4c21-8f8b-0162acccbffc",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "523f552e-c26f-432c-9bd5-66a4464db93e",
+                            AppUserId = "2fdf167e-7507-4acc-bc65-1652affb6558",
                             MajorId = 1,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "1bcfd888-c765-449d-a286-bcca98b19c19",
+                            AppUserId = "876bda16-595b-4ccf-ad34-9099c73ce21b",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "249f0ae9-9fb9-4d7d-864a-aa058cf6d1c9",
+                            AppUserId = "d4d5a7fe-b81f-47c0-b40b-e4c8acc228c2",
                             MajorId = 2,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "bb2caa99-1ced-4c4d-b197-178257ce2e5f",
+                            AppUserId = "d3659c1e-dc50-4afd-9a4b-c412af974199",
                             MajorId = 7,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "182a6b63-09a3-4744-b03b-7b09dde76618",
+                            AppUserId = "bf84cdd5-949b-4e31-8cd8-7458c30293b5",
                             MajorId = 2,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "6631fef5-5287-4ca2-abd7-4621ad392c86",
+                            AppUserId = "8f8e13e2-eb0a-406f-82c6-c7fefe962154",
                             MajorId = 5,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "cc1fbb3a-6ba8-400a-b00c-88d70619c5ef",
+                            AppUserId = "a3093694-84ad-416e-a98e-98c269c6fa29",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "3415e8da-751f-4450-8327-6e42ab913dae",
+                            AppUserId = "2c8fddbb-00ad-40cb-a258-54b86cc101f4",
                             MajorId = 5,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "aded3147-1b49-44da-a7d0-765912bdaf37",
+                            AppUserId = "a9866409-e08f-4e15-b896-0905775622fa",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "e51b4197-c122-49c1-ab25-5a4716a73e33",
+                            AppUserId = "42906696-1971-4676-86e2-942ff0ef5c74",
                             MajorId = 2,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "4ecfc6da-b7a5-4b90-9846-4784ce99a2e2",
+                            AppUserId = "474311ae-14a4-4384-9950-6ca66983f25b",
                             MajorId = 5,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "ec3ba1cd-24de-4012-865b-c8cd4e59dac4",
+                            AppUserId = "f5bd6e29-3a80-4d35-b105-a0fb987eba5c",
                             MajorId = 6,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "8fde2dd6-cffe-4dca-b5a1-f3bb2a2d869b",
+                            AppUserId = "44fe3df4-f173-47bf-901d-d4d2c6e88107",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "ef563ec2-99e3-4aa0-b9c9-3bc6deac215f",
+                            AppUserId = "a0bebee6-526a-46a7-9570-1b532538536c",
                             MajorId = 6,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "c43a68a0-4e1e-4b6b-a60e-7689d2b8ee85",
+                            AppUserId = "a847a4a8-ecdd-4573-ac3f-b8656ca5d0f5",
                             MajorId = 9,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "9d65d32c-4ed3-4ba9-a72e-4491f5df921b",
+                            AppUserId = "ed56463c-f12b-4e88-85a5-0e0ed0a2a01f",
                             MajorId = 7,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "ce61ea89-8818-44ae-8b16-6366761a6313",
+                            AppUserId = "81cc7536-91c8-4fb8-ae58-9f49e12fa2e9",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "ddf4e679-1d22-45c7-b332-c3955d8b798a",
+                            AppUserId = "e5b45a2e-53b3-451f-bf87-b7d756bf207a",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "7b4f4718-f143-4d36-b210-6e4924931d87",
+                            AppUserId = "7ea8a7f4-819f-442a-9e51-56bb8c686900",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "dd8698f5-ffee-41a8-b5e7-89647e015669",
+                            AppUserId = "2ae79be7-c7ba-4fa8-b73b-a264ef5a957f",
                             MajorId = 6,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "69cb26a9-9508-46c0-bc6e-fa217aa75a13",
+                            AppUserId = "9ff70a7a-be2f-4af0-9bbd-6455cb7d5274",
                             MajorId = 2,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "b4dc7510-7624-4329-a270-2487e28692e8",
+                            AppUserId = "c437dc50-cbe1-42b2-83e8-0570ed766f69",
                             MajorId = 7,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "fc9db39e-6880-41ba-b723-2daff5dc03f2",
+                            AppUserId = "04e6be85-e718-4c28-bff8-8a61845544df",
                             MajorId = 5,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "daab1bfe-16da-42f4-b553-5747b916d7e1",
+                            AppUserId = "be77e03a-1e33-41e0-ac73-59af7094aecb",
                             MajorId = 6,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "7573173a-8c71-41f6-a352-5a064aee1dac",
+                            AppUserId = "f6bec9b3-3cc4-404a-adb7-3c7de60dc459",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "8b8c27db-812d-47ba-a927-c84b1aacb645",
+                            AppUserId = "19e5f9b8-fd8e-450a-b918-143f68fcc4d7",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "60cae427-0d8f-4873-84dd-5e9212a0664c",
+                            AppUserId = "84789208-f640-4ead-9cac-c99e60cdf585",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "81b8a64f-fa24-4cdf-a94d-ab1acd5597f8",
+                            AppUserId = "3d7fdf32-e278-4985-a569-157491a4b072",
                             MajorId = 8,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "b1faccab-3207-418b-9e44-4a78ed008612",
+                            AppUserId = "ceb4daca-8ed2-4f44-bd2c-022b64d648eb",
                             MajorId = 2,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "d56aa3bd-b1c7-4edb-9186-ffb1971348aa",
+                            AppUserId = "145b524d-fd3c-438b-873c-b8399afa4e6e",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "b6f1c0f1-5bca-4677-b4ac-59df9694b308",
+                            AppUserId = "44bf2a68-8707-4903-be9b-fd02fadcdeb0",
                             MajorId = 3,
                             isActive = true
                         },
                         new
                         {
-                            AppUserId = "776ac473-3f9a-4f09-8b4e-0225a72f428c",
+                            AppUserId = "14422cf3-595c-44f6-a477-5f005a671e52",
                             MajorId = 1,
                             isActive = true
                         });
@@ -3391,28 +3381,26 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("AppUserPositionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppUserPositionId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateSubmitted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("InterviewId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("PositionId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("StatusType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("AppUserPositionId");
 
@@ -3428,163 +3416,163 @@ namespace Candid.Migrations
                         new
                         {
                             AppUserPositionId = 1,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(1930),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2520),
                             PositionId = 5,
                             StatusType = "Accepted",
-                            StudentId = "112c0553-9717-4894-9590-7246e414e899",
+                            StudentId = "0dfefb99-0ea1-4b54-9e47-b1f0a95e0302",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 2,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(1960),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2550),
                             PositionId = 5,
                             StatusType = "Accepted",
-                            StudentId = "ec3ba1cd-24de-4012-865b-c8cd4e59dac4",
+                            StudentId = "f5bd6e29-3a80-4d35-b105-a0fb987eba5c",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 3,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(1980),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2570),
                             PositionId = 15,
                             StatusType = "Accepted",
-                            StudentId = "6631fef5-5287-4ca2-abd7-4621ad392c86",
+                            StudentId = "8f8e13e2-eb0a-406f-82c6-c7fefe962154",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 4,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2000),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2590),
                             PositionId = 12,
                             StatusType = "Accepted",
-                            StudentId = "69cb26a9-9508-46c0-bc6e-fa217aa75a13",
+                            StudentId = "9ff70a7a-be2f-4af0-9bbd-6455cb7d5274",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 5,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2020),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2610),
                             PositionId = 8,
                             StatusType = "Accepted",
-                            StudentId = "eac2f179-0bc8-406c-acba-49812724b40d",
+                            StudentId = "cf6c5917-5161-49af-b79b-5aad9ef0ff0d",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 6,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2030),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2620),
                             PositionId = 13,
                             StatusType = "Accepted",
-                            StudentId = "ec3ba1cd-24de-4012-865b-c8cd4e59dac4",
+                            StudentId = "f5bd6e29-3a80-4d35-b105-a0fb987eba5c",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 7,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2050),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2630),
                             PositionId = 13,
                             StatusType = "Accepted",
-                            StudentId = "1066cc51-a1ab-4767-a91f-7459610a7092",
+                            StudentId = "40242fd0-e360-42e8-b407-d0301c5d593f",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 8,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2060),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2650),
                             PositionId = 13,
                             StatusType = "Accepted",
-                            StudentId = "a7fa66b0-4aed-4409-afff-272b8aaa2907",
+                            StudentId = "27f23b88-addc-4733-b304-16a97cc5817a",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 9,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2070),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2660),
                             PositionId = 20,
                             StatusType = "Accepted",
-                            StudentId = "5993c6c2-b79c-40ac-8e69-d1e26794c0a8",
+                            StudentId = "42131839-483c-4bf4-82d8-ffaf166b9bb6",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 10,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2090),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2670),
                             PositionId = 20,
                             StatusType = "Accepted",
-                            StudentId = "9d65d32c-4ed3-4ba9-a72e-4491f5df921b",
+                            StudentId = "ed56463c-f12b-4e88-85a5-0e0ed0a2a01f",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 11,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2100),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2690),
                             PositionId = 9,
                             StatusType = "Accepted",
-                            StudentId = "7b4f4718-f143-4d36-b210-6e4924931d87",
+                            StudentId = "7ea8a7f4-819f-442a-9e51-56bb8c686900",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 12,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2120),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2710),
                             PositionId = 11,
                             StatusType = "Accepted",
-                            StudentId = "523f552e-c26f-432c-9bd5-66a4464db93e",
+                            StudentId = "2fdf167e-7507-4acc-bc65-1652affb6558",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 13,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2130),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2720),
                             PositionId = 3,
                             StatusType = "Accepted",
-                            StudentId = "69cb26a9-9508-46c0-bc6e-fa217aa75a13",
+                            StudentId = "9ff70a7a-be2f-4af0-9bbd-6455cb7d5274",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 14,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2150),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2740),
                             PositionId = 3,
                             StatusType = "Accepted",
-                            StudentId = "e4d90733-3e62-4b97-926a-54561fb63ae3",
+                            StudentId = "94eb4296-228d-48d1-afe8-6d4e3214d4eb",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 15,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2160),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2750),
                             PositionId = 12,
                             StatusType = "Accepted",
-                            StudentId = "cb86ec9e-bc98-4973-aa47-bba78cfab53b",
+                            StudentId = "b3989942-c2b0-41d0-b905-498bf74b0655",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 16,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2170),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2760),
                             PositionId = 12,
                             StatusType = "Pending",
-                            StudentId = "776ac473-3f9a-4f09-8b4e-0225a72f428c",
+                            StudentId = "14422cf3-595c-44f6-a477-5f005a671e52",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 17,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2200),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2780),
                             PositionId = 26,
                             StatusType = "Pending",
-                            StudentId = "776ac473-3f9a-4f09-8b4e-0225a72f428c",
+                            StudentId = "14422cf3-595c-44f6-a477-5f005a671e52",
                             isActive = true
                         },
                         new
                         {
                             AppUserPositionId = 18,
-                            DateSubmitted = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2220),
+                            DateSubmitted = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2810),
                             PositionId = 3,
                             StatusType = "Pending",
-                            StudentId = "776ac473-3f9a-4f09-8b4e-0225a72f428c",
+                            StudentId = "14422cf3-595c-44f6-a477-5f005a671e52",
                             isActive = true
                         });
                 });
@@ -3593,29 +3581,27 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("AddressId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CompanyDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyEmail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("WebsiteUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("CompanyId");
 
@@ -3759,13 +3745,13 @@ namespace Candid.Migrations
             modelBuilder.Entity("Candid.Models.CompanyIndustry", b =>
                 {
                     b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("IndustryId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("CompanyId", "IndustryId");
 
@@ -3894,16 +3880,14 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("IndustryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IndustryId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("IndustryType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("IndustryId");
 
@@ -4000,31 +3984,29 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("InterviewId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InterviewId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("AppUserPositionId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CreatorId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("InterviewDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RecruiterId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Room")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("InterviewId");
 
@@ -4039,10 +4021,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 1,
                             AppUserPositionId = 1,
-                            CreatorId = "7dbe4c9e-a015-47cb-8098-57a60cfccc4b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2290),
+                            CreatorId = "76236e18-0495-45e3-ac79-20b15bb5b68d",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2870),
                             InterviewDate = new DateTime(2023, 5, 13, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "7dbe4c9e-a015-47cb-8098-57a60cfccc4b",
+                            RecruiterId = "76236e18-0495-45e3-ac79-20b15bb5b68d",
                             Room = "Two",
                             isActive = true
                         },
@@ -4050,10 +4032,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 2,
                             AppUserPositionId = 2,
-                            CreatorId = "7dbe4c9e-a015-47cb-8098-57a60cfccc4b",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2340),
+                            CreatorId = "76236e18-0495-45e3-ac79-20b15bb5b68d",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2920),
                             InterviewDate = new DateTime(2023, 5, 14, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "7dbe4c9e-a015-47cb-8098-57a60cfccc4b",
+                            RecruiterId = "76236e18-0495-45e3-ac79-20b15bb5b68d",
                             Room = "Two",
                             isActive = true
                         },
@@ -4061,10 +4043,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 3,
                             AppUserPositionId = 3,
-                            CreatorId = "a0cec485-38d5-4365-8081-5b285943df45",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2350),
+                            CreatorId = "721d7a8f-cb48-4bf2-80a4-ad217491080f",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2930),
                             InterviewDate = new DateTime(2023, 5, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "a0cec485-38d5-4365-8081-5b285943df45",
+                            RecruiterId = "721d7a8f-cb48-4bf2-80a4-ad217491080f",
                             Room = "Two",
                             isActive = true
                         },
@@ -4072,10 +4054,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 4,
                             AppUserPositionId = 4,
-                            CreatorId = "34f24e25-36a7-4293-b497-ad8329741278",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2370),
+                            CreatorId = "ce4243a4-9dad-4acc-8bff-38a6c3357e49",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2970),
                             InterviewDate = new DateTime(2023, 5, 13, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "34f24e25-36a7-4293-b497-ad8329741278",
+                            RecruiterId = "ce4243a4-9dad-4acc-8bff-38a6c3357e49",
                             Room = "One",
                             isActive = true
                         },
@@ -4083,10 +4065,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 5,
                             AppUserPositionId = 5,
-                            CreatorId = "c5506eb1-7594-4e74-bac7-04ecf82cca5f",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2390),
+                            CreatorId = "cad02551-a322-4ba3-b64d-df09534bcba9",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2980),
                             InterviewDate = new DateTime(2023, 5, 16, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "c5506eb1-7594-4e74-bac7-04ecf82cca5f",
+                            RecruiterId = "cad02551-a322-4ba3-b64d-df09534bcba9",
                             Room = "Two",
                             isActive = true
                         },
@@ -4094,10 +4076,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 6,
                             AppUserPositionId = 6,
-                            CreatorId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2400),
+                            CreatorId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(2990),
                             InterviewDate = new DateTime(2023, 4, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
+                            RecruiterId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
                             Room = "One",
                             isActive = true
                         },
@@ -4105,10 +4087,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 7,
                             AppUserPositionId = 7,
-                            CreatorId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2410),
+                            CreatorId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3010),
                             InterviewDate = new DateTime(2023, 4, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
+                            RecruiterId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
                             Room = "One",
                             isActive = true
                         },
@@ -4116,10 +4098,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 8,
                             AppUserPositionId = 8,
-                            CreatorId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2430),
+                            CreatorId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3020),
                             InterviewDate = new DateTime(2023, 4, 2, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
+                            RecruiterId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
                             Room = "Four",
                             isActive = true
                         },
@@ -4127,10 +4109,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 9,
                             AppUserPositionId = 9,
-                            CreatorId = "4955ae5a-39a7-4e7f-857e-102d10c26c77",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2440),
+                            CreatorId = "f0fdd3b1-f79a-4b58-9fe1-d97e099113e2",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3030),
                             InterviewDate = new DateTime(2023, 5, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "4955ae5a-39a7-4e7f-857e-102d10c26c77",
+                            RecruiterId = "f0fdd3b1-f79a-4b58-9fe1-d97e099113e2",
                             Room = "One",
                             isActive = true
                         },
@@ -4138,10 +4120,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 10,
                             AppUserPositionId = 10,
-                            CreatorId = "4955ae5a-39a7-4e7f-857e-102d10c26c77",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2460),
+                            CreatorId = "f0fdd3b1-f79a-4b58-9fe1-d97e099113e2",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3080),
                             InterviewDate = new DateTime(2023, 5, 10, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "4955ae5a-39a7-4e7f-857e-102d10c26c77",
+                            RecruiterId = "f0fdd3b1-f79a-4b58-9fe1-d97e099113e2",
                             Room = "One",
                             isActive = true
                         },
@@ -4149,10 +4131,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 11,
                             AppUserPositionId = 11,
-                            CreatorId = "3358b2db-cdd0-4b15-bd97-c97ae08d172f",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2470),
+                            CreatorId = "f3957123-4d3f-4583-af95-b0f137b8f5cc",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3090),
                             InterviewDate = new DateTime(2023, 5, 16, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "3358b2db-cdd0-4b15-bd97-c97ae08d172f",
+                            RecruiterId = "f3957123-4d3f-4583-af95-b0f137b8f5cc",
                             Room = "Three",
                             isActive = true
                         },
@@ -4160,10 +4142,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 12,
                             AppUserPositionId = 12,
-                            CreatorId = "dbbf9288-ae29-4d22-a1cd-8a4fe86ebf50",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2480),
+                            CreatorId = "6ae4f0ac-d516-428d-8378-72fffc8e37c6",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3110),
                             InterviewDate = new DateTime(2023, 5, 16, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "dbbf9288-ae29-4d22-a1cd-8a4fe86ebf50",
+                            RecruiterId = "6ae4f0ac-d516-428d-8378-72fffc8e37c6",
                             Room = "Four",
                             isActive = true
                         },
@@ -4171,10 +4153,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 13,
                             AppUserPositionId = 13,
-                            CreatorId = "7adb64f0-0d74-4449-b469-daa8799f20b4",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2490),
+                            CreatorId = "715c1593-9f91-4855-a7c0-de88682cdb79",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3120),
                             InterviewDate = new DateTime(2023, 6, 5, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "7adb64f0-0d74-4449-b469-daa8799f20b4",
+                            RecruiterId = "715c1593-9f91-4855-a7c0-de88682cdb79",
                             Room = "Three",
                             isActive = true
                         },
@@ -4182,10 +4164,10 @@ namespace Candid.Migrations
                         {
                             InterviewId = 14,
                             AppUserPositionId = 14,
-                            CreatorId = "df8f08ba-e7e0-467a-a048-dbf9f75b19ce",
-                            DateCreated = new DateTime(2023, 4, 23, 21, 59, 24, 828, DateTimeKind.Local).AddTicks(2500),
+                            CreatorId = "d55bb438-be06-4961-8d85-6fd03192dbcf",
+                            DateCreated = new DateTime(2023, 11, 27, 0, 24, 34, 420, DateTimeKind.Local).AddTicks(3120),
                             InterviewDate = new DateTime(2023, 6, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            RecruiterId = "df8f08ba-e7e0-467a-a048-dbf9f75b19ce",
+                            RecruiterId = "d55bb438-be06-4961-8d85-6fd03192dbcf",
                             Room = "Three",
                             isActive = true
                         });
@@ -4195,20 +4177,18 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("MajorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MajorId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("MajorCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("MajorName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MajorId");
 
@@ -4284,32 +4264,30 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("PositionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PositionId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("AddressId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Deadline")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PositionDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PositionName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PositionType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("PositionId");
 
@@ -4622,13 +4600,13 @@ namespace Candid.Migrations
             modelBuilder.Entity("Candid.Models.PositionMajor", b =>
                 {
                     b.Property<int>("PositionId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("MajorId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("PositionId", "MajorId");
 
@@ -5050,45 +5028,44 @@ namespace Candid.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "d2e5e116-d5fd-45df-a531-aa661fec879c",
+                            Id = "3360741c-aa4f-4b28-b07c-ce18b3170e7c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb",
+                            Id = "81488624-9687-47c9-a1d1-995c177f366c",
                             Name = "Recruiter",
                             NormalizedName = "RECRUITER"
                         },
                         new
                         {
-                            Id = "eafb2ef1-90c8-4e52-8962-ad68ff67512f",
+                            Id = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -5098,19 +5075,17 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -5123,19 +5098,17 @@ namespace Candid.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -5148,18 +5121,18 @@ namespace Candid.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -5171,10 +5144,10 @@ namespace Candid.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -5185,401 +5158,401 @@ namespace Candid.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "13f522a5-c59c-4c75-b767-6077ca503450",
-                            RoleId = "d2e5e116-d5fd-45df-a531-aa661fec879c"
+                            UserId = "be7b04c7-a79a-4efe-9f40-9550dea53d0f",
+                            RoleId = "3360741c-aa4f-4b28-b07c-ce18b3170e7c"
                         },
                         new
                         {
-                            UserId = "677b36c2-c5de-497a-8465-b56fe96af334",
-                            RoleId = "d2e5e116-d5fd-45df-a531-aa661fec879c"
+                            UserId = "d2057556-d00d-4dc1-be24-ace1e9c34c3f",
+                            RoleId = "3360741c-aa4f-4b28-b07c-ce18b3170e7c"
                         },
                         new
                         {
-                            UserId = "3b6e8ffc-8aa1-4e52-8c14-d01a3daeb582",
-                            RoleId = "d2e5e116-d5fd-45df-a531-aa661fec879c"
+                            UserId = "88fe0b5e-207d-4439-bf6b-beacc9a5f23d",
+                            RoleId = "3360741c-aa4f-4b28-b07c-ce18b3170e7c"
                         },
                         new
                         {
-                            UserId = "cd2971ad-feae-4428-9e1a-d564b8cb8610",
-                            RoleId = "d2e5e116-d5fd-45df-a531-aa661fec879c"
+                            UserId = "016667f6-e9b0-4d7c-91cb-7699380abf79",
+                            RoleId = "3360741c-aa4f-4b28-b07c-ce18b3170e7c"
                         },
                         new
                         {
-                            UserId = "f9424b1d-fb39-47d4-b3ce-0d2e48bb5e78",
-                            RoleId = "d2e5e116-d5fd-45df-a531-aa661fec879c"
+                            UserId = "5d5687f6-16cf-4839-9d7a-c8c47ab3e815",
+                            RoleId = "3360741c-aa4f-4b28-b07c-ce18b3170e7c"
                         },
                         new
                         {
-                            UserId = "7adb64f0-0d74-4449-b469-daa8799f20b4",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "715c1593-9f91-4855-a7c0-de88682cdb79",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "df8f08ba-e7e0-467a-a048-dbf9f75b19ce",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "d55bb438-be06-4961-8d85-6fd03192dbcf",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "4955ae5a-39a7-4e7f-857e-102d10c26c77",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "f0fdd3b1-f79a-4b58-9fe1-d97e099113e2",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "34f24e25-36a7-4293-b497-ad8329741278",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "ce4243a4-9dad-4acc-8bff-38a6c3357e49",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "dbbf9288-ae29-4d22-a1cd-8a4fe86ebf50",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "6ae4f0ac-d516-428d-8378-72fffc8e37c6",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "5f4072f1-4938-499f-9287-503a5f536b76",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "3cd735fe-8129-4aed-8929-7bf029cb16a3",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "fc557e69-6813-435f-b1f2-233dddfca80e",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "8c40c1a0-eddc-409c-af8c-869101b609a1",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "ac036877-901d-464a-b02e-494acf94ad4d",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "48bb5539-0993-4ca2-9e65-0d644dab8e9d",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "e841f6c0-ad73-4c41-88bf-3b70e014f8ca",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "ae3389ff-c40f-4f70-bf67-bdd132402931",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "92a565c6-4096-4b59-99c6-aee76311b68a",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "0edbb0c1-3779-4090-a9d6-55b1a2397119",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "7dbe4c9e-a015-47cb-8098-57a60cfccc4b",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "76236e18-0495-45e3-ac79-20b15bb5b68d",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "ab89fdf5-cbd2-49c3-b01f-025ae7f9e046",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "da86f76c-7cfa-4a47-8c41-c0927018b888",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "30caf059-b889-45c0-bcc8-062f0f57a06d",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "fb803e5c-db3e-4931-9cbb-01af2889c447",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "39df0958-b951-47ab-8c70-30708af91bf3",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "808ce1ec-8885-454a-93f0-065feeddabb3",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "a0cec485-38d5-4365-8081-5b285943df45",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "721d7a8f-cb48-4bf2-80a4-ad217491080f",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "c5506eb1-7594-4e74-bac7-04ecf82cca5f",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "cad02551-a322-4ba3-b64d-df09534bcba9",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "3358b2db-cdd0-4b15-bd97-c97ae08d172f",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "f3957123-4d3f-4583-af95-b0f137b8f5cc",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "5cb15e84-86ac-4b42-b60f-8989c5a063e3",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "779c2fc8-b231-41e6-b9c4-4357f6a74bd4",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "7781ee93-7275-42a4-8240-0a76a05fd402",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "9b70c4f1-85d0-452b-a8d2-62c45dfde3b8",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "7499a7ad-44e0-40f5-b044-163cc86e8e5f",
-                            RoleId = "48da8abf-4c0f-4b2b-8c00-58dac4bceebb"
+                            UserId = "0b2fcac6-6568-42f0-893b-36b3d2437db6",
+                            RoleId = "81488624-9687-47c9-a1d1-995c177f366c"
                         },
                         new
                         {
-                            UserId = "eac2f179-0bc8-406c-acba-49812724b40d",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "cf6c5917-5161-49af-b79b-5aad9ef0ff0d",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "5449f2bb-06a1-4291-b108-404103418fd6",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "e36685df-681f-422c-a4e7-5c3c32041ea0",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "2377e694-030a-4ef6-8590-99f0ccb8c583",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "71771f28-a611-456c-863e-805ef104acf1",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "bc30683e-b23d-4dfa-ac61-a6eb24670952",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "6a26dbe3-59ae-4faa-a446-2497c3553bd7",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "a7fa66b0-4aed-4409-afff-272b8aaa2907",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "27f23b88-addc-4733-b304-16a97cc5817a",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "133a1335-8c77-48d2-a556-09e94fe742cb",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "84fe17d1-f73c-44f9-a2c4-d3146b0765eb",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "cb86ec9e-bc98-4973-aa47-bba78cfab53b",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "b3989942-c2b0-41d0-b905-498bf74b0655",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "112c0553-9717-4894-9590-7246e414e899",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "0dfefb99-0ea1-4b54-9e47-b1f0a95e0302",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "1066cc51-a1ab-4767-a91f-7459610a7092",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "40242fd0-e360-42e8-b407-d0301c5d593f",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "8f391bcb-df75-475a-a481-4aca008508c9",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "d7ff8474-9cb9-4155-926b-dbdc647fbc9a",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "ccfe848a-ff30-4948-a9bb-4494f5ef7442",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "682a043f-dc4c-46d3-9816-8dad38a56d04",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "57a6f1e7-0d26-428f-aebd-ec233a1ba643",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "869d2640-c513-42e8-b921-b7b252ef83b8",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "e4d90733-3e62-4b97-926a-54561fb63ae3",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "94eb4296-228d-48d1-afe8-6d4e3214d4eb",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "8d64652a-9817-4172-82cd-8d32f42f2db6",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "9ddaa3c1-a3cc-4a21-9091-6f9f236570ef",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "5993c6c2-b79c-40ac-8e69-d1e26794c0a8",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "42131839-483c-4bf4-82d8-ffaf166b9bb6",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "9457e4ad-c052-4b0d-9a77-f717b44fe246",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "cc38625e-88a9-44ef-8dd3-cd5f23e72d5a",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "ea76119b-5ded-497f-a4fb-7091bd52d82a",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "573ab8fb-5a49-400e-bf05-7cb3092ee3d0",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "b1f980d2-eeea-400a-8c88-a7793ac59e82",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "ade77a46-4295-46f3-9acd-2171ccf78de4",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "0cb96c55-c6ba-4e81-bdc2-209d7b957282",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "05fbabcc-e04d-4c21-8f8b-0162acccbffc",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "523f552e-c26f-432c-9bd5-66a4464db93e",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "2fdf167e-7507-4acc-bc65-1652affb6558",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "1bcfd888-c765-449d-a286-bcca98b19c19",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "876bda16-595b-4ccf-ad34-9099c73ce21b",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "249f0ae9-9fb9-4d7d-864a-aa058cf6d1c9",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "d4d5a7fe-b81f-47c0-b40b-e4c8acc228c2",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "bb2caa99-1ced-4c4d-b197-178257ce2e5f",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "d3659c1e-dc50-4afd-9a4b-c412af974199",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "182a6b63-09a3-4744-b03b-7b09dde76618",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "bf84cdd5-949b-4e31-8cd8-7458c30293b5",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "6631fef5-5287-4ca2-abd7-4621ad392c86",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "8f8e13e2-eb0a-406f-82c6-c7fefe962154",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "cc1fbb3a-6ba8-400a-b00c-88d70619c5ef",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "a3093694-84ad-416e-a98e-98c269c6fa29",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "3415e8da-751f-4450-8327-6e42ab913dae",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "2c8fddbb-00ad-40cb-a258-54b86cc101f4",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "aded3147-1b49-44da-a7d0-765912bdaf37",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "a9866409-e08f-4e15-b896-0905775622fa",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "e51b4197-c122-49c1-ab25-5a4716a73e33",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "42906696-1971-4676-86e2-942ff0ef5c74",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "4ecfc6da-b7a5-4b90-9846-4784ce99a2e2",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "474311ae-14a4-4384-9950-6ca66983f25b",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "ec3ba1cd-24de-4012-865b-c8cd4e59dac4",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "f5bd6e29-3a80-4d35-b105-a0fb987eba5c",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "8fde2dd6-cffe-4dca-b5a1-f3bb2a2d869b",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "44fe3df4-f173-47bf-901d-d4d2c6e88107",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "ef563ec2-99e3-4aa0-b9c9-3bc6deac215f",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "a0bebee6-526a-46a7-9570-1b532538536c",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "c43a68a0-4e1e-4b6b-a60e-7689d2b8ee85",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "a847a4a8-ecdd-4573-ac3f-b8656ca5d0f5",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "9d65d32c-4ed3-4ba9-a72e-4491f5df921b",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "ed56463c-f12b-4e88-85a5-0e0ed0a2a01f",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "ce61ea89-8818-44ae-8b16-6366761a6313",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "81cc7536-91c8-4fb8-ae58-9f49e12fa2e9",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "ddf4e679-1d22-45c7-b332-c3955d8b798a",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "e5b45a2e-53b3-451f-bf87-b7d756bf207a",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "7b4f4718-f143-4d36-b210-6e4924931d87",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "7ea8a7f4-819f-442a-9e51-56bb8c686900",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "dd8698f5-ffee-41a8-b5e7-89647e015669",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "2ae79be7-c7ba-4fa8-b73b-a264ef5a957f",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "69cb26a9-9508-46c0-bc6e-fa217aa75a13",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "9ff70a7a-be2f-4af0-9bbd-6455cb7d5274",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "b4dc7510-7624-4329-a270-2487e28692e8",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "c437dc50-cbe1-42b2-83e8-0570ed766f69",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "fc9db39e-6880-41ba-b723-2daff5dc03f2",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "04e6be85-e718-4c28-bff8-8a61845544df",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "daab1bfe-16da-42f4-b553-5747b916d7e1",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "be77e03a-1e33-41e0-ac73-59af7094aecb",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "7573173a-8c71-41f6-a352-5a064aee1dac",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "f6bec9b3-3cc4-404a-adb7-3c7de60dc459",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "8b8c27db-812d-47ba-a927-c84b1aacb645",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "19e5f9b8-fd8e-450a-b918-143f68fcc4d7",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "60cae427-0d8f-4873-84dd-5e9212a0664c",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "84789208-f640-4ead-9cac-c99e60cdf585",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "81b8a64f-fa24-4cdf-a94d-ab1acd5597f8",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "3d7fdf32-e278-4985-a569-157491a4b072",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "b1faccab-3207-418b-9e44-4a78ed008612",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "ceb4daca-8ed2-4f44-bd2c-022b64d648eb",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "d56aa3bd-b1c7-4edb-9186-ffb1971348aa",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "145b524d-fd3c-438b-873c-b8399afa4e6e",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "b6f1c0f1-5bca-4677-b4ac-59df9694b308",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "44bf2a68-8707-4903-be9b-fd02fadcdeb0",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         },
                         new
                         {
-                            UserId = "776ac473-3f9a-4f09-8b4e-0225a72f428c",
-                            RoleId = "eafb2ef1-90c8-4e52-8962-ad68ff67512f"
+                            UserId = "14422cf3-595c-44f6-a477-5f005a671e52",
+                            RoleId = "d231b4fe-fa50-4ff3-9453-f8ff3be9ccd2"
                         });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 

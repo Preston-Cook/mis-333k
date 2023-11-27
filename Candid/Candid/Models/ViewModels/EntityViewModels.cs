@@ -4,40 +4,40 @@ namespace Candid.Models
 {
     public class CompanyViewModel
     {
-        public Int32 CompanyId { get; set; }
+        public int CompanyId { get; set; }
 
         [Required]
         [Display(Name = "Company Name")]
-        public String CompanyName { get; set; }
-        
+        public string CompanyName { get; set; }
+
         [Required]
         [Display(Name = "Industry Types")]
         public List<IndustryTypes> IndustryTypes { get; set; } = new List<IndustryTypes>();
 
         [Display(Name = "Company Email")]
         [EmailAddress]
-        public String CompanyEmail { get; set; }
+        public string CompanyEmail { get; set; }
 
         [Display(Name = "Company Website")]
         [Url]
-        public String? WebsiteUrl { get; set; }
+        public string? WebsiteUrl { get; set; }
 
         [Display(Name = "Company Description")]
-        public String CompanyDescription { get; set; }
-        
+        public string CompanyDescription { get; set; }
+
         [Display(Name = "City")]
         [Required]
-        public String City { get; set; }
+        public string City { get; set; }
 
         [Display(Name = "Street")]
         [RegularExpression(@"^\s*\S+(?:\s+\S+){2,4}$", ErrorMessage = "Invalid Address")]
         [Required]
-        public String Street { get; set; }
+        public string Street { get; set; }
 
         [Required]
         [RegularExpression(@"^[0-9]{5}(?:-[0-9]{4})?$", ErrorMessage = "Invalid Postal Code")]
         [Display(Name = "Postal Code")]
-        public String PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [Required]
         public StateType State { get; set; }
@@ -45,17 +45,17 @@ namespace Candid.Models
 
     public class PositionViewModel
     {
-        public Int32 PositionId { get; set; }
+        public int PositionId { get; set; }
 
         [Required]
         [Display(Name = "Position Name")]
-        public String PositionName { get; set; }
-        
+        public string PositionName { get; set; }
+
         [Display(Name = "Company Name")]
-        public Int32 CompanyId { get; set; }
+        public int CompanyId { get; set; }
 
         [Display(Name = "Position Description")]
-        public String PositionDescription { get; set; }
+        public string PositionDescription { get; set; }
 
         [Required]
         [Display(Name = "Position Majors")]
@@ -71,17 +71,17 @@ namespace Candid.Models
 
         [Display(Name = "City")]
         [Required]
-        public String City { get; set; }
+        public string City { get; set; }
 
         [Display(Name = "Street")]
         [RegularExpression(@"^\s*\S+(?:\s+\S+){2,4}$", ErrorMessage = "Invalid Address")]
         [Required]
-        public String Street { get; set; }
+        public string Street { get; set; }
 
         [Required]
         [RegularExpression(@"^\d{5}(?:[-\s]\d{4})?$", ErrorMessage = "Invalid Postal Code")]
         [Display(Name = "Postal Code")]
-        public String PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [Required]
         public StateType State { get; set; }
@@ -91,27 +91,27 @@ namespace Candid.Models
     {
         [Required]
         [Display(Name = "Company Name")]
-        public String CompanyName { get; set; }
+        public string CompanyName { get; set; }
     }
 
     public class ApplicationViewModel
     {
-        public String StudentId { get; set; }
-        public String FirstName { get; set; }
+        public string StudentId { get; set; }
+        public string FirstName { get; set; }
 
-        public String LastName { get; set; }
+        public string LastName { get; set; }
 
         public DateTime GraduationDate { get; set; }
 
         public Ethnicity Ethnicity { get; set; }
         public Gender Gender { get; set; }
 
-        public Decimal GPA { get; set; }
+        public decimal GPA { get; set; }
 
-        public String Majors { get; set; }
+        public string Majors { get; set; }
 
         [Required]
-        public List<Int32> Positions { get; set; } = new List<Int32>();
+        public List<int> Positions { get; set; } = new List<int>();
 
     }
 
@@ -119,7 +119,7 @@ namespace Candid.Models
     {
         [Required]
         [Display(Name = "Interviewer")]
-        public String RecruiterId { get; set; }
+        public string RecruiterId { get; set; }
         [Required]
         [Display(Name = "Room Number")]
         public RoomType RoomType { get; set; }
@@ -127,7 +127,7 @@ namespace Candid.Models
         [Display(Name = "Interview Date")]
         public DateTime InterviewDate { get; set; }
 
-        public String UserId { get; set; }
+        public string UserId { get; set; }
     }
 
     public class InterviewAdminViewModel
@@ -141,11 +141,11 @@ namespace Candid.Models
 
     public class InterviewStudentViewModel
     {
-        
-        [Required]
-        public Int32 AppUserPositionId { get; set; }
 
         [Required]
-        public Int32 InterviewId { get; set; }
+        public int AppUserPositionId { get; set; }
+
+        [Required]
+        public int InterviewId { get; set; }
     }
 }

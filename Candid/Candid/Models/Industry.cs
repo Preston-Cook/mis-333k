@@ -7,10 +7,10 @@ namespace Candid.Models
     public class Industry
     {
         [Key]
-        public Int32 IndustryId { get; set; }
+        public int IndustryId { get; set; }
 
         [Required]
-        public Boolean isActive { get; set; } = true;
+        public bool isActive { get; set; } = true;
 
         [Required]
         public IndustryTypes IndustryType { get; set; }

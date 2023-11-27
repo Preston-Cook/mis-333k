@@ -8,12 +8,12 @@ namespace Candid.Models
     public class Position
     {
         [Key]
-        public Int32 PositionId { get; set; }
+        public int PositionId { get; set; }
 
         [Required]
-        public String PositionName { get; set; }
+        public string PositionName { get; set; }
 
-        public String? PositionDescription { get; set; }        
+        public string? PositionDescription { get; set; }
 
         [Required]
         public Boolean isActive { get; set; } = true;
@@ -22,14 +22,14 @@ namespace Candid.Models
         public PositionType PositionType { get; set; }
 
         [ForeignKey("AddressId")]
-        public Int32 AddressId { get; set; }
+        public int AddressId { get; set; }
         public Address Address { get; set; }
 
         [Required]
         public DateTime Deadline { get; set; }
 
         // One-to-many for company to positions
-        public Int32? CompanyId { get; set; }
+        public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public Company Company { get; set; }
 

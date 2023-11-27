@@ -17,7 +17,7 @@ namespace Candid.Models
 
     public class RegisterViewModel
     {
-        public String UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         [EmailAddress]
@@ -27,13 +27,13 @@ namespace Candid.Models
         [Required(ErrorMessage = "First name is required.")]
         [RegularExpression("^[a-zA-Z ,.'-]+$", ErrorMessage = "Invalid Name")]
         [Display(Name = "First Name")]
-        
-        public String FirstName { get; set; }
+
+        public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is required.")]
         [RegularExpression("^[a-zA-Z ,.'-]+$", ErrorMessage = "Invalid Name")]
         [Display(Name = "Last Name")]
-        public String LastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -62,7 +62,7 @@ namespace Candid.Models
         public DateTime GraduationDate { get; set; }
 
         [Range(0.0, 4.0, ErrorMessage = "Invalid GPA Value")]
-        public Decimal GPA { get; set; }
+        public decimal GPA { get; set; }
 
         [Required]
         public Ethnicity Ethnicity { get; set; }
@@ -75,16 +75,16 @@ namespace Candid.Models
         public PositionType PositionType { get; set; }
 
         [Required]
-        public String City { get; set; }
+        public string City { get; set; }
 
         [Required]
         [RegularExpression(@"^\s*\S+(?:\s+\S+){2,4}$", ErrorMessage = "Invalid Address")]
-        public String Street { get; set; }
+        public string Street { get; set; }
 
         [Required]
         [RegularExpression(@"^[0-9]{5}(?:-[0-9]{4})?$", ErrorMessage = "Invalid Postal Code")]
         [Display(Name = "Postal Code")]
-        public String PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [Required]
         public StateType State { get; set; }
@@ -94,9 +94,9 @@ namespace Candid.Models
     {
         [Required]
         [Display(Name = "Company Name")]
-        public String CompanyName { get; set; }
+        public string CompanyName { get; set; }
 
-        public List<String> CompanyList { get; set; }
+        public List<string> CompanyList { get; set; }
     }
 
     public class AdminRegisterModel : RegisterViewModel

@@ -7,27 +7,27 @@ namespace Candid.Models
     public class Interview
     {
         [Key]
-        public Int32 InterviewId { get; set; }
+        public int InterviewId { get; set; }
 
         [Required]
         public RoomType Room { get; set; }
 
-        public Boolean isActive { get; set; } = true;
+        public bool isActive { get; set; } = true;
 
         [Required]
         public DateTime InterviewDate { get; set; }
 
-        public String CreatorId { get; set; }
+        public string CreatorId { get; set; }
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         // One to many for recruiter to interivews
         [ForeignKey("Recruiter")]
-        public String RecruiterId { get; set; }
+        public string RecruiterId { get; set; }
         public AppUser Recruiter { get; set; }
 
         // One to one for application
-        public Int32? AppUserPositionId { get; set; }
+        public int? AppUserPositionId { get; set; }
         [ForeignKey("AppUserPositionId")]
         public AppUserPosition AppUserPosition { get; set; }
     }

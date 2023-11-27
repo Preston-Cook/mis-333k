@@ -2,7 +2,7 @@ namespace Candid.Models
 {
     public class LocationDto
     {
-        public Decimal? Lat { get; set; } 
-        public Decimal? Lng { get; set; }  
+        public decimal? Lat { get; set; }
+        public decimal? Lng { get; set; }
     }
 }

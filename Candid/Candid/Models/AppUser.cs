@@ -8,14 +8,14 @@ namespace Candid.Models
 
     public class AppUser : IdentityUser
     {
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         [Required]
-        public String FirstName { get; set; }
+        public string FirstName { get; set; }
 
 
-        [Display(Name ="Last Name")]
+        [Display(Name = "Last Name")]
         [Required]
-        public String LastName { get; set; }
+        public string LastName { get; set; }
 
         // Account Creation Date
         public DateTime DateCreated { get; set; } = DateTime.Now;
@@ -25,27 +25,27 @@ namespace Candid.Models
         // System date field for testing
         public DateTime SystemDate { get; set; } = DateTime.Now;
 
-        [Display(Name="Date of Birth")]
+        [Display(Name = "Date of Birth")]
         public DateTime? DateOfBirth { get; set; } = null;
 
-        public Int32? AddressId { get; set; }
-        
+        public int? AddressId { get; set; }
+
         [ForeignKey("AddressId")]
         public Address Address { get; set; }
 
         [Required]
-        public Boolean IsActive { get; set; } = true;
+        public bool IsActive { get; set; } = true;
 
         /******* Properties for Student *******/
         public Gender Gender { get; set; }
 
         public Ethnicity Ethnicity { get; set; }
 
-        [Display(Name="GPA")]
+        [Display(Name = "GPA")]
         [Range(0.0, 4.0, ErrorMessage = "Invalid GPA Value")]
-        public Decimal GPA { get; set; }
+        public decimal GPA { get; set; }
 
-        [Display(Name ="Graduation Date")]
+        [Display(Name = "Graduation Date")]
         public DateTime? GraduationDate { get; set; } = null;
 
         public PositionType PositionType { get; set; }
@@ -63,12 +63,12 @@ namespace Candid.Models
         /******* Properties for Recruiter *******/
 
         // one-to-many relationship for companies to recruiters
-        public Int32? CompanyId { get; set; }
+        public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public Company Company { get; set; }
 
         // One to many for recruiter to interviews
         [InverseProperty("Recruiter")]
-        public List<Interview> RecruiterInterviews { get; set; } 
+        public List<Interview> RecruiterInterviews { get; set; }
     }
 }

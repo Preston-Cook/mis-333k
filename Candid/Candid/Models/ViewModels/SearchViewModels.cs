@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 namespace Candid.Models
 {
     public class PositionSearchViewModel
-    {   
+    {
         [Display(Name = "Position Name")]
-        public String? PositionName { get; set; }
+        public string? PositionName { get; set; }
 
         [Display(Name = "Position Description")]
-        public String? PositionDescription { get; set; }
+        public string? PositionDescription { get; set; }
 
         [Display(Name = "Position Type")]
         public PositionType? PositionType { get; set; }
@@ -21,26 +21,26 @@ namespace Candid.Models
 
         public StateType? State { get; set; }
 
-        public String? City { get; set; }
+        public string? City { get; set; }
 
         public List<MajorCodes> Majors { get; set; } = new List<MajorCodes>();
 
         public DateTime? Deadline { get; set; }
 
         [Required]
-        public Boolean isBeforeDeadline { get; set; }
+        public bool isBeforeDeadline { get; set; }
     }
 
     public class CompanySearchViewModel
     {
         [Display(Name = "State")]
         public StateType? State { get; set; }
-        
+
         [Display(Name = "City")]
-        public String? City { get; set; }
+        public string? City { get; set; }
 
         [Display(Name = "Company Name")]
-        public String? CompanyName { get; set; }
+        public string? CompanyName { get; set; }
 
         [Display(Name = "Position Type")]
         public PositionType? PositionType { get; set; }
@@ -52,11 +52,11 @@ namespace Candid.Models
     public class StudentSearchViewModel
     {
         [Display(Name = "First Name")]
-        public String? FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Display(Name = "Last Name")]
-        public String? LastName { get; set; }
-        
+        public string? LastName { get; set; }
+
         public List<MajorCodes> Majors { get; set; } = new List<MajorCodes>();
 
         public PositionType? PositionType { get; set; }
@@ -64,11 +64,11 @@ namespace Candid.Models
         [Display(Name = "Graduation Date")]
         public DateTime? GraduationDate { get; set; }
 
-        public Boolean isAboveGraduationDate { get; set; }
+        public bool isAboveGraduationDate { get; set; }
 
         [Range(0.0, 4.0, ErrorMessage = "Invalid GPA Value")]
-        public Decimal? GPA { get; set; }
+        public decimal? GPA { get; set; }
 
-        public Boolean isAboveGPA { get; set; }
+        public bool isAboveGPA { get; set; }
     }
 }

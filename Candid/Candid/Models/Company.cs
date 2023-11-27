@@ -8,26 +8,26 @@ namespace Candid.Models
     public class Company
     {
         [Key]
-        public Int32 CompanyId { get; set; }
+        public int CompanyId { get; set; }
 
         [Required]
-        public String CompanyName { get; set; }
+        public string CompanyName { get; set; }
 
         [EmailAddress]
-        public String CompanyEmail { get; set; }
+        public string CompanyEmail { get; set; }
 
         [ForeignKey("Address")]
-        public Int32 AddressId { get; set;}
+        public int AddressId { get; set; }
         public Address Address { get; set; }
 
         [Url]
-        public String? WebsiteUrl { get; set; }
+        public string? WebsiteUrl { get; set; }
 
         [Required]
-        public Boolean isActive { get; set; } = true;
+        public bool isActive { get; set; } = true;
 
         [Required]
-        public String CompanyDescription { get; set; }
+        public string CompanyDescription { get; set; }
 
         // one to many relationship for company to recruiters
         public List<AppUser> Recruiters { get; set; }

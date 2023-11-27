@@ -17,10 +17,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Retrieve connection string from environment
-String connectionString = "";
+String connectionString = "Data Source=sqlite.db";
 
 //NOTE: This tells your application how to get a connection to the database
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
 
 //NOTE: You need this line for including Identity in your project
 builder.Services.AddDefaultIdentity<AppUser>()
